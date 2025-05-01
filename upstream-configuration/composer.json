@@ -1,0 +1,65 @@
+{
+    "name": "pantheon-upstreams/upstream-configuration",
+    "description": "Pantheon Upstream for CU Starter Kit 3.0",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "version":"1.0.1",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "require": {
+        "drupal/admin_toolbar": "^3.4",
+        "drupal/bootstrap_ui_kit": "^1.0@alpha",
+        "drupal/ckeditor5_icons": "^1.0@RC",
+        "drupal/config_ignore": "^3.1",
+        "drupal/config_patch": "3.0.x-dev@dev",
+        "drupal/config_patch_gitlab_api": "^2.0@beta",
+        "drupal/config_profile": "^1.1",
+        "drupal/config_rewrite": "^1.5",
+        "drupal/core-composer-scaffold": "~10.2.2",
+        "drupal/core-project-message": "~10.2.2",
+        "drupal/core-recommended": "~10.2.2",
+        "drupal/default_content": "^2.0@alpha",
+        "drupal/devel": "^5.0",
+        "drupal/entity_usage": "^2.0@beta",
+        "drupal/environment_indicator": "^4.0",
+        "drupal/field_group": "^3.4",
+        "drupal/force_users_logout": "^2.0",
+        "drupal/google_tag": "^2.0",
+        "drupal/jsonapi_extras": "^3.24",
+        "drupal/jsonapi_image_styles": "^3.0",
+        "drupal/layout_paragraphs": "^2.0",
+        "drupal/link_attributes": "^2.1",
+        "drupal/metatag": "^2.0",
+        "drupal/pantheon_advanced_page_cache": "^2.1",
+        "drupal/pantheon_autopilot_toolbar": "1.0.x-dev",
+        "drupal/paragraphs": "^1.16",
+        "drupal/pathauto": "^1.11",
+        "drupal/qa_accounts": "^1.0",
+        "drupal/r4032login": "^2.2",
+        "drupal/rabbit_hole": "^2.0@alpha",
+        "drupal/rebuild_cache_access": "^1.9",
+        "drupal/redirect": "^1.9",
+        "drupal/samlauth": "^3.9",
+        "drupal/simplesamlphp_auth": "^4.0",
+        "drupal/svg_image": "^3.0",
+        "drupal/tac_lite": "^1.7",
+        "drupal/twig_tweak": "^3.2",
+        "drupal/viewsreference": "^2.0",
+        "drupal/xmlsitemap": "^1.5",
+        "pantheon-systems/pantheon_domain_masking": "^2.0",
+        "simplesamlphp/simplesamlphp": "^2.1"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "_README": "To make a custom upstream, clone this repository and add any dependencies to be provided by this upstream to this composer.json file. Leave the root-level composer.json file for the exclusive use of each individual site; do not modify it after your custom upstream has been published. See https://pantheon.io/docs/create-custom-upstream for more information."
+    }
+}
