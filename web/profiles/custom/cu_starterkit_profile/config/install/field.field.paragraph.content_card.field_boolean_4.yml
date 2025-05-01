@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_boolean_4
+    - paragraphs.paragraphs_type.content_card
+id: paragraph.content_card.field_boolean_4
+field_name: field_boolean_4
+entity_type: paragraph
+bundle: content_card
+label: 'Text Center Aligned'
+description: ' Positioning of all card text (defaults to Left Justified). '
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

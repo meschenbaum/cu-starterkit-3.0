@@ -1,0 +1,331 @@
+{#
+/**
+ * @file
+ * Theme override to display a single page.
+ *
+ * The doctype, html, head and body tags are not in this template. Instead they
+ * can be found in the html.html.twig template in this directory.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.global_header_first: Items for the global header first region.
+ * - page.global_header_second: Items for the global header second region.
+ * - page.local_header_first: Items for the local header first region.
+ * - page.local_header_second: Items for the local header second region.
+ * - page.main_menu: Items for the global menu region.
+ * - page.hero: Items for hero region.
+ * - page.alerts: Items for the alerts region.
+ * - page.breadcrumb: Items for the breadcrumb region.
+ * - page.featured_top: Items for the featured top content region.
+ * - page.content: The main content of the current page.
+ * - page.sidebar_first: Items for the first sidebar.
+ * - page.sidebar_second: Items for the second sidebar.
+ * - page.featured_bottom_first: Items for the first bottom feature.
+ * - page.featured_bottom_second: Items for the second bottom feature.
+ * - page.footer_first: Items for the local footer first region.
+ * - page.footer_second: Items for the local footer second region.
+ * - page.footer_third: Items for the local footer third region.
+ * - page.footer_fourth: Items for the local footer fourth region.
+ * - page.global_footer_first: Items for the global footer first region.
+ * - page.global_footer_second: Items for the global footer second region.
+ *
+ * Theme Settings:
+ * - cuskt_top_container: Type of top level container: fluid (eg edge to edge) or fixed width
+ * - cuskt_navbar_global_schema: Text color theme of the Global navbar.
+ * - cuskt_navbar_bg_global_schema: Background color of the Global navbar.
+ * - cuskt_navbar_local_schema: Text color theme of the Local navbar.
+ * - cuskt_navbar_bg_local_schema: Background color of the Local navbar.
+ * - cuskt_navbar_main_schema: Text color theme of the <b>Main</b> navbar.
+ * - cuskt_navbar_bg_main_schema: Background color of the Main navbar.
+ * - cuskt_footer_global_schema: Text color theme of the Global footer.
+ * - cuskt_footer_bg_global_schema: Background color of the Global footer.
+ * - cuskt_footer_local_schema: Text color theme of the Local footer.
+ * - cuskt_footer_bg_local_schema: Background color of the Local footer.
+ * - cuskt_search_type: Type of search to use.
+ * - cuskt_search_action: CU search action
+ * - cuskt_search_input_name: CU search input name
+ * - local_search: Boolean if local search and search module installed.
+ * - is_landing_page: Boolean - is a landing page.
+ *
+ * @see template_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+{%
+set nav_classes_global = 'navbar navbar-expand-lg' ~
+  (cuskt_navbar_global_schema != 'none' ? " navbar-#{cuskt_navbar_global_schema}" : ' ') ~
+  (cuskt_navbar_global_schema != 'none' ? (cuskt_navbar_global_schema == 'dark' ? ' text-light' : ' text-dark' ) : ' ') ~
+  (cuskt_navbar_bg_global_schema != 'none' ? " bg-#{cuskt_navbar_bg_global_schema}" : ' ')
+%}
+{%
+set search_classes_global = 'btn' ~
+  (cuskt_navbar_global_schema != 'none' ? (cuskt_navbar_global_schema == 'dark' ? ' btn-dark' : ' btn-light' ) : ' btn-default')
+%}
+{%
+set navbar_toggler_classes = 'navbar-toggler collapsed btn' ~
+  (cuskt_navbar_global_schema != 'none' ? (cuskt_navbar_global_schema == 'dark' ? ' btn-dark' : ' btn-light' ) : ' btn-default')
+%}
+{%
+set nav_classes_local = 'navbar navbar-expand-lg' ~
+  (cuskt_navbar_local_schema != 'none' ? " navbar-#{cuskt_navbar_local_schema}" : ' ') ~
+  (cuskt_navbar_local_schema != 'none' ? (cuskt_navbar_local_schema == 'dark' ? ' text-light' : ' text-dark' ) : ' ') ~
+  (cuskt_navbar_bg_local_schema != 'none' ? " bg-#{cuskt_navbar_bg_local_schema}" : ' ')
+%}
+{%
+set nav_classes_main = 'navbar navbar-expand-lg' ~
+  (cuskt_navbar_main_schema != 'none' ? " navbar-#{cuskt_navbar_main_schema}" : ' ') ~
+  (cuskt_navbar_main_schema != 'none' ? (cuskt_navbar_main_schema == 'dark' ? ' text-light' : ' text-dark' ) : ' ') ~
+  (cuskt_navbar_bg_main_schema != 'none' ? " bg-#{cuskt_navbar_bg_main_schema}" : ' ')
+%}
+
+{%
+set footer_classes_local = ' ' ~
+  (cuskt_footer_local_schema != 'none' ? " footer-#{cuskt_footer_local_schema}" : ' ') ~
+  (cuskt_footer_local_schema != 'none' ? (cuskt_footer_local_schema == 'dark' ? ' text-light' : ' text-dark' ) : ' ') ~
+  (cuskt_footer_bg_local_schema != 'none' ? " bg-#{cuskt_footer_bg_local_schema}" : ' ')
+%}
+{%
+set footer_classes_global = ' ' ~
+  (cuskt_footer_global_schema != 'none' ? " footer-#{cuskt_footer_global_schema}" : ' ') ~
+  (cuskt_footer_global_schema != 'none' ? (cuskt_footer_global_schema == 'dark' ? ' text-light' : ' text-dark' ) : ' ') ~
+  (cuskt_footer_bg_global_schema != 'none' ? " bg-#{cuskt_footer_bg_global_schema}" : ' ')
+%}
+
+<header role="banner">
+  {# Global header section #}
+  {% if page.global_header_first or page.global_header_second %}
+  <nav class="{{ nav_classes_global }}">
+    <div class="{{ cuskt_top_container }} d-flex">
+      {{ page.global_header_first }}
+
+      {% if page.global_header_second %}
+        {#<button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContentGlobal" aria-controls="navbarSupportedContentGlobal"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>#}
+
+        <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContentGlobal">
+          {{ page.global_header_second }}
+        </div>
+      {% endif %}
+      <div class="btn-group" role="group" aria-lable="Nav button group">
+        {% if cuskt_search_type == 'cu' or (cuskt_search_type == 'local' and local_search) %}
+          <button class="{{ search_classes_global }}" type="button" data-bs-toggle="collapse" data-bs-target="#searchBox" aria-expanded="false" aria-controls="searchBox">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        {% endif %}
+        {% if not is_landing_page %}
+        <button class="{{ navbar_toggler_classes }}" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContentMenu" aria-controls="navbarSupportedContentMenu"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        {% endif %}
+      </div>
+
+    </div>
+  </nav>
+      {# Search box #}
+      {% if cuskt_search_type == 'cu' or (cuskt_search_type == 'local' and local_search) %}
+        <div class="collapse container flex-fill my-2" id="searchBox">
+          {% if cuskt_search_type == 'cu' %}
+            {% set cu_search_input = cuskt_search_input_name ? cuskt_search_input_name : 'keys' %}
+            <form id="cse-search-box-form-id" action="{{ cuskt_search_action }}" accept-charset="UTF-8">
+              <div class="d-flex flex-row justify-content-center">
+                <label for="CUSsearchBox" class="visually-hidden">Search</label>
+                <input title="Enter the terms you wish to search for." class="form-control" placeholder="Search site" type="search" id="CUSsearchBox" size="15" maxlength="128" name="{{ cu_search_input }}" aria-label="Search site">
+                <button type="submit" role="button" class="{{ search_classes_global }}">
+                    Submit
+                </button>
+              </div>
+            </form>
+          {% elseif cuskt_search_type == 'local' and local_search %}
+            <form id="drupal-search-box-form-id" action="/search/node" accept-charset="UTF-8">
+              <div class="d-flex flex-row justify-content-center">
+                <label for="CUSsearchBox" class="visually-hidden">Search</label>
+                <input title="Enter the terms you wish to search for." class="form-control" placeholder="Search site" type="search" id="CUSsearchBox" size="15" maxlength="128" name="search" aria-label="Search site">
+                <button type="submit" role="button" class="{{ search_classes_global }}">
+                    Submit
+                </button>
+              </div>
+            </form>
+          {% endif %}
+        </div>
+      {% endif %}
+  {% endif %}
+
+  {# Local header section #}
+  {% if page.local_header_first or page.local_header_second %}
+  <nav class="{{ nav_classes_local }}">
+    <div class="{{ cuskt_top_container }} d-flex">
+      {{ page.local_header_first }}
+
+      {% if page.local_header_second %}
+        {#<button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>#}
+
+        <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
+          {{ page.local_header_second }}
+        </div>
+      {% endif %}
+    </div>
+  </nav>
+  {% endif %}
+
+  {# Main Menu section #}
+  {% if page.main_menu and not is_landing_page %}
+  <nav class="{{ nav_classes_main }}">
+    <div class="{{ cuskt_top_container }} d-flex">
+        {#<button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContentMenu" aria-controls="navbarSupportedContentMenu"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>#}
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContentMenu">
+          {% if page.global_header_second %}
+            <div class="d-lg-none">
+              {{ page.global_header_second }}
+            </div>
+          {% endif %}
+          {% if page.local_header_second %}
+            <div class="d-lg-none">
+              {{ page.local_header_second }}
+            </div>
+          {% endif %}
+          {{ page.main_menu }}
+        </div>
+    </div>
+  </nav>
+  {% endif %}
+
+  {# HERO Region #}
+  {% if page.hero %}
+    {{ page.hero }}
+  {% endif %}
+
+</header>
+
+<main role="main">
+  <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+
+  {%
+  set sidebar_first_classes = (page.sidebar_first and page.sidebar_second) ? 'col-12 col-sm-6 col-lg-3' : 'col-12 col-lg-3'
+  %}
+
+  {%
+  set sidebar_second_classes = (page.sidebar_first and page.sidebar_second) ? 'col-12 col-sm-6 col-lg-3' : 'col-12 col-lg-3'
+  %}
+
+  {%
+  set content_classes = (page.sidebar_first and page.sidebar_second) ? 'col-12 col-lg-6' : ((page.sidebar_first or page.sidebar_second) ? 'col-12 col-lg-9' : 'col-12' )
+   %}
+
+
+  <div class="{{ cuskt_top_container }}">
+    {% if page.breadcrumb and not is_landing_page %}
+      {{ page.breadcrumb }}
+    {% endif %}
+    {% if page.alerts %}
+      {{ page.alerts }}
+    {% endif %}
+    {% if page.featured_top %}
+      {{ page.featured_top }}
+    {% endif %}
+    <div class="row g-0">
+      {% if page.sidebar_first %}
+        <div class="order-2 order-lg-1 {{ sidebar_first_classes }}">
+          <aside>
+          {{ page.sidebar_first }}
+          </aside>
+        </div>
+      {% endif %}
+      <div class="order-1 order-lg-2 {{ content_classes }}">
+        {{ page.content }}
+      </div>
+      {% if page.sidebar_second %}
+        <div class="order-3 {{ sidebar_second_classes }}">
+          <aside>
+          {{ page.sidebar_second }}
+          <aside>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if page.featured_bottom_first %}
+      {{ page.featured_bottom_first }}
+    {% endif %}
+    {% if page.featured_bottom_second %}
+      {{ page.featured_bottom_second }}
+    {% endif %}
+  </div>
+
+</main>
+
+{% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth or page.global_footer_first or page.global_footer_second %}
+<footer class="mt-auto {{ footer_classes_global }}">
+  {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
+  <div class="row g-0 {{ footer_classes_local }}">
+    {% if page.footer_first %}
+      <div class="order-1 col-12 col-md-3">
+        {{ page.footer_first }}
+      </div>
+    {% endif %}
+    {% if page.footer_second %}
+      <div class="order-2 col-12 col-md-3">
+        {{ page.footer_second }}
+      </div>
+    {% endif %}
+    {% if page.footer_third %}
+      <div class="order-3 col-12 col-md-3">
+        {{ page.footer_third }}
+      </div>
+    {% endif %}
+    {% if page.footer_fourth %}
+      <div class="order-4 col-12 col-md-3">
+        {{ page.footer_fourth }}
+      </div>
+    {% endif %}
+  </div>
+  {% endif %}
+  {% if page.global_footer_first or page.global_footer_second %}
+  <div class="{{ cuskt_top_container }}">
+    <div class="row g-0">
+      {% if page.global_footer_first %}
+        <div class="order-1 col-12 col-md-6">
+          {{ page.global_footer_first }}
+        </div>
+      {% endif %}
+      {% if page.global_footer_second %}
+        <div class="order-2 col-12 col-md-6">
+          {{ page.global_footer_second }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+</footer>
+{% endif %}

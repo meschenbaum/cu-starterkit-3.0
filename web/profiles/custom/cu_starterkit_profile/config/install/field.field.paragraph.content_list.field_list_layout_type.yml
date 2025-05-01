@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_list_layout_type
+    - paragraphs.paragraphs_type.content_list
+  module:
+    - options
+id: paragraph.content_list.field_list_layout_type
+field_name: field_list_layout_type
+entity_type: paragraph
+bundle: content_list
+label: 'List Layout Type'
+description: 'Layout options for list: Image~Text (4x8, 3x9), Text~Image (8x4, 9x3). [Defaults to Image~Text (4x8)]'
+required: false
+translatable: false
+default_value:
+  -
+    value: 2col__4_8
+default_value_callback: ''
+settings: {  }
+field_type: list_string

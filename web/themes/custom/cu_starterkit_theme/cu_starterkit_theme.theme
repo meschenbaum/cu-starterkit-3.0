@@ -1,0 +1,728 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming.
+ */
+
+use Drupal\block\Entity\Block;
+use Drupal\cu_starterkit_theme\SettingsManager;
+use Drupal\cu_starterkit_theme\SubthemeManager;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Template\Attribute;
+use PhpParser\Node\Expr\Cast\Array_;
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function cu_starterkit_theme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+
+  if (isset($_GET['styleguide'])) {
+    $suggestions[] = 'page__styleguide';
+  }
+
+  if (isset($variables['attributes']['data-block']['region'])) {
+    $region = $variables['attributes']['data-block']['region'];
+    $suggestions[] = $variables['theme_hook_original'] . '__' . $region;
+    $suggestions[] = 'menu__' . $region;
+  }
+
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $content_type = $node->bundle();
+    $suggestions[] = 'page__'.$content_type;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function cu_starterkit_theme_form_system_theme_settings_alter(&$form, FormStateInterface $form_state, $form_id = NULL) {
+  $settings_manager = new SettingsManager(\Drupal::service('theme.manager'));
+  return $settings_manager->themeSettingsAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Validate callback to ensure filter order and allowed_html are compatible.
+ */
+function cu_starterkit_theme_form_system_theme_settings_subtheme_validate(array &$form, FormStateInterface $form_state) {
+  $subtheme_manager = new SubthemeManager(\Drupal::service('file_system'), \Drupal::service('messenger'));
+  return $subtheme_manager->validateForm($form, $form_state);
+}
+
+/**
+ * Form submission handler for node_form().
+ *
+ * @see cu_starterkit_theme_form_system_theme_settings_alter()
+ */
+function cu_starterkit_theme_form_system_theme_settings_subtheme_submit($form, FormStateInterface $form_state) {
+  $subtheme_manager = new SubthemeManager(\Drupal::service('file_system'), \Drupal::service('messenger'));
+  return $subtheme_manager->submitForm($form, $form_state);
+}
+
+/**
+* Implements hook_page_attachments_alter().
+*/
+function cu_starterkit_theme_page_attachments_alter(array &$attachments) {
+  // Remove Generator metadata
+  foreach ($attachments["#attached"]["html_head"] as $key => $attachment) {
+    if ($attachment[0]["#tag"] === 'meta' && !empty($attachment[0]["#attributes"]["name"]) && $attachment[0]["#attributes"]["name"] === 'Generator') {
+      unset($attachments["#attached"]["html_head"]["$key"]);
+    }
+  }
+
+  if ( (\Drupal::moduleHandler()->moduleExists('pantheon_domain_masking') && \Drupal::config('pantheon_domain_masking.settings')->get('enabled')) 
+    && (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') && $_ENV['PANTHEON_ENVIRONMENT'] == 'live' ) {
+      $subPath = '/' . \Drupal::config('pantheon_domain_masking.settings')->get('subpath');
+  } else {
+    $subPath = '';
+  }
+
+  // Set favicons
+  foreach ($attachments["#attached"]["html_head_link"] as $key => $attachment) {
+    if ($attachment[0]["rel"] === 'icon') {
+      unset($attachments["#attached"]["html_head_link"]["$key"]);
+    }
+  }
+  $favicon_links = array(
+    array(
+      array(
+        'rel' => 'apple-touch-icon',
+        'href' => $subPath . '/themes/custom/cu_starterkit_theme/images/apple-touch-icon.png?v=2',
+        'sizes' => '180x180'
+      ),
+    ),
+    array(
+      array(
+        'rel' => 'icon',
+        'href' => $subPath . '/themes/custom/cu_starterkit_theme/images/favicon-32x32.png?v=2',
+        'sizes' => '32x32',
+      'type' => 'image/png'
+      ),
+    ),
+    array(
+      array(
+        'rel' => 'icon',
+        'href' => $subPath . '/themes/custom/cu_starterkit_theme/images/favicon-16x16.png?v=2',
+        'sizes' => '16x16',
+        'type' => 'image/png'
+      ),
+    ),
+    array(
+      array(
+        'rel' => 'manifest',
+        'href' => $subPath . '/themes/custom/cu_starterkit_theme/images/site.webmanifest?v=2'
+      ),
+    ),
+    array(
+      array(
+        'rel' => 'mask-icon',
+        'href' => $subPath . '/themes/custom/cu_starterkit_theme/images/safari-pinned-tab.svg?v=2',
+        'color' => '#cfb87c'
+      ),
+    ),
+    array(
+      array(
+        'rel' => 'shortcut icon',
+        'href' => $subPath . '/themes/custom/cu_starterkit_theme/favicon.ico?v=2',
+      ),
+    ),
+  );
+  $favicon_meta = array(
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => array(
+      'name' => 'msapplication-TileColor',
+      'content' => '#cfb87c'
+    ),
+  );
+  $favicon_meta_1 = array(
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => array(
+      'name' => 'msapplication-config',
+      'content' => $subPath . '/themes/custom/cu_starterkit_theme/images/browserconfig.xml?v=2'
+    ),
+  );
+  $favicon_meta_2 = array(
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => array(
+      'name' => 'theme-color',
+      'content' => '#cfb87c'
+    ),
+  );
+  $attachments['#attached']['html_head_link'] = $favicon_links;
+  $attachments['#attached']['html_head'][] = [$favicon_meta, 'msapplicationTileColor'];
+  $attachments['#attached']['html_head'][] = [$favicon_meta_1, 'msapplicationConfig'];
+  $attachments['#attached']['html_head'][] = [$favicon_meta_2, 'themeColor'];
+}
+
+ /**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ *
+ * Adds body classes if certain regions have content.
+ */
+function cu_starterkit_theme_preprocess_html(&$variables) {
+  // So fonts can be preloaded from base theme in the event Olivero is used as a subtheme.
+  $variables['cuskt_path'] = \Drupal::request()->getBasePath() . '/' . \Drupal::service('extension.list.theme')->getPath('cu_starterkit_theme');
+
+  // Site branding
+  $variables['cuskt_branding'] = theme_get_setting('cuskt_branding');
+  // Body color theme.
+  $variables['cuskt_body_schema'] = theme_get_setting('cuskt_body_schema');
+  $variables['cuskt_body_bg_schema'] = theme_get_setting('cuskt_body_bg_schema');
+}
+
+/**
+ * Implements theme_preprocess_page().
+ */
+function cu_starterkit_theme_preprocess_page(&$variables) {
+  // Pass variables to theme.
+  $variables['cuskt_top_container'] = theme_get_setting('cuskt_top_container');
+  // Navbar color theme.
+  $variables['cuskt_navbar_global_schema'] = theme_get_setting('cuskt_navbar_global_schema');
+  $variables['cuskt_navbar_bg_global_schema'] = theme_get_setting('cuskt_navbar_bg_global_schema');
+  $variables['cuskt_navbar_local_schema'] = theme_get_setting('cuskt_navbar_local_schema');
+  $variables['cuskt_navbar_bg_local_schema'] = theme_get_setting('cuskt_navbar_bg_local_schema');
+  $variables['cuskt_navbar_main_schema'] = theme_get_setting('cuskt_navbar_main_schema');
+  $variables['cuskt_navbar_bg_main_schema'] = theme_get_setting('cuskt_navbar_bg_main_schema');
+  // Footer color theme.
+  $variables['cuskt_footer_global_schema'] = theme_get_setting('cuskt_footer_global_schema');
+  $variables['cuskt_footer_bg_global_schema'] = theme_get_setting('cuskt_footer_bg_global_schema');
+  $variables['cuskt_footer_local_schema'] = theme_get_setting('cuskt_footer_local_schema');
+  $variables['cuskt_footer_bg_local_schema'] = theme_get_setting('cuskt_footer_bg_local_schema');
+  // Search settings
+  $variables['cuskt_search_type'] = theme_get_setting('cuskt_search_type');
+  $variables['cuskt_search_action'] = theme_get_setting('cuskt_search_action');
+  $variables['cuskt_search_input_name'] = theme_get_setting('cuskt_search_input_name');
+  if ( $variables['cuskt_search_type'] == 'local' && \Drupal::moduleHandler()->moduleExists('search')) {
+    $variables['local_search'] = true;
+  } else {
+    $variables['local_search'] = false;
+  }
+  // Landing Page
+  $variables['is_landing_page'] = (isset($variables['node']) && $variables['node']->hasField('field_landing_page')) ? $variables['node']->get('field_landing_page')->getValue()[0]['value'] : '0';
+}
+
+/**
+ * Implements theme_preprocess_node__().
+ */
+function cu_starterkit_theme_preprocess_node__page(&$variables) {
+  // Landing Page
+  $variables['is_landing_page'] = (isset($variables['node']) && $variables['node']->hasField('field_landing_page')) ? $variables['node']->get('field_landing_page')->getValue()[0]['value'] : '0';
+}
+/**
+ * Implements theme_preprocess_region__hero().
+ */
+function cu_starterkit_theme_preprocess_views_view_fields__page_hero__block(&$variables) {
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $variables['page_type'] = $node->bundle();
+  }
+}
+
+/**
+ * Implements hook_preprocess_breadcrumb().
+ */
+function cu_starterkit_theme_preprocess_breadcrumb(&$variables) {
+  if ($variables['breadcrumb']) {
+    $request = \Drupal::request();
+    $route_match = \Drupal::routeMatch();
+    $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+    
+    if (!empty($page_title)) {
+      $variables['breadcrumb'][] = [
+        'text' => $page_title
+      ];
+    }
+    $variables['#cache']['contexts'][] = 'url';
+  }
+}
+
+/**
+ * Implements theme_preprocess_node__().
+ */
+function cu_starterkit_theme_preprocess_node__article_list(&$variables) {
+  $variables['filter_by_category'] = Array();
+  $variables['filter_by_tag'] = Array();
+  $variables['exclude_category'] = Array();
+  $variables['exclude_tag'] = Array();
+
+  // Filter by Category
+  $termsFiltCat = $variables['node']->get('field_filter_by_category')->referencedEntities();
+  foreach ($termsFiltCat as $termFiltCat) {
+    $variables['filter_by_category'][] = $termFiltCat->id();
+  }
+  //$variables['filter_by_category'] = implode(',', $variables['filter_by_category']);
+
+  // Filter by Tag
+  $termsFiltTag = $variables['node']->get('field_filter_by_tag')->referencedEntities();
+  foreach ($termsFiltTag as $termFiltTag) {
+    $variables['filter_by_tag'][] = $termFiltTag->id();
+  }
+  //$variables['filter_by_tag'] = implode(',', $variables['filter_by_tag']);
+
+  // Exclude by Category
+  $termsExCat = $variables['node']->get('field_exclude_category')->referencedEntities();
+  foreach ($termsExCat as $termExCat) {
+    $variables['exclude_category'][] = $termExCat->id();
+  }
+  //$variables['exclude_category'] = implode(',', $variables['exclude_category']);
+
+  // Exclude by Tag
+  $termsExTag = $variables['node']->get('field_exclude_tag')->referencedEntities();
+  foreach ($termsExTag as $termExTag) {
+    $variables['exclude_tag'][] = $termExTag->id();
+  }
+  //$variables['exclude_tag'] = implode(',', $variables['exclude_tag']);
+
+  // Set domain masking subpath if being used(on Pantheon) - needed for json:api path alias use: https://gitlab.com/universityofcolorado/uis/webapps/shared-code/cu-starterkit-project-3.0/-/issues/75
+  $variables['cuskt_domain_masking_subpath'] = '';
+  if (isset($_ENV['HTTP_X_MASKED_PATH']) && $_ENV['HTTP_X_MASKED_PATH']) {
+    $variables['cuskt_domain_masking_subpath'] = $_ENV['HTTP_X_MASKED_PATH'];
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for menu-local-tasks templates.
+ *
+ * Use preprocess hook to set #attached to child elements
+ * because they will be processed by Twig and drupal_render will
+ * be invoked.
+ */
+function cu_starterkit_theme_preprocess_menu_local_tasks(&$variables) {
+  if (!empty($variables['primary'])) {
+    $variables['primary']['#attached'] = [
+      'library' => [
+        'cu_starterkit_theme/drupal.nav-tabs',
+      ],
+    ];
+  }
+  elseif (!empty($variables['secondary'])) {
+    $variables['secondary']['#attached'] = [
+      'library' => [
+        'cu_starterkit_theme/drupal.nav-tabs',
+      ],
+    ];
+  }
+
+  foreach (Element::children($variables['primary']) as $key) {
+    $variables['primary'][$key]['#level'] = 'primary';
+  }
+  foreach (Element::children($variables['secondary']) as $key) {
+    $variables['secondary'][$key]['#level'] = 'secondary';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for menu-local-task templates.
+ */
+function cu_starterkit_theme_preprocess_menu_local_task(&$variables) {
+  // Ensure is-active class is set when the tab is active. The generic active
+  // link handler applies stricter comparison rules than what is necessary for
+  // tabs.
+  if (isset($variables['is_active']) && $variables['is_active'] === TRUE) {
+    $variables['link']['#options']['attributes']['class'][] = 'nav-link active is-active';
+  }
+  else {
+    $variables['link']['#options']['attributes']['class'][] = 'nav-link';
+  }
+
+  if (isset($variables['element']['#level'])) {
+    $variables['level'] = $variables['element']['#level'];
+  }
+}
+
+/**
+ * Callback to convert attributes class which is string to array.
+ *
+ * @param array $variables
+ *   The variables to render from preprocess function.
+ */
+function _cu_starterkit_theme_attributes_class_string_to_array(&$variables) {
+  if (isset($variables['attributes']) &&
+    isset($variables['attributes']['class']) &&
+    !is_array($variables['attributes']['class'])) {
+    $variables['attributes']['class'] = [$variables['attributes']['class']];
+  }
+}
+
+/**
+ * Implements theme_preprocess_textarea().
+ */
+function cu_starterkit_theme_preprocess_textarea(&$variables) {
+  _cu_starterkit_theme_attributes_class_string_to_array($variables);
+  $variables['attributes']['class'][] = 'form-control';
+}
+
+/**
+ * Implements template_preprocess_HOOK() for input.
+ */
+function cu_starterkit_theme_preprocess_input(&$variables) {
+  _cu_starterkit_theme_attributes_class_string_to_array($variables);
+
+  $type_html = $variables['attributes']['type'];
+  $text_types_html = [
+    'text',
+    'email',
+    'tel',
+    'number',
+    'search',
+    'password',
+    'url',
+    'month',
+    'week',
+    'date',
+    'time',
+  ];
+
+  if (in_array($type_html, $text_types_html)) {
+    $variables['attributes']['class'][] = 'form-control';
+  }
+
+  if (in_array($type_html, ['checkbox'])) {
+    $variables['attributes']['class'][] = 'form-check-input';
+  }
+}
+
+/**
+ * Implements theme_preprocess_datetime_form().
+ */
+function cu_starterkit_theme_preprocess_datetime_form(&$variables) {
+  _cu_starterkit_theme_attributes_class_string_to_array($variables);
+  $variables['attributes']['class'][] = 'form-inline';
+}
+
+/**
+ * Implements theme_preprocess_views_ui_display_tab_setting().
+ */
+function cu_starterkit_theme_preprocess_views_ui_display_tab_setting(&$variables) {
+  _cu_starterkit_theme_attributes_class_string_to_array($variables);
+  $variables['attributes']['class'][] = 'my-1';
+}
+
+/**
+ * Implements theme_preprocess_views_ui_display_tab_bucket().
+ */
+function cu_starterkit_theme_preprocess_views_ui_display_tab_bucket(&$variables) {
+  _cu_starterkit_theme_attributes_class_string_to_array($variables);
+  $variables['attributes']['class'][] = 'my-2';
+}
+
+/**
+ * Implements theme_preprocess_image().
+ */
+function cu_starterkit_theme_preprocess_image(&$variables) {
+  _cu_starterkit_theme_attributes_class_string_to_array($variables);
+  $variables['attributes']['class'][] = 'img-fluid';
+}
+
+/**
+ * Implements hook_preprocess_image_widget().
+ */
+function cu_starterkit_theme_preprocess_image_widget(array &$variables) {
+  $data = &$variables['data'];
+
+  // This prevents image widget templates from rendering preview container HTML
+  // to users that do not have permission to access these previews.
+  // @todo revisit in https://drupal.org/node/953034
+  // @todo revisit in https://drupal.org/node/3114318
+  if (isset($data['preview']['#access']) && $data['preview']['#access'] === FALSE) {
+    unset($data['preview']);
+  }
+}
+
+/**
+ * Callback to add standard table classes.
+ *
+ * @see https://getbootstrap.com/docs/5.2/content/tables/
+ */
+function cu_starterkit_theme_add_table_variables(&$variables) {
+  _cu_starterkit_theme_attributes_class_string_to_array($variables);
+  $variables['attributes']['class'][] = 'table';
+}
+
+/**
+ * Callback to add standard table classes.
+ *
+ * @see https://getbootstrap.com/docs/5.2/content/tables/
+ */
+function cu_starterkit_theme_add_table_striped_variables(&$variables) {
+  _cu_starterkit_theme_attributes_class_string_to_array($variables);
+  $variables['attributes']['class'][] = 'table-striped';
+}
+
+/**
+ * Implements theme_preprocess_system_modules_details().
+ */
+function cu_starterkit_theme_preprocess_system_modules_details(&$variables) {
+  cu_starterkit_theme_add_table_variables($variables);
+  cu_starterkit_theme_add_table_striped_variables($variables);
+}
+
+/**
+ * Implements theme_preprocess_system_modules_uninstall().
+ */
+function cu_starterkit_theme_preprocess_system_modules_uninstall(&$variables) {
+  cu_starterkit_theme_add_table_variables($variables);
+  cu_starterkit_theme_add_table_striped_variables($variables);
+}
+
+/**
+ * Implements theme_preprocess_views_ui_views_listing_table().
+ */
+function cu_starterkit_theme_preprocess_views_ui_views_listing_table(&$variables) {
+  cu_starterkit_theme_add_table_variables($variables);
+  cu_starterkit_theme_add_table_striped_variables($variables);
+}
+
+/**
+ * Implements theme_preprocess_table().
+ */
+function cu_starterkit_theme_preprocess_table(&$variables) {
+  cu_starterkit_theme_add_table_variables($variables);
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function cu_starterkit_theme_views_pre_render(ViewExecutable $view) {
+  $add_classes = function (&$option, array $classes_to_add) {
+    $classes = preg_split('/\s+/', $option);
+    $classes = array_filter($classes);
+    $classes = array_merge($classes, $classes_to_add);
+    $option = implode(' ', array_unique($classes));
+  };
+
+  if ($view->id() === 'media_library') {
+    if ($view->display_handler->options['defaults']['css_class']) {
+      $add_classes($view->displayHandlers->get('default')->options['css_class'], ['media-library-view']);
+    } else {
+      $add_classes($view->display_handler->options['css_class'], ['media-library-view']);
+    }
+
+    if ($view->current_display === 'page') {
+      if (array_key_exists('media_bulk_form', $view->field)) {
+        $add_classes($view->field['media_bulk_form']->options['element_class'], ['media-library-item__click-to-select-checkbox']);
+      }
+      if (array_key_exists('rendered_entity', $view->field)) {
+        $add_classes($view->field['rendered_entity']->options['element_class'], ['media-library-item__content']);
+      }
+      if (array_key_exists('edit_media', $view->field)) {
+        $add_classes($view->field['edit_media']->options['alter']['link_class'], ['media-library-item__edit']);
+        $add_classes($view->field['edit_media']->options['alter']['link_class'], ['icon-link']);
+      }
+      if (array_key_exists('delete_media', $view->field)) {
+        $add_classes($view->field['delete_media']->options['alter']['link_class'], ['media-library-item__remove']);
+        $add_classes($view->field['delete_media']->options['alter']['link_class'], ['icon-link']);
+      }
+    } elseif (strpos($view->current_display, 'widget') === 0) {
+      if (array_key_exists('rendered_entity', $view->field)) {
+        $add_classes($view->field['rendered_entity']->options['element_class'], ['media-library-item__content']);
+      }
+      if (array_key_exists('media_library_select_form', $view->field)) {
+        $add_classes($view->field['media_library_select_form']->options['element_wrapper_class'], ['media-library-item__click-to-select-checkbox']);
+      }
+
+      if ($view->display_handler->options['defaults']['css_class']) {
+        $add_classes($view->displayHandlers->get('default')->options['css_class'], ['media-library-view--widget']);
+      } else {
+        $add_classes($view->display_handler->options['css_class'], ['media-library-view--widget']);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_media_library_item__widget().
+ *
+ * This targets each media item selected in an entity reference field.
+ */
+function cu_starterkit_theme_preprocess_media_library_item__widget(array &$variables) {
+  $variables['content']['remove_button']['#attributes']['class'][] = 'media-library-item__remove';
+  $variables['content']['remove_button']['#attributes']['class'][] = 'icon-link';
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * Pass block region value to content so this can be used in
+ * THEME_theme_suggestions_menu_alter.
+ */
+function cu_starterkit_theme_preprocess_block(&$variables) {
+  if (isset($variables['elements']['#id'])) {
+    $block = Block::load($variables['elements']['#id']);
+    if ($block) {
+      $region = Block::load($variables['elements']['#id'])->getRegion();
+      if (!empty($region)) {
+        $variables['content']['#attributes']['data-block']['region'] = $region;
+      }
+    }
+  }
+
+  // System Branding Block
+  if ($variables['base_plugin_id'] == 'system_branding_block') {
+    switch (theme_get_setting('cuskt_navbar_bg_global_schema')) {
+      case 'none':
+      case 'light':
+        $variables['logo_theme'] = 'light';
+        break;
+      default:
+        $variables['logo_theme'] = 'dark';
+    }
+
+    if ( (\Drupal::moduleHandler()->moduleExists('pantheon_domain_masking') && \Drupal::config('pantheon_domain_masking.settings')->get('enabled')) 
+      && (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') && $_ENV['PANTHEON_ENVIRONMENT'] == 'live' ) {
+        $variables['subPath'] = '/' . \Drupal::config('pantheon_domain_masking.settings')->get('subpath');
+    } else {
+      $variables['subPath'] = '';
+    }
+
+    $variables['cuskt_branding_logo_use_svg_sprite'] = theme_get_setting('cuskt_branding_logo_use_svg_sprite');
+    $variables['cuskt_branding_logo_mobile_sprite_path'] = theme_get_setting('cuskt_branding_logo_mobile_sprite_path');
+    $variables['cuskt_branding_logo_desktop_sprite_path'] = theme_get_setting('cuskt_branding_logo_desktop_sprite_path');
+    // Landing Page
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+      $variables['is_landing_page'] = ($node->hasField('field_landing_page')) ? $node->get('field_landing_page')->getValue()[0]['value'] : '0';
+    } else {
+      $variables['is_landing_page'] = '0';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph__cuskt_layout_hero()
+ */
+function cu_starterkit_theme_preprocess_paragraph__cuskt_layout_hero(&$variables) {
+  $paragraph = $variables['elements']['#paragraph'];
+  $variables['bg_color'] = $paragraph->hasField('field_background_color') ? $paragraph->get('field_background_color')->value : '';
+  $variables['text_color'] = $paragraph->hasField('field_text_color') ? $paragraph->get('field_text_color')->value : '';
+  $variables['margin_top'] = $paragraph->hasField('field_margin_top') ? $paragraph->get('field_margin_top')->value : '';
+  $variables['margin_bottom'] = $paragraph->hasField('field_margin_bottom') ? $paragraph->get('field_margin_bottom')->value : '';
+  $variables['padding_top'] = $paragraph->hasField('field_padding_top') ? $paragraph->get('field_padding_top')->value : '';
+  $variables['padding_bottom'] = $paragraph->hasField('field_padding_bottom') ? $paragraph->get('field_padding_bottom')->value : '';
+  // Add layout setting to region for handling by layout twig
+  $variables['content']['regions']['#settings']['cuskt_column_setting'] = $paragraph->hasField('field_column_layout_setting_hero') ? $paragraph->get('field_column_layout_setting_hero')->value : '';
+}
+
+/**
+ * Implements hook_preprocess_paragraph__cuskt_layout()
+ */
+function cu_starterkit_theme_preprocess_paragraph__cuskt_layout(&$variables) {
+  $paragraph = $variables['elements']['#paragraph'];
+  $variables['bg_color'] = $paragraph->hasField('field_background_color') ? $paragraph->get('field_background_color')->value : '';
+  $variables['text_color'] = $paragraph->hasField('field_text_color') ? $paragraph->get('field_text_color')->value : '';
+  $variables['margin_top'] = $paragraph->hasField('field_margin_top') ? $paragraph->get('field_margin_top')->value : '';
+  $variables['margin_bottom'] = $paragraph->hasField('field_margin_bottom') ? $paragraph->get('field_margin_bottom')->value : '';
+  $variables['padding_top'] = $paragraph->hasField('field_padding_top') ? $paragraph->get('field_padding_top')->value : '';
+  $variables['padding_bottom'] = $paragraph->hasField('field_padding_bottom') ? $paragraph->get('field_padding_bottom')->value : '';
+  // Add layout setting to region for handling by layout twig
+  $variables['content']['regions']['#settings']['cuskt_column_setting'] = $paragraph->hasField('field_column_layout_setting') ? $paragraph->get('field_column_layout_setting')->value : '';
+}
+
+/**
+ * Implements hook_preprocess_paragraph__content_media()
+ */
+function cu_starterkit_theme_preprocess_paragraph__content_media(&$variables) {
+  $paragraph = $variables['elements']['#paragraph'];
+  $variables['is_figure'] = ($paragraph->hasField('field_text') && $paragraph->get('field_text')->value) ? true : false;
+  $variables['caption_align'] = $paragraph->hasField('field_text_alignment') ? $paragraph->get('field_text_alignment')->value : '';
+}
+
+/**
+ * Implements hook_preprocess_paragraph__content_horizontal_rule()
+ */
+function cu_starterkit_theme_preprocess_paragraph__content_horizontal_rule(&$variables) {
+  $paragraph = $variables['elements']['#paragraph'];
+  $variables['border_color'] = $paragraph->hasField('field_border_color') ? $paragraph->get('field_border_color')->value : '';
+  $variables['padding_tb'] = $paragraph->hasField('field_padding_top_bottom') ? $paragraph->get('field_padding_top_bottom')->value : '';
+}
+
+/**
+ * Implements hook_preprocess_paragraph__content_list()
+ */
+function cu_starterkit_theme_preprocess_paragraph__content_list(&$variables) {
+  $paragraph = $variables['elements']['#paragraph'];
+  $variables['list_count'] = $paragraph->hasField('field_paragraph') ? $paragraph->get('field_paragraph')->count() : '0';
+  // Need to build media  as it no longer done in Layout Paragraphs/Paragraphs
+  if ($variables['list_count']) {
+    $listItems = $paragraph->get('field_paragraph')->referencedEntities();
+    foreach($listItems as $key => $item){
+      $build = \Drupal::entityTypeManager()->getViewBuilder('media')->view($item->get('field_media')[0]->entity);
+      $variables['list_items'][$key]['content'] = $item;
+      $variables['list_items'][$key]['media'] = $build;
+    }
+  } else {
+    $variables['list_items'] = [];
+  }
+  $variables['list_layout_type'] = $paragraph->hasField('field_list_layout_type') ? $paragraph->get('field_list_layout_type')->value : '';
+  $variables['list_item_divider'] = $paragraph->hasField('field_boolean') ? $paragraph->get('field_boolean')->value : '';
+  $variables['list_item_margin'] = $paragraph->hasField('field_margin_bottom') ? $paragraph->get('field_margin_bottom')->value : '';
+}
+
+/**
+ * Implements hook_preprocess_paragraph__content_list_styled_order()
+ */
+function cu_starterkit_theme_preprocess_paragraph__content_list_styled_order(&$variables) {
+  $paragraph = $variables['elements']['#paragraph'];
+  $variables['list_count'] = $paragraph->hasField('field_paragraph') ? $paragraph->get('field_paragraph')->count() : '0';
+  $variables['list_style'] = $paragraph->hasField('field_list_style') ? $paragraph->get('field_list_style')->value : 'primary';
+  $variables['list_size'] = $paragraph->hasField('field_list_size') ? $paragraph->get('field_list_size')->value : 'small';
+}
+
+
+/**
+ * Implements hook_preprocess_paragraph__content_accordion()
+ */
+function cu_starterkit_theme_preprocess_paragraph__content_accordion(&$variables) {
+  $paragraph = $variables['elements']['#paragraph'];
+  $variables['list_count'] = $paragraph->hasField('field_paragraph') ? $paragraph->get('field_paragraph')->count() : '0';
+}
+
+/**
+ * Implements hook_preprocess_paragraph__content_card()
+ */
+function cu_starterkit_theme_preprocess_paragraph__content_card(&$variables) {
+  $paragraph = $variables['elements']['#paragraph'];
+  // Overlay
+  $variables['is_overlay'] = $paragraph->hasField('field_boolean_3') ? $paragraph->get('field_boolean_3')->value : '';
+  $variables['overlay_link'] = ($paragraph->hasField('field_link') && $paragraph->get('field_link')->first()) ? $paragraph->get('field_link')->first()->getUrl() : '';
+  $variables['overlay_link_title'] = ($paragraph->hasField('field_link') && $paragraph->get('field_link')->first()) ? $paragraph->get('field_link')->first()->title : '';
+  $variables['text_color'] = $paragraph->hasField('field_text_color') ? $paragraph->get('field_text_color')->value : '';
+  // Header/Footer
+  $variables['card_header_bg_color'] = $paragraph->hasField('field_background_color_2') ? $paragraph->get('field_background_color_2')->value : '';
+  $variables['card_footer_bg_color'] = $paragraph->hasField('field_background_color') ? $paragraph->get('field_background_color')->value : '';
+  // Button
+  $variables['button_color'] = $paragraph->hasField('field_button_color') ? $paragraph->get('field_button_color')->value : '';
+  $variables['button_link'] = ($paragraph->hasField('field_link_2') && $paragraph->get('field_link_2')->first()) ? $paragraph->get('field_link_2')->first()->getUrl() : '';
+  $variables['button_link_text'] = ($paragraph->hasField('field_link_2') && $paragraph->get('field_link_2')->first()) ? $paragraph->get('field_link_2')->first()->title : '';
+  $variables['button_link_title'] = ($paragraph->hasField('field_link_2') && $paragraph->get('field_link_2')->first() && isset($paragraph->get('field_link_2')->first()->get('options')->getValue()['attributes']['title'])) ? $paragraph->get('field_link_2')->first()->get('options')->getValue()['attributes']['title'] : '';
+  $variables['button_center'] = $paragraph->hasField('field_boolean_2') ? $paragraph->get('field_boolean_2')->value : '';
+  // Image
+  $variables['card_image_position'] = $paragraph->hasField('field_card_image_position') ? $paragraph->get('field_card_image_position')->value : '';
+  // Styles
+  $variables['text_alignment'] = $paragraph->hasField('field_boolean_4') ? $paragraph->get('field_boolean_4')->value : '';
+  $variables['border_color'] = $paragraph->hasField('field_border_color') ? $paragraph->get('field_border_color')->value : '';
+  $variables['card_horizontal_rule'] = $paragraph->hasField('field_boolean') ? $paragraph->get('field_boolean')->value : '';
+}
+
+/**
+ * Implements hook_preprocess_paragraph__content_quote()
+ */
+function cu_starterkit_theme_preprocess_paragraph__content_quote(&$variables) {
+  $paragraph = $variables['elements']['#paragraph'];
+  $variables['image_position'] = $paragraph->hasField('field_boolean_left_right') ? $paragraph->get('field_boolean_left_right')->value : '';
+  $variables['text_alignment'] = $paragraph->hasField('field_text_alignment') ? $paragraph->get('field_text_alignment')->value : '';
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function cu_starterkit_theme_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
+  if (isset($variables['attributes']['data-block']['region'])) {
+    $region = $variables['attributes']['data-block']['region'];
+    $suggestions[] = $variables['theme_hook_original'] . '__' . $region;
+    $suggestions[] = 'menu__' . $region;
+  }
+}

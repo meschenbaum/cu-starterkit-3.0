@@ -1,0 +1,41 @@
+{
+    "_hash": "a9d41d3260dae1940fa44ba543c4f887c4f4f2896ff0cb29a23d8c9b9dc92aaf",
+    "patches": {
+        "drupal/config_rewrite": [
+            {
+                "package": "drupal/config_rewrite",
+                "description": "Allow Creation of new configs files on rewrite",
+                "url": "https://www.drupal.org/files/issues/2023-11-28/3403251-allow-create.patch",
+                "sha256": "540f467b2cd1182e20c2757df677c62fef973cf8bd7f5db2b3a9ccc4b8a9b251",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:upstream-configuration/patches.json"
+                }
+            }
+        ],
+        "drupal/layout_paragraphs": [
+            {
+                "package": "drupal/layout_paragraphs",
+                "description": "Undefined array key '#ief_submit_trigger'",
+                "url": "https://www.drupal.org/files/issues/2023-02-03/layout_paragraphs-fixes-undefined-array-key-3274988-0.patch",
+                "sha256": "b0bc0e5ea51a105bb94cd3a67df78c5ec2defdc800c9d752b2ea5daad3e93f88",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:upstream-configuration/patches.json"
+                }
+            }
+        ],
+        "drupal/core": [
+            {
+                "package": "drupal/core",
+                "description": "2863785 - Config import creates 'Undefined index: uuid' notice",
+                "url": "https://www.drupal.org/files/issues/2023-10-30/2863785-24.patch",
+                "sha256": "1fbe1e0d70b1e8fa476c3b53063d99ea9bd0d9a16378ae1dbd2288f65a779dc7",
+                "depth": 2,
+                "extra": {
+                    "provenance": "patches-file:upstream-configuration/patches.json"
+                }
+            }
+        ]
+    }
+}

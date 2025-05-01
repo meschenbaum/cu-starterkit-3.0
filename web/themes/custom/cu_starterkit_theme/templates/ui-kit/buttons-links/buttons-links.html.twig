@@ -1,0 +1,59 @@
+{#
+/**
+ * @file
+ * Implements the Buttons & Links tab content for the UI Kit.
+ *
+ * Displays usage of buttons & links within the theme.
+ */
+#}
+{% import '@cu_starterkit_theme/ui-kit/buttons-links/buttons-links.macros.twig' as macros %}
+{% extends '@bootstrap_ui_kit/section.html.twig' %}
+
+{% block section_intro %}
+  <p>{{ 'This type scale is a range of contrasting styles that support the needs of the product and its content.'|t }}</p>
+{% endblock %}
+
+{% block section_content %}
+  <div class="border-bottom pb-5 mt-5">
+    <div class="row row-cols-lg-4 gy-5">
+      {{ macros.button_set('Primary') }}
+      {{ macros.button_set('Secondary') }}
+      {{ macros.button_set('Dark') }}
+      {{ macros.button_set('Light') }}
+    </div>
+  </div>
+  <div class="border-bottom py-5 my-5">
+    <div class="row row-cols-lg-4 gy-5">
+      {{ macros.button_set('Primary', true) }}
+      {{ macros.button_set('Secondary', true) }}
+      {{ macros.button_set('Dark', true) }}
+      {{ macros.button_set('Light', true, 'dark') }}
+    </div>
+  </div>
+  <h3 class="d-block mb-5">{{ 'Links'|t }}</h3>
+  <div class="border-bottom py-5 my-5">
+    <div class="row row-cols-lg-4 gy-5">
+      <div class="p-5 mt-lg-0 rounded-3">
+        <div class="row row-cols-1 gy-5">
+          <strong>{{ 'Default Links'|t }}</strong>
+          <div>
+            <small class="d-block mb-2">{{ 'Normal'|t }}</small>
+            <div class="mb-5">
+              <a href="#">{{ 'Link text'|t }}</a>
+            </div>
+          </div>
+          <div>
+            <small class="d-block mb-2">{{ 'With Icon'|t }}</small>
+            <div class="mb-5">
+              <a href="#">{{ 'Link text'|t }}<i class="fa-solid fa-arrow-right ms-1" role="presentation"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {#{ macros.link_set('Primary') }#}
+      {#{ macros.link_set('Secondary') }#}
+      {{ macros.link_set('Dark') }}
+      {{ macros.link_set('Light', 'dark') }}
+    </div>
+  </div>
+{% endblock %}

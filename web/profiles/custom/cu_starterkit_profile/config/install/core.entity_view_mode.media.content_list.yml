@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.content_list
+label: 'Content: List'
+description: ''
+targetEntityType: media
+cache: true

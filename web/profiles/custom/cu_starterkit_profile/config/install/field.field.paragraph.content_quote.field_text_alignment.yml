@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text_alignment
+    - paragraphs.paragraphs_type.content_quote
+  module:
+    - options
+id: paragraph.content_quote.field_text_alignment
+field_name: field_text_alignment
+entity_type: paragraph
+bundle: content_quote
+label: 'Text Alignment'
+description: "Alignment text(defaults to 'None' = Left Justified).\r\n"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

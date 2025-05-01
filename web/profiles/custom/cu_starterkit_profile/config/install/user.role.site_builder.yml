@@ -1,0 +1,207 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.basic
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.hero_html
+    - filter.format.styled_list
+    - media.type.audio
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.video
+    - node.type.article
+    - node.type.article_list
+    - node.type.page
+    - taxonomy.vocabulary.byline
+    - taxonomy.vocabulary.category
+    - taxonomy.vocabulary.media_tags
+    - taxonomy.vocabulary.tags
+  module:
+    - block
+    - block_content
+    - config
+    - entity_reference_revisions
+    - entity_usage
+    - file
+    - filter
+    - media
+    - metatag
+    - node
+    - paragraphs
+    - paragraphs_library
+    - paragraphs_type_permissions
+    - path
+    - rebuild_cache_access
+    - redirect
+    - taxonomy
+    - views_ui
+    - xmlsitemap
+id: site_builder
+label: 'Site Builder'
+weight: -5
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access entity usage statistics'
+  - 'access files overview'
+  - 'access media overview'
+  - 'access taxonomy overview'
+  - 'access user profiles'
+  - 'administer blocks'
+  - 'administer content types'
+  - 'administer media'
+  - 'administer media types'
+  - 'administer meta tags'
+  - 'administer nodes'
+  - 'administer redirects'
+  - 'administer taxonomy'
+  - 'administer url aliases'
+  - 'administer users'
+  - 'administer views'
+  - 'administer xmlsitemap'
+  - 'create article content'
+  - 'create article_list content'
+  - 'create audio media'
+  - 'create basic block content'
+  - 'create document media'
+  - 'create image media'
+  - 'create media'
+  - 'create page content'
+  - 'create paragraph content content_accordion'
+  - 'create paragraph content content_accordion_item'
+  - 'create paragraph content content_anchor_link'
+  - 'create paragraph content content_card'
+  - 'create paragraph content content_horizontal_rule'
+  - 'create paragraph content content_list'
+  - 'create paragraph content content_list_item'
+  - 'create paragraph content content_list_styled_order'
+  - 'create paragraph content content_list_styled_order_item'
+  - 'create paragraph content content_media'
+  - 'create paragraph content content_quote'
+  - 'create paragraph content content_wysiwyg'
+  - 'create paragraph content cuskt_content_library_reference'
+  - 'create paragraph content cuskt_layout'
+  - 'create paragraph content cuskt_layout_hero'
+  - 'create paragraph content hero_wysiwyg'
+  - 'create paragraph content view_reference'
+  - 'create paragraph library item'
+  - 'create remote_video media'
+  - 'create terms in byline'
+  - 'create terms in category'
+  - 'create terms in media_tags'
+  - 'create terms in tags'
+  - 'create url aliases'
+  - 'create video media'
+  - 'delete any article content'
+  - 'delete any article_list content'
+  - 'delete any audio media'
+  - 'delete any basic block content'
+  - 'delete any basic block content revisions'
+  - 'delete any document media'
+  - 'delete any file'
+  - 'delete any image media'
+  - 'delete any media'
+  - 'delete any page content'
+  - 'delete any remote_video media'
+  - 'delete any video media'
+  - 'delete article revisions'
+  - 'delete article_list revisions'
+  - 'delete media'
+  - 'delete orphan revisions'
+  - 'delete own article content'
+  - 'delete own article_list content'
+  - 'delete own audio media'
+  - 'delete own document media'
+  - 'delete own files'
+  - 'delete own image media'
+  - 'delete own page content'
+  - 'delete own remote_video media'
+  - 'delete own video media'
+  - 'delete page revisions'
+  - 'delete paragraph content content_accordion'
+  - 'delete paragraph content content_accordion_item'
+  - 'delete paragraph content content_anchor_link'
+  - 'delete paragraph content content_card'
+  - 'delete paragraph content content_horizontal_rule'
+  - 'delete paragraph content content_list'
+  - 'delete paragraph content content_list_item'
+  - 'delete paragraph content content_list_styled_order'
+  - 'delete paragraph content content_list_styled_order_item'
+  - 'delete paragraph content content_media'
+  - 'delete paragraph content content_quote'
+  - 'delete paragraph content content_wysiwyg'
+  - 'delete paragraph content cuskt_content_library_reference'
+  - 'delete paragraph content cuskt_layout'
+  - 'delete paragraph content cuskt_layout_hero'
+  - 'delete paragraph content hero_wysiwyg'
+  - 'delete paragraph content view_reference'
+  - 'delete terms in byline'
+  - 'delete terms in category'
+  - 'delete terms in media_tags'
+  - 'delete terms in tags'
+  - 'edit any article content'
+  - 'edit any article_list content'
+  - 'edit any audio media'
+  - 'edit any basic block content'
+  - 'edit any document media'
+  - 'edit any image media'
+  - 'edit any page content'
+  - 'edit any remote_video media'
+  - 'edit any video media'
+  - 'edit own article content'
+  - 'edit own article_list content'
+  - 'edit own audio media'
+  - 'edit own document media'
+  - 'edit own image media'
+  - 'edit own page content'
+  - 'edit own remote_video media'
+  - 'edit own video media'
+  - 'edit paragraph library item'
+  - 'edit terms in byline'
+  - 'edit terms in category'
+  - 'edit terms in media_tags'
+  - 'edit terms in tags'
+  - 'export configuration'
+  - 'import configuration'
+  - 'override xmlsitemap link settings'
+  - 'rebuild cache access'
+  - 'revert any basic block content revisions'
+  - 'revert article revisions'
+  - 'revert article_list revisions'
+  - 'revert page revisions'
+  - 'synchronize configuration'
+  - 'update any media'
+  - 'update media'
+  - 'update paragraph content content_accordion'
+  - 'update paragraph content content_accordion_item'
+  - 'update paragraph content content_anchor_link'
+  - 'update paragraph content content_card'
+  - 'update paragraph content content_horizontal_rule'
+  - 'update paragraph content content_list'
+  - 'update paragraph content content_list_item'
+  - 'update paragraph content content_list_styled_order'
+  - 'update paragraph content content_list_styled_order_item'
+  - 'update paragraph content content_media'
+  - 'update paragraph content content_quote'
+  - 'update paragraph content content_wysiwyg'
+  - 'update paragraph content cuskt_content_library_reference'
+  - 'update paragraph content cuskt_layout'
+  - 'update paragraph content cuskt_layout_hero'
+  - 'update paragraph content hero_wysiwyg'
+  - 'update paragraph content view_reference'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'use text format hero_html'
+  - 'use text format styled_list'
+  - 'view all media revisions'
+  - 'view any basic block content history'
+  - 'view article revisions'
+  - 'view article_list revisions'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view page revisions'
+  - 'view unpublished paragraphs'
+  - 'view user email addresses'

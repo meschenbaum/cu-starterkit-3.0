@@ -1,0 +1,15 @@
+{# Headings #}
+{% macro heading_row(level, friendly_name) %}
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ friendly_name ? friendly_name : level|upper }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <{{ level }}
+      data-typography-level="{{ friendly_name ? friendly_name|clean_class : level|clean_class }}"
+      class="m-0 p-0 {{ friendly_name ? friendly_name|clean_class }}">{{ 'Lorem ipsum'|t  }}</{{ level }}>
+  </div>
+  </div>
+{% endmacro %}

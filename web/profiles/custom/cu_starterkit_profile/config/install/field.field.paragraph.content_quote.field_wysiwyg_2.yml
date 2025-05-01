@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_wysiwyg_2
+    - filter.format.basic_html
+    - filter.format.full_html
+    - filter.format.plain_text
+    - paragraphs.paragraphs_type.content_quote
+  module:
+    - text
+id: paragraph.content_quote.field_wysiwyg_2
+field_name: field_wysiwyg_2
+entity_type: paragraph
+bundle: content_quote
+label: Citation
+description: 'Should be single line citation with limited HTML.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+    - full_html
+    - plain_text
+field_type: text_long

@@ -1,0 +1,303 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_card.field_background_color
+    - field.field.paragraph.content_card.field_background_color_2
+    - field.field.paragraph.content_card.field_boolean
+    - field.field.paragraph.content_card.field_boolean_2
+    - field.field.paragraph.content_card.field_boolean_3
+    - field.field.paragraph.content_card.field_boolean_4
+    - field.field.paragraph.content_card.field_border_color
+    - field.field.paragraph.content_card.field_button_color
+    - field.field.paragraph.content_card.field_card_image_position
+    - field.field.paragraph.content_card.field_link
+    - field.field.paragraph.content_card.field_link_2
+    - field.field.paragraph.content_card.field_media
+    - field.field.paragraph.content_card.field_text
+    - field.field.paragraph.content_card.field_text_2
+    - field.field.paragraph.content_card.field_text_color
+    - field.field.paragraph.content_card.field_wysiwyg
+    - paragraphs.paragraphs_type.content_card
+  module:
+    - field_group
+    - link
+    - link_attributes
+    - media_library
+    - text
+third_party_settings:
+  field_group:
+    group_tabs_container:
+      children:
+        - group_card_text
+        - group_image
+        - group_layout
+        - group_styling_options
+      label: 'Tabs Container'
+      region: content
+      parent_name: ''
+      weight: 16
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: horizontal
+        width_breakpoint: 640
+    group_card_text:
+      children:
+        - field_text_2
+        - field_wysiwyg
+        - field_text
+        - group_button
+      label: 'Card Text'
+      region: content
+      parent_name: group_tabs_container
+      weight: 19
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: true
+    group_button:
+      children:
+        - field_button_color
+        - field_boolean_2
+        - field_link_2
+      label: Button
+      region: content
+      parent_name: group_card_text
+      weight: 8
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_image:
+      children:
+        - field_media
+      label: Image
+      region: content
+      parent_name: group_tabs_container
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_layout:
+      children:
+        - field_card_image_position
+        - group_card_link_overlay
+      label: Layout
+      region: content
+      parent_name: group_tabs_container
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_card_link_overlay:
+      children:
+        - field_boolean_3
+        - field_link
+        - field_text_color
+      label: 'Card Link Overlay'
+      region: content
+      parent_name: group_layout
+      weight: 3
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_styling_options:
+      children:
+        - group_all_card
+        - group_header_footer_colors
+        - field_border_color
+        - field_boolean
+      label: 'Styling Options'
+      region: content
+      parent_name: group_tabs_container
+      weight: 23
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_all_card:
+      children:
+        - field_boolean_4
+      label: 'All Card'
+      region: content
+      parent_name: group_styling_options
+      weight: 15
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_header_footer_colors:
+      children:
+        - field_background_color_2
+        - field_background_color
+      label: 'Header/Footer Colors'
+      region: content
+      parent_name: group_styling_options
+      weight: 16
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+id: paragraph.content_card.default
+targetEntityType: paragraph
+bundle: content_card
+mode: default
+content:
+  field_background_color:
+    type: options_select
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_background_color_2:
+    type: options_select
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_boolean:
+    type: boolean_checkbox
+    weight: 18
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_boolean_2:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_boolean_3:
+    type: boolean_checkbox
+    weight: 10
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_boolean_4:
+    type: boolean_checkbox
+    weight: 22
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_border_color:
+    type: options_select
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_button_color:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_card_image_position:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_link:
+    type: link_default
+    weight: 11
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: 'Used for anchor title(hover text)'
+    third_party_settings: {  }
+  field_link_2:
+    type: link_attributes
+    weight: 7
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        title: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+        aria-label: false
+      widget_default_open: expandIfValuesSet
+    third_party_settings: {  }
+  field_media:
+    type: media_library_widget
+    weight: 5
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_text:
+    type: string_textfield
+    weight: 7
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_text_2:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_text_color:
+    type: options_select
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_wysiwyg:
+    type: text_textarea
+    weight: 6
+    region: content
+    settings:
+      rows: 5
+      placeholder: 'Enter your content here...'
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

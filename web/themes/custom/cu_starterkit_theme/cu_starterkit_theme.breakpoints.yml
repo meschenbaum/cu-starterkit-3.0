@@ -1,0 +1,31 @@
+cu_starterkit_theme.sm:
+  label: Small
+  mediaQuery: '(min-width: 576px)'
+  weight: 1
+  multipliers:
+    - 1x
+cu_starterkit_theme.md:
+  label: Medium
+  mediaQuery: '(min-width: 768px)'
+  weight: 2
+  multipliers:
+    - 1x
+cu_starterkit_theme.lg:
+  label: Large
+  mediaQuery: '(min-width: 992px)'
+  weight: 3
+  multipliers:
+    - 1x
+cu_starterkit_theme.xl:
+  label: X-Large
+  mediaQuery: '(min-width: 1200px)'
+  weight: 4
+  multipliers:
+    - 1x
+cu_starterkit_theme.xxl:
+  label: XXL
+  mediaQuery: '(min-width: 1400px)'
+  weight: 5
+  multipliers:
+    - 1x
+

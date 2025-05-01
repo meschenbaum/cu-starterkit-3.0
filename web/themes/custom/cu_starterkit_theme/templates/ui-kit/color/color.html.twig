@@ -1,0 +1,67 @@
+{#
+/**
+ * @file
+ * Implements the Color tab content for the UI Kit.
+ *
+ * Displays usage of color within the theme.
+ */
+#}
+{% import '@cu_starterkit_theme/ui-kit/color/color.macros.twig' as macros %}
+{% extends '@bootstrap_ui_kit/section.html.twig' %}
+
+{% block section_intro %}
+  {% set min_passable = min_passable|default('AA') %}
+  {% trans %}
+    <p><strong>Purposeful:</strong> Colors should serve purposes, making the digital experience predictable, fluent and
+      pleasing. e.g. what color indicates which element is clickable.</p>
+    <p><strong>Accessible:</strong> All colors must pass {{ min_passable }} standard for normal and large text.</p>
+  {% endtrans %}
+{% endblock %}
+
+{% block section_content %}
+  {{ attach_library('bootstrap_ui_kit/bootstrap-ui-kit.color') }}
+
+  {% block primary_colors %}
+  <div class="pb-5 mb-5 border-bottom d-block">
+    <p><strong>{{ 'Primary colors'|t }}</strong></p>
+    <div class="row justify-content-between gy-5">
+      {% block primary_colors_content %}
+        {{ macros.swatch('primary') }}
+        {{ macros.swatch('secondary') }}
+        {{ macros.swatch('light') }}
+        {{ macros.swatch('dark') }}
+      {% endblock %}
+    </div>
+  </div>
+  {% endblock %}
+
+  {% block secondary_colors %}
+  <div class="pb-5 mb-5 border-bottom d-block">
+    <p><strong>{{ 'Secondary colors'|t }}</strong></p>
+    <div class="row justify-content-between gy-5">
+      {% block secondary_colors_content %}
+        {{ macros.swatch('success') }}
+        {{ macros.swatch('info') }}
+        {{ macros.swatch('warning') }}
+        {{ macros.swatch('danger') }}
+      {% endblock %}
+    </div>
+  </div>
+  {% endblock %}
+
+  {% block accessibility_checker %}
+  <div class="mb-5">
+    <p><strong>{{ 'Accessibility'|t }}</strong></p>
+    {% block accessibility_checker_content %}
+      {{ macros.accessibility_info('primary', 'black') }}
+      {{ macros.accessibility_info('secondary', 'white') }}
+      {{ macros.accessibility_info('light', 'black') }}
+      {{ macros.accessibility_info('dark', 'white') }}
+      {{ macros.accessibility_info('success', 'white') }}
+      {{ macros.accessibility_info('info', 'black') }}
+      {{ macros.accessibility_info('warning', 'black') }}
+      {{ macros.accessibility_info('danger', 'white') }}
+    {% endblock %}
+  </div>
+  {% endblock %}
+{% endblock %}

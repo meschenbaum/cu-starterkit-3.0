@@ -1,0 +1,109 @@
+name: 'CU StarterKit Theme'
+type: theme
+base theme: stable9
+description: 'CU System Starter Kit Theme for Drupal 10+'
+alt text: Screenshot of CU System StarterKit Theme.
+package: CU System
+starterkit: true
+generator: 'starterkit_theme:10.2.2'
+core_version_requirement: ^10
+version: VERSION
+
+dependencies:
+#  - drupal:block
+#  - drupal:block_content
+#  - drupal:breakpoint
+#  - drupal:ckeditor5
+#  - drupal:datetime
+#  - drupal:datetime_range
+#  - drupal:editor
+#  - drupal:entity_reference_revisions
+#  - drupal:entity_usage
+#  - drupal:field
+#  - drupal:field_group
+#  - drupal:field_ui
+#  - drupal:file
+#  - drupal:filter
+#  - drupal:help
+#  - drupal:image
+#  - drupal:layout_discovery
+#  - drupal:layout_paragraphs
+#  - drupal:layout_paragraphs_library
+#  - drupal:layout_paragraphs_permissions
+#  - drupal:link
+#  - drupal:media
+#  - drupal:media_library
+#  - drupal:menu_link_content
+#  - drupal:menu_ui
+#  - drupal:metatag
+#  - drupal:node
+#  - drupal:paragraphs
+#  - drupal:paragraphs_library
+#  - drupal:paragraphs_type_permissions
+#  - drupal:path
+#  - drupal:path_alias
+#  - drupal:pathauto
+#  - drupal:responsive_image
+#  - drupal:taxonomy
+#  - drupal:text
+#  - drupal:user
+#  - drupal:views
+#  - drupal:views_ui
+
+libraries:
+  - cu_starterkit_theme/base
+  - cu_starterkit_theme/messages
+  - core/normalize
+  - cu_starterkit_theme/global-styling
+
+libraries-extend:
+  user/drupal.user:
+    - cu_starterkit_theme/user
+  core/drupal.dropbutton:
+    - cu_starterkit_theme/dropbutton
+  core/drupal.dialog:
+    - cu_starterkit_theme/dialog
+  file/drupal.file:
+    - cu_starterkit_theme/file
+  core/drupal.progress:
+    - cu_starterkit_theme/progress
+
+libraries-override:
+  bootstrap_ui_kit/bootstrap-ui-kit:
+    js:
+      js/bootstrap-ui-kit.js:  templates/ui-kit/bootstrap-ui-kit.js
+  bootstrap_ui_kit/bootstrap-ui-kit.iconography:
+    js:
+      templates/ui-kit/iconography/iconography.js:  templates/ui-kit/iconography/iconography.js
+
+ckeditor_stylesheets:
+  - css/style.css
+ckeditor5-stylesheets:
+  - dist/fontawesome/css/fontawesome.min.css
+  - dist/fontawesome/css/brands.min.css
+  - dist/fontawesome/css/regular.min.css
+  - dist/fontawesome/css/solid.min.css
+  - css/ck5style.css
+
+regions:
+  global_header_first: "Global Header First"
+  global_header_second: "Global Header Second"
+  local_header_first: "Local Header First"
+  local_header_second: "Local Header Second"
+  main_menu: "Main Navigation"
+  hero: "Hero"
+  alerts: "Alerts"
+  breadcrumb: "Breadcrumb Navigation"
+  featured_top: 'Featured top'
+  content: "Content"
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  featured_bottom_first: 'Featured bottom first'
+  featured_bottom_second: 'Featured bottom second'
+  footer_first: 'Footer first'
+  footer_second: 'Footer second'
+  footer_third: 'Footer third'
+  footer_fourth: 'Footer fourth'
+  global_footer_first: 'Global Footer first'
+  global_footer_second: 'Global Footer second'
+

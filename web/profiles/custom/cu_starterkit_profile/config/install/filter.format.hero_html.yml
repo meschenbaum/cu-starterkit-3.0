@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Hero HTML'
+format: hero_html
+weight: 0
+filters:
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<br> <p class="fs-1 fs-2 fs-3 fs-4 fs-5 fs-6"> <a class="btn btn-primary btn-secondary btn-dark btn-light btn-outline-primary btn-outline-secondary btn-outline-dark btn-outline-light text-nowrap" href> <strong> <em> <u> <sub> <sup> <i class>'
+      filter_html_help: true
+      filter_html_nofollow: false
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: true
+    weight: 10
+    settings: {  }

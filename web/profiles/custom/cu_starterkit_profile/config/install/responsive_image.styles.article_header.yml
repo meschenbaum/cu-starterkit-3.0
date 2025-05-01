@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.layout_default_article_header
+    - image.style.layout_large_article_header
+    - image.style.layout_medium_article_header
+    - image.style.layout_small_article_header
+    - image.style.layout_x_large_article_header
+    - image.style.layout_xx_large_article_header
+  theme:
+    - cu_starterkit_theme
+id: article_header
+label: 'Article Feature'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: layout_xx_large_article_header
+    breakpoint_id: cu_starterkit_theme.xxl
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: layout_x_large_article_header
+    breakpoint_id: cu_starterkit_theme.xl
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: layout_large_article_header
+    breakpoint_id: cu_starterkit_theme.lg
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: layout_medium_article_header
+    breakpoint_id: cu_starterkit_theme.md
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: layout_small_article_header
+    breakpoint_id: cu_starterkit_theme.sm
+    multiplier: 1x
+breakpoint_group: cu_starterkit_theme
+fallback_image_style: layout_default_article_header

@@ -1,0 +1,91 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.hero_html
+  module:
+    - ckeditor5
+format: hero_html
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - bold
+      - italic
+      - underline
+      - subscript
+      - superscript
+      - '|'
+      - link
+      - icon
+      - '|'
+      - style
+  plugins:
+    ckeditor5_icons_icon:
+      fa_version: '6'
+      fa_styles:
+        - solid
+        - regular
+        - brands
+      custom_metadata: false
+      async_metadata: true
+      recommended_enabled: true
+      recommended_icons:
+        - up-right-from-square
+        - download
+        - cloud-arrow-down
+        - facebook
+        - x-twitter
+        - google-plus-g
+        - square-youtube
+    ckeditor5_style:
+      styles:
+        -
+          label: 'Primary Button'
+          element: '<a class="btn btn-primary">'
+        -
+          label: 'Secondary Button'
+          element: '<a class="btn btn-secondary">'
+        -
+          label: 'Dark Button'
+          element: '<a class="btn btn-dark">'
+        -
+          label: 'Light Button'
+          element: '<a class="btn btn-light">'
+        -
+          label: 'Primary O-Button'
+          element: '<a class="btn btn-outline-primary">'
+        -
+          label: 'Secondary O-Button'
+          element: '<a class="btn btn-outline-secondary">'
+        -
+          label: 'Dark O-Button'
+          element: '<a class="btn btn-outline-dark">'
+        -
+          label: 'Light O-Button'
+          element: '<a class="btn btn-outline-light">'
+        -
+          label: 'No Wrap Button'
+          element: '<a class="btn text-nowrap">'
+        -
+          label: 'No Wrap'
+          element: '<a class="text-nowrap">'
+        -
+          label: 'Font Size 1'
+          element: '<p class="fs-1">'
+        -
+          label: 'Font Size 2'
+          element: '<p class="fs-2">'
+        -
+          label: 'Font Size 3'
+          element: '<p class="fs-3">'
+        -
+          label: 'Font Size 4'
+          element: '<p class="fs-4">'
+        -
+          label: 'Font Size 5'
+          element: '<p class="fs-5">'
+        -
+          label: 'Font Size 6'
+          element: '<p class="fs-6">'
+image_upload: {  }

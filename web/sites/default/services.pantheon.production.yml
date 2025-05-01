@@ -1,0 +1,14 @@
+#
+# Rename this file to 'services.pantheon.production.yml' and
+# modify to suit.  It will then be loaded by settings.pantheon.php
+# on production environments ('test' and 'live').
+#
+# See 'default.services.yml' for information on useful settings to
+# put here.
+#
+parameters:
+  twig.config:
+    debug: false
+    auto_reload: null
+    cache: true
+  http.response.debug_cacheability_headers: false

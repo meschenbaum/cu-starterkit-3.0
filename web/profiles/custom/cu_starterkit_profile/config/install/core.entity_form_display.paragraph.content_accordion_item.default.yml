@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_accordion_item.field_text
+    - field.field.paragraph.content_accordion_item.field_wysiwyg
+    - paragraphs.paragraphs_type.content_accordion_item
+  module:
+    - text
+id: paragraph.content_accordion_item.default
+targetEntityType: paragraph
+bundle: content_accordion_item
+mode: default
+content:
+  field_text:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_wysiwyg:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 10
+      placeholder: 'Enter your content here...'
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

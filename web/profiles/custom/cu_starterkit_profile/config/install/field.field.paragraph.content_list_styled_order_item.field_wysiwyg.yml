@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_wysiwyg
+    - filter.format.plain_text
+    - filter.format.styled_list
+    - paragraphs.paragraphs_type.content_list_styled_order_item
+  module:
+    - text
+id: paragraph.content_list_styled_order_item.field_wysiwyg
+field_name: field_wysiwyg
+entity_type: paragraph
+bundle: content_list_styled_order_item
+label: Content
+description: 'Text area for list item'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - styled_list
+    - plain_text
+field_type: text_long

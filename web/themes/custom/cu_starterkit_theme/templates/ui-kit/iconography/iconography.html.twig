@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Implements the Iconography tab content for the UI Kit.
+ *
+ * Displays usage of icons within the theme.
+ */
+#}
+{% extends '@bootstrap_ui_kit/section.html.twig' %}
+
+{% block section_intro %}
+  {% trans %}
+    <p><strong>FontAwesome Icons:</strong> Free, high quality, open source icon library with over 1,800 icons. Include them anyway you
+      like—SVGs, SVG sprite, or web fonts. Use them with or without Bootstrap in any project.</p>
+  {% endtrans %}
+{% endblock %}
+
+{% block section_content %}
+  {{ attach_library('bootstrap_ui_kit/bootstrap-ui-kit.iconography') }}
+
+  {# Iconset #}
+  {% if iconography_set %}
+    <div class="d-flex flex-wrap gap-5">
+      {% for icon in iconography_set|sort %}
+        <div class="d-flex flex-column text-center gap-3 {{ dev_mode ? 'btn-copy__icon' }}" data-icon-name="{{ icon }}" style="width: 100px">
+          {% block icon %}
+            {% include '@cu_starterkit_theme/ui-kit/iconography/icon.html.twig' with { name: icon, classes: 'icon-lg' } %}
+          {% endblock %}
+          <span class="py-2 badge text-bg-light fw-normal text-truncate" role="presentation">{{ icon }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-danger" role="alert">
+      {{ "Failed to load iconset. Check that your config is correctly set."|t }}
+    </div>
+  {% endif %}
+{% endblock %}

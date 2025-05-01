@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_list_style
+    - paragraphs.paragraphs_type.content_list_styled_order
+  module:
+    - options
+id: paragraph.content_list_styled_order.field_list_style
+field_name: field_list_style
+entity_type: paragraph
+bundle: content_list_styled_order
+label: 'List Style'
+description: 'Styling to be applied.'
+required: true
+translatable: false
+default_value:
+  -
+    value: primary
+default_value_callback: ''
+settings: {  }
+field_type: list_string

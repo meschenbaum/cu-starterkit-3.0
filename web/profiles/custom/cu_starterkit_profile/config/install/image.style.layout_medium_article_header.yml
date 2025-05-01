@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_medium_article_header
+label: 'Layout: Medium - Article Feature'
+effects:
+  bb8bb52b-ac83-48d9-9796-19fb6d0730d5:
+    uuid: bb8bb52b-ac83-48d9-9796-19fb6d0730d5
+    id: image_scale
+    weight: 1
+    data:
+      width: 1060
+      height: null
+      upscale: true

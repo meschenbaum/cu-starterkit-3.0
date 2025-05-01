@@ -1,0 +1,100 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content
+    - node.type.page
+    - paragraphs.paragraphs_type.content_accordion
+    - paragraphs.paragraphs_type.content_anchor_link
+    - paragraphs.paragraphs_type.content_card
+    - paragraphs.paragraphs_type.content_horizontal_rule
+    - paragraphs.paragraphs_type.content_list
+    - paragraphs.paragraphs_type.content_list_styled_order
+    - paragraphs.paragraphs_type.content_media
+    - paragraphs.paragraphs_type.content_quote
+    - paragraphs.paragraphs_type.content_wysiwyg
+    - paragraphs.paragraphs_type.cuskt_content_library_reference
+    - paragraphs.paragraphs_type.cuskt_layout
+    - paragraphs.paragraphs_type.view_reference
+  module:
+    - entity_reference_revisions
+id: node.page.field_content
+field_name: field_content
+entity_type: node
+bundle: page
+label: Content
+description: 'Main content area of page.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      content_accordion: content_accordion
+      content_anchor_link: content_anchor_link
+      content_card: content_card
+      content_horizontal_rule: content_horizontal_rule
+      content_list: content_list
+      content_list_styled_order: content_list_styled_order
+      content_media: content_media
+      content_quote: content_quote
+      content_wysiwyg: content_wysiwyg
+      cuskt_content_library_reference: cuskt_content_library_reference
+      cuskt_layout: cuskt_layout
+      view_reference: view_reference
+    negate: 0
+    target_bundles_drag_drop:
+      content_accordion:
+        weight: -37
+        enabled: true
+      content_accordion_item:
+        weight: -24
+        enabled: false
+      content_anchor_link:
+        weight: -35
+        enabled: true
+      content_card:
+        weight: -34
+        enabled: true
+      content_horizontal_rule:
+        weight: -33
+        enabled: true
+      content_list:
+        weight: -32
+        enabled: true
+      content_list_item:
+        weight: -23
+        enabled: false
+      content_list_styled_order:
+        weight: -31
+        enabled: true
+      content_list_styled_order_item:
+        weight: -22
+        enabled: false
+      content_media:
+        weight: -30
+        enabled: true
+      content_quote:
+        weight: -29
+        enabled: true
+      content_wysiwyg:
+        weight: -28
+        enabled: true
+      cuskt_content_library_reference:
+        weight: -27
+        enabled: true
+      cuskt_layout:
+        weight: -26
+        enabled: true
+      cuskt_layout_hero:
+        weight: -21
+        enabled: false
+      hero_wysiwyg:
+        weight: -20
+        enabled: false
+      view_reference:
+        weight: -25
+        enabled: true
+field_type: entity_reference_revisions

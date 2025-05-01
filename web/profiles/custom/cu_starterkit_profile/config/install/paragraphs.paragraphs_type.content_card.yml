@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'file:file:7bcc924a-0232-4696-a49f-c53d5afe4f36'
+  module:
+    - layout_paragraphs
+    - paragraphs_library
+third_party_settings:
+  paragraphs_library:
+    allow_library_conversion: true
+id: content_card
+label: 'Content: Card'
+icon_uuid: 7bcc924a-0232-4696-a49f-c53d5afe4f36
+icon_default: 'data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDEgMTAxIj48dGl0bGU+QXJ0Ym9hcmQgMjwvdGl0bGU+PHBhdGggZD0iTTkxLjUsMjNIOS41QTEuNSwxLjUsMCwwLDAsOCwyNC41djUyQTEuNSwxLjUsMCwwLDAsOS41LDc4aDgyQTEuNSwxLjUsMCwwLDAsOTMsNzYuNXYtNTJBMS41LDEuNSwwLDAsMCw5MS41LDIzWk05MCw3NUgxMVYyNkg5MFoiLz48cGF0aCBkPSJNMTgsNzBINDdhMS41LDEuNSwwLDAsMCwxLjUtMS41QTE1Ljc3LDE1Ljc3LDAsMCwwLDMyLjUsNTNhMTUuNzcsMTUuNzcsMCwwLDAtMTYsMTUuNUExLjUsMS41LDAsMCwwLDE4LDcwWk0zMi41LDU2QTEyLjg1LDEyLjg1LDAsMCwxLDQ1LjQxLDY3SDE5LjU5QTEyLjg1LDEyLjg1LDAsMCwxLDMyLjUsNTZaIi8+PHBhdGggZD0iTTMyLjUsNTBBOC41LDguNSwwLDEsMCwyNCw0MS41LDguNTEsOC41MSwwLDAsMCwzMi41LDUwWm0wLTE0QTUuNSw1LjUsMCwxLDEsMjcsNDEuNSw1LjUxLDUuNTEsMCwwLDEsMzIuNSwzNloiLz48cGF0aCBkPSJNNTEuNSw0MmgzMGExLjUsMS41LDAsMCwwLDAtM2gtMzBhMS41LDEuNSwwLDAsMCwwLDNaIi8+PHBhdGggZD0iTTUxLjUsNTZoMzBhMS41LDEuNSwwLDAsMCwwLTNoLTMwYTEuNSwxLjUsMCwwLDAsMCwzWiIvPjwvc3ZnPg=='
+description: 'Card pattern'
+behavior_plugins:
+  layout_paragraphs:
+    enabled: false
+    available_layouts: {  }

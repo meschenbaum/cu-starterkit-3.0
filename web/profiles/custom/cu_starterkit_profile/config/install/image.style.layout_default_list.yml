@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_default_list
+label: 'Layout: Default - List'
+effects:
+  68f1348c-4e34-4861-af56-2f3b3f1b37a2:
+    uuid: 68f1348c-4e34-4861-af56-2f3b3f1b37a2
+    id: image_scale
+    weight: 1
+    data:
+      width: 280
+      height: null
+      upscale: true

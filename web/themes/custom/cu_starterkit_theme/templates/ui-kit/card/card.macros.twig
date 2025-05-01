@@ -1,0 +1,86 @@
+{#
+/**
+ * @file
+ * Implements the Card macro for the UI Kit.
+ *
+ * Displays card within the theme.
+ *
+ * Macro inputs
+ * card(
+ *  - text_center = [false(default), true],
+ *  - border_color = [false(default), 'primary', 'secondary', 'light', 'dark'],
+ *  - header = [false(default), 'primary', 'secondary', 'light', 'dark'],
+ *  - horizontal_rule = [false(default), true],
+ *  - title = [false(default), true], 
+ *  - subtitle = [false(default), true], 
+ *  - text = [false(default), true], 
+ *  - link = [false(default), true], 
+ *  - button = [false(default), 'primary', 'secondary', 'light', 'dark'], 
+ *  - button_center = [false(default), true], 
+ *  - footer = [false(default), 'primary', 'secondary', 'light', 'dark'], 
+ *  - image_top = [false(default), true], 
+ *  - image_btm = [false(default), true], 
+ *  - overlay = [false(default), true], 
+ *  - overlay_text = [false(default), 'primary', 'secondary', 'light', 'dark']
+ )
+ */
+#}
+{% macro card(text_center = false, border_color = false, header = false, horizontal_rule = false, title = false, subtitle = false, text = false, link = false, button = false, button_center = false, footer = false, image_top = false, image_btm = false, overlay = false, overlay_text = false) %}
+
+  <div class="card h-100 {{ text_center ? 'text-center' }} {{ border_color ? 'has-border border-' ~ border_color|clean_class }}">
+  {% if image_top and not overlay %}
+    <img src="https://picsum.photos/seed/picsum/500/350" class="card-img-top img-fluid" alt="Placeholder Image">
+  {% endif %}
+  {% if image_top and overlay %}
+    <img src="https://picsum.photos/seed/picsum/500/350" class="card-img img-fluid" alt="Placeholder Image">
+  {% endif %}
+  {% if header %}
+    <div class="card-header text-bg-{{ header|clean_class }}">{{ 'Header - '|t }}{{ header|capitalize }}</div>
+  {% endif %}
+
+  {% if title or subtitle or text or link or button %}
+    {% if (title or subtitle or text or link or button) and overlay %}
+      <div class="card-img-overlay">
+      {% if overlay %}
+        <a href="#" class="stretched-link" title="Overlay link"></a>
+        <div class="card-img-overlay--text position-absolute top-50 start-50 translate-middle {{ overlay_text ? 'text-' ~ overlay_text|clean_class }}">
+          <div class="card-body">
+      {% endif %}
+    {% else %}
+      <div class="card-body">
+    {% endif %}
+    {% if horizontal_rule %}
+      <hr class="br-cu-gold my-3" role="separator">
+    {% endif %}
+    {% if title %}
+      <h5 class="card-title">Card title</h5>
+    {% endif %}
+    {% if subtitle %}
+      <h6 class="card-subtitle">Card subtitle</h6>
+    {% endif %}
+    {% if text %}
+      <p class="card-text">Some quick example text to make up the bulk of the card's content.</p>
+    {% endif %}
+    {% if link %}
+      <p><a class="card-link" href="#" title="{{ 'Link Alt Text'|t }}">{{ 'Card link'|t }}</a> <a class="card-link" href="#" title="{{ 'Link Alt Text'|t }}">{{ 'Card link'|t }}</a></p>
+    {% endif %}
+    {% if button %}
+      {% if button_center %}<div class="text-center">{% endif %}
+      <a href="#" title="Button Title" class="btn btn-{{ button|clean_class }}">{{ 'Button - '|t }}{{ button|capitalize }}</a>
+      {% if button_center %}</div>{% endif %}
+    {% endif %}
+    {% if (title or subtitle or text or link or button) and overlay  %}
+        </div>
+      </div>
+    {% endif %}
+    </div>
+  {% endif %}
+
+  {% if footer %}
+    <div class="card-footer text-bg-{{ footer|clean_class }}">{{ 'Footer - '|t }}{{ footer|capitalize }}</div>
+  {% endif %}
+  {% if image_btm and not overlay %}
+    <img src="https://picsum.photos/seed/picsum/500/350" class="card-img-bottom img-fluid" alt="Placeholder Image">
+  {% endif %}
+  </div>
+{% endmacro %}

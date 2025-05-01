@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_boolean
+    - paragraphs.paragraphs_type.content_card
+id: paragraph.content_card.field_boolean
+field_name: field_boolean
+entity_type: paragraph
+bundle: content_card
+label: 'Card Horizontal Rule'
+description: 'Turn on/off horizontal rule for card.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

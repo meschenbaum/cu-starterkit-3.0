@@ -1,0 +1,185 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+  module:
+    - ckeditor5
+format: full_html
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - bold
+      - italic
+      - underline
+      - subscript
+      - superscript
+      - strikethrough
+      - '|'
+      - alignment
+      - blockQuote
+      - '|'
+      - bulletedList
+      - numberedList
+      - '|'
+      - undo
+      - redo
+      - '|'
+      - link
+      - drupalMedia
+      - '|'
+      - horizontalLine
+      - icon
+      - specialCharacters
+      - insertTable
+      - '|'
+      - heading
+      - style
+      - '|'
+      - removeFormat
+      - '-'
+      - codeBlock
+      - code
+      - '|'
+      - sourceEditing
+  plugins:
+    ckeditor5_alignment:
+      enabled_alignments:
+        - center
+        - left
+        - right
+    ckeditor5_codeBlock:
+      languages:
+        -
+          label: 'Plain text'
+          language: plaintext
+        -
+          label: C
+          language: c
+        -
+          label: 'C#'
+          language: cs
+        -
+          label: C++
+          language: cpp
+        -
+          label: CSS
+          language: css
+        -
+          label: Diff
+          language: diff
+        -
+          label: HTML
+          language: html
+        -
+          label: Java
+          language: java
+        -
+          label: JavaScript
+          language: javascript
+        -
+          label: PHP
+          language: php
+        -
+          label: Python
+          language: python
+        -
+          label: Ruby
+          language: ruby
+        -
+          label: TypeScript
+          language: typescript
+        -
+          label: XML
+          language: xml
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    ckeditor5_icons_icon:
+      fa_version: '6'
+      fa_styles:
+        - solid
+        - regular
+        - brands
+      custom_metadata: false
+      async_metadata: true
+      recommended_enabled: true
+      recommended_icons:
+        - up-right-from-square
+        - download
+        - cloud-arrow-down
+        - facebook
+        - x-twitter
+        - google-plus-g
+        - square-youtube
+    ckeditor5_list:
+      properties:
+        reversed: true
+        startIndex: true
+      multiBlock: true
+    ckeditor5_sourceEditing:
+      allowed_tags: {  }
+    ckeditor5_style:
+      styles:
+        -
+          label: 'Primary Button'
+          element: '<a class="btn btn-primary">'
+        -
+          label: 'Secondary Button'
+          element: '<a class="btn btn-secondary">'
+        -
+          label: 'Dark Button'
+          element: '<a class="btn btn-dark">'
+        -
+          label: 'Light Button'
+          element: '<a class="btn btn-light">'
+        -
+          label: 'Primary O-Button'
+          element: '<a class="btn btn-outline-primary">'
+        -
+          label: 'Secondary O-Button'
+          element: '<a class="btn btn-outline-secondary">'
+        -
+          label: 'Dark O-Button'
+          element: '<a class="btn btn-outline-dark">'
+        -
+          label: 'Light O-Button'
+          element: '<a class="btn btn-outline-light">'
+        -
+          label: 'No Wrap Button'
+          element: '<a class="btn text-nowrap">'
+        -
+          label: 'No Wrap Link'
+          element: '<a class="text-nowrap">'
+        -
+          label: Blockquote
+          element: '<blockquote class="blockquote">'
+        -
+          label: Table
+          element: '<table class="table">'
+        -
+          label: 'Table Striped'
+          element: '<table class="table table-striped">'
+        -
+          label: 'Table Group Divider'
+          element: '<tbody class="table-group-divider">'
+        -
+          label: 'Card Title'
+          element: '<h5 class="card-title">'
+        -
+          label: 'Card Subtitle'
+          element: '<h6 class="card-subtitle">'
+        -
+          label: 'Card Text'
+          element: '<p class="card-text">'
+        -
+          label: 'Card Link'
+          element: '<a class="card-link">'
+    media_media:
+      allow_view_mode_override: true
+image_upload: {  }

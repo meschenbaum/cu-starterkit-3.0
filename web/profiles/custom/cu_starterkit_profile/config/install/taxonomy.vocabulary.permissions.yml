@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Custom Permission Groups'
+vid: permissions
+description: ''
+weight: 0

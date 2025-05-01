@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_large_article_header
+label: 'Layout: Large - Article Feature'
+effects:
+  cb9c63c4-d431-476d-a1d8-2d5e8f01aae5:
+    uuid: cb9c63c4-d431-476d-a1d8-2d5e8f01aae5
+    id: image_scale
+    weight: 1
+    data:
+      width: 1196
+      height: null
+      upscale: true

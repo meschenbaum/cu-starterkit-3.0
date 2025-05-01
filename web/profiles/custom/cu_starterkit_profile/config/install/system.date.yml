@@ -1,0 +1,9 @@
+first_day: 1
+country:
+  default: US
+timezone:
+  default: America/Denver
+  user:
+    configurable: true
+    default: 0
+    warn: true

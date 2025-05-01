@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_x_large_article_header
+label: 'Layout: X-Large - Article Feature'
+effects:
+  e5d34f77-a28a-4337-bd1e-94f8140af4de:
+    uuid: e5d34f77-a28a-4337-bd1e-94f8140af4de
+    id: image_scale
+    weight: 1
+    data:
+      width: 1336
+      height: null
+      upscale: true

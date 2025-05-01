@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Theme for icons.
+ *
+ * Available variables:
+ * - name: The icons given name.
+ * - classes: The icon classes.
+ * - extra: Additional content to render.
+ */
+#}
+{% if name is not iterable %}
+  {{ _self.icon(name, classes, extra) }}
+{% else %}
+  <span class="d-flex align-items-center">
+    {% for key in name %}
+      {{ _self.icon(key, classes, extra) }}
+    {% endfor %}
+  </span>
+{% endif %}
+
+{# Icons #}
+{% macro icon(name, classes, extra) %}
+  {%
+    set attributes = create_attribute({
+    'class': ['fa-solid', 'fa-' ~ name|replace({'.': '-'})]
+  })
+  %}
+  <i{{ attributes.addClass(classes) }} role="presentation">
+    {#<svg role="img" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" viewBox="0 0 20 20">
+      <use xlink:href="#{{ name }}"></use>
+    </svg>#}
+  </i>
+  {{ extra|raw }}
+{% endmacro %}

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_large_card
+label: 'Layout: Large - Card'
+effects:
+  4b50da03-12e6-45c4-a7c0-9dc5ee285d1b:
+    uuid: 4b50da03-12e6-45c4-a7c0-9dc5ee285d1b
+    id: image_scale
+    weight: 1
+    data:
+      width: 290
+      height: null
+      upscale: true

@@ -1,0 +1,271 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: (optional) The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: (optional) Themed creation date field.
+ * - author_name: (optional) Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * - exclude_category: List of Category Term IDs for exclusion.
+ * - exclude_tag: List of Tags Term IDs for exclusion.
+ * - filter_by_category: List of Category Term IDs for filtering.
+ * - filter_by_tag: List of Tags Term IDs for filtering.
+ *
+ * - cuskt_domain_masking_subpath: Domain Masking SubPath
+ *
+ * @see template_preprocess_node()
+ *
+ */
+#}
+
+{{ attach_library('cu_starterkit_theme/article-list') }}
+
+{# JSON API Endpoint information #}
+{% set articlesJSON = (url('<front>')|render|trim('/'))
+  ~ '/jsonapi/node/article'
+  ~ '?include[node--article]=uid,title,field_content,created,body,field_categories,field_tags,field_byline,field_featured_media,field_post_date'
+  ~ '&include=field_featured_media.field_media_image'
+  ~ '&fields[file--file]=uri,url'
+%}
+
+{# Filter on only published (status = true) content #}
+{% set PublishedFilter = '&filter[publish-check][condition][path]=status'
+  ~ '&filter[publish-check][condition][value]=1'
+  ~ '&filter[publish-check][condition][memberOf]=published'
+%}
+
+{# placeholder variables for our include and exclude filters, default to blank strings #}
+{% set IncludeFilter = '' %}
+{% set IncludeCategoryFilter = '' %}
+{% set IncludeTagsFilter = '' %}
+{% set ExcludeCategoryFilter = '' %}
+{% set ExcludeTagsFilter = '' %}
+
+{# Setup Include Category Filter using a logical OR between included category IDs #}
+{% if filter_by_category|length %}
+  {% set includeGroupMembers = '' %}
+  {% for item in filter_by_category %}
+    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-cat'
+      ~ (item|trim)
+      ~ '][condition][path]=field_categories.meta.drupal_internal__target_id'
+      ~ '&filter[filter-cat'
+      ~ (item|trim)
+      ~ '][condition][value]='
+      ~ (item|trim)
+      ~ '&filter[filter-cat'
+      ~ (item|trim)
+      ~ '][condition][memberOf]=cat-include'
+    %}
+  {% endfor %}
+  {% set IncludeCategoryFilter = '&filter[cat-include][group][conjunction]=OR'
+    ~ includeGroupMembers
+  %}
+{% endif %}
+
+{# Setup Include Tags Filter using a logical OR between included tag IDs #}
+{% if filter_by_tag|length %}
+  {% set includeGroupMembers = '' %}
+  {% for item in filter_by_tag %}
+    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-tag'
+      ~ (item|trim)
+      ~ '][condition][path]=field_tags.meta.drupal_internal__target_id'
+      ~ '&filter[filter-tag'
+      ~ (item|trim)
+      ~ '][condition][value]='
+      ~ (item|trim)
+      ~ '&filter[filter-tag'
+      ~ (item|trim)
+      ~ '][condition][memberOf]=tag-include'
+    %}
+  {% endfor %}
+  {% set IncludeTagsFilter = '&filter[tag-include][group][conjunction]=OR'
+    ~ includeGroupMembers
+  %}
+{% endif %}
+
+{# check to see if we have both Categories and Tags to filter on #}
+{# if so... setup a logicial AND Between both include filters #}
+{% if IncludeCategoryFilter and IncludeTagsFilter %}
+  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
+    ~ PublishedFilter
+    ~ '&filter[include-group][group][conjunction]=AND'
+    ~ '&filter[include-group][group][memberOf]=published'
+    ~ IncludeCategoryFilter
+    ~ '&filter[cat-include][group][memberOf]=include-group'
+    ~ IncludeTagsFilter
+    ~ '&filter[tag-include][group][memberOf]=include-group'
+  %}
+  {# Otherwise default to either the Category filter or the Tag filter as defined #}
+{% elseif IncludeCategoryFilter %}
+  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
+    ~ '&filter[cat-include][group][memberOf]=published'
+    ~ PublishedFilter
+    ~ IncludeCategoryFilter
+  %}
+{% elseif IncludeTagsFilter %}
+  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
+    ~ '&filter[tag-include][group][memberOf]=published'
+    ~ PublishedFilter
+    ~ IncludeTagsFilter
+  %}
+{# no includeded Categories or Tags ... still need to filter on published articles #}
+{% else %}
+  {% set IncludeFilter = '&filter[status][value]=1' %}
+{% endif %}
+
+{# Check for Exclude Categories and setup the filter to exclude anything that matches "NOT IN SET" #}
+{# {% if exclude_category|length %}
+  {% set excludeGroupMembers = "" %}
+  {% for item in exclude_category %}
+     {% set excludeGroupMembers = excludeGroupMembers ~ 
+       '&filter[filter-excat][condition][value][' ~ loop.index ~ ']=' ~ item 
+     %}
+  {% endfor %}
+  {% set ExcludeCategoryFilter = 
+       '&filter[filter-excat][condition][path]=cusk_categories.meta.drupal_internal__target_id' ~
+       '&filter[filter-excat][condition][operator]=NOT%20IN' ~ 
+       excludeGroupMembers 
+  %}
+{% endif %} #}
+{# 
+{% if exclude_category|length %}
+  {% set excludeGroupMembers = "" %}
+  {% for item in exclude_category %}
+     {% set excludeGroupMembers = excludeGroupMembers ~ 
+       '&filter[filter-excat' ~ item ~'][condition][path]=cusk_categories.meta.drupal_internal__target_id' ~
+       '&filter[filter-excat' ~ item ~'][condition][operator]=%3C%3E' ~
+       '&filter[filter-excat' ~ item ~'][condition][value]=' ~ item ~
+       '&filter[filter-excat' ~ item ~'][condition][memberOf]=cat-exclude' 
+     %}
+     
+  {% endfor %}
+  {% set ExcludeCategoryFilter = "&filter[cat-exclude][group][conjunction]=AND" ~ excludeGroupMembers %}
+{% endif %} #}
+
+{# pagination filter #}
+{% set pageCount = 10 %}
+{% set pageCountFilter = '&page[limit]=' ~ pageCount %}
+
+{# sorting filter #}
+{% set sortFilter = '&sort[sort-created][path]=field_post_date&sort[sort-created][direction]=DESC' %}
+
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'mb-5',
+  ]
+%}
+{{ attach_library('cu_starterkit_theme/node') }}
+<article{{ attributes.addClass(classes) }}>
+
+	{{ title_prefix }}
+	{% if label|render|striptags|trim %}
+	<h1{{title_attributes}}>{{ label }}</h1>
+	{% endif %}
+	{{ title_suffix }}
+
+  <div{{ content_attributes.addClass('node__content') }}>
+    <div class="article-list-body">
+    {{ content.field_content }}
+    </div>
+
+    {# Article list #}
+    <div id="article-listing"
+      class="article-list-container"
+      data-jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
+      data-excats="{{ excludeCategories }}"
+      data-extags="{{ excludeTags }}"
+      data-dmpath="{{ cuskt_domain_masking_subpath }}">
+      {# No Data message #}
+      <div id="article-list-no-results" class="alert alert-primary d-none" role="alert">
+        No articles were returned, please check your filters and try again.
+      </div>
+
+      {# dynamically loaded data goes here... #}
+      <div id="article-list-data"></div>
+
+      {# Loading message #}
+      <div id="article-list-loading" class="spinner-border text-primary m-5 d-none" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+
+      {# No more Data #}
+      <div id="article-list-end-of-data" class="alert alert-secondary d-none" role="alert">
+        No more results matching your filters.
+      </div>
+
+      {# Error in the response from the API endpoint, display an error #}
+      <div id="article-list-error" class="alert alert-warning d-none" role="alert">
+        Error retrieving article list from the API endpoint.  Please try again later.  
+      </div>
+      <div class="article-list-button-container text-center">
+        <a id='article-list-load-more'class="btn btn-primary d-none">
+          Load More
+        </a>
+      </div>
+    </div>
+  </div>
+
+</article>

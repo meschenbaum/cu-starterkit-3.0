@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_x_large_list
+label: 'Layout: X-Large - List'
+effects:
+  8531e46d-b715-4521-9c5b-36ba00f2c84e:
+    uuid: 8531e46d-b715-4521-9c5b-36ba00f2c84e
+    id: image_scale
+    weight: 1
+    data:
+      width: 410
+      height: null
+      upscale: true

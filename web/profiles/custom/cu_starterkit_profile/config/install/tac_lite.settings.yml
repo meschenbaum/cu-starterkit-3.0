@@ -1,0 +1,37 @@
+tac_lite_categories:
+  permissions: permissions
+tac_lite_schemes: '1'
+menu_rebuild_needed: true
+tac_lite_config_scheme_1:
+  name: 'CU Faculty, Staff and Students using SSO'
+  perms:
+    grant_view: grant_view
+  unpublished: 0
+  term_visibility: 0
+tac_lite_grants_scheme_1:
+  anonymous:
+    permissions:
+      - '0'
+  authenticated:
+    permissions:
+      1: '1'
+  developer:
+    permissions: {  }
+  architect:
+    permissions: {  }
+  site_manager:
+    permissions: {  }
+  content_editor:
+    permissions: {  }
+  layout_manager:
+    permissions: {  }
+  site_owner:
+    permissions: {  }
+  edit_own_content:
+    permissions: {  }
+  newsletter:
+    permissions: {  }
+  webform_editor:
+    permissions: {  }
+  webform_submissions_viewer:
+    permissions: {  }

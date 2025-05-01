@@ -1,0 +1,260 @@
+{#
+/**
+ * @file
+ * Implements the Typography tab content for the UI Kit.
+ *
+ * Displays usage of typography within the theme.
+ */
+#}
+{% import '@cu_starterkit_theme/ui-kit/typography/typography.macros.twig' as macros %}
+{% extends '@bootstrap_ui_kit/section.html.twig' %}
+
+{% block section_intro %}
+  <p>{{ 'This type scale is a range of contrasting styles that support the needs of the product and its content.'|t }}</p>
+{% endblock %}
+
+{% block section_content %}
+  {{ attach_library('bootstrap_ui_kit/bootstrap-ui-kit.typography') }}
+  <h2 class="border-bottom border-primary mb-4">{{ 'Headings'|t }}</h2>
+  {{ macros.heading_row('h1') }}
+  {{ macros.heading_row('h2') }}
+  {{ macros.heading_row('h3') }}
+  {{ macros.heading_row('h4') }}
+  {{ macros.heading_row('h5') }}
+  {{ macros.heading_row('h6') }}
+  <h2 class="border-bottom border-primary mb-4">{{ 'Inline Text Elements'|t }}</h2>
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ 'Strikethrough'|t }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <p data-typography-level="s">
+        <s>{{ 'This line of text is meant to be treated as no longer accurate.'|t  }}</s>
+      </p>
+    </div>
+  </div>
+
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ 'Underlined'|t }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <p data-typography-level="u">
+        <u>{{ 'This line of text will render as underlined.'|t  }}</u>
+      </p>
+    </div>
+  </div>
+
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ 'Bold'|t }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <p data-typography-level="strong">
+        <strong>{{ 'This line rendered as bold text.'|t  }}</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ 'Italicized'|t }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <p data-typography-level="em">
+        <em>{{ 'This line rendered as italicized text.'|t  }}</em>
+      </p>
+    </div>
+  </div>
+
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ 'Subscript'|t }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <p data-typography-level="sub">{{ 'This line is rendered with a '|t  }}
+        <sub>{{ 'Subscript'|t  }}</sub>
+        {{ ' element in it.'|t }}
+      </p>
+    </div>
+  </div>
+
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ 'Superscript'|t }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <p data-typography-level="sup">{{ 'This line is rendered with a '|t  }}
+        <sup>{{ 'Superscript'|t  }}</sup>
+        {{ ' element in it.'|t }}
+      </p>
+    </div>
+  </div>
+
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ 'Blockquote'|t }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <blockquote data-typography-level="blockquote" class="blockquote">
+        <p>{{ 'A well-known quote, contained in a blockquote element.'|t  }}</p>
+      </blockquote>
+    </div>
+  </div>
+
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ 'Bulleted lists'|t }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <ul data-typography-level="ul">
+        <li>{{ 'A bulleted list item.'|t  }}</li>
+        <li>{{ 'A bulleted list item.'|t  }}</li>
+        <li>{{ 'A bulleted list item.'|t  }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ 'Ordered lists'|t }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <ol data-typography-level="ol">
+        <li>{{ 'An ordered list item.'|t  }}</li>
+        <li>{{ 'An ordered list item.'|t  }}</li>
+        <li>{{ 'An ordered list item.'|t  }}</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ 'Table'|t }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <table data-typography-level="table" class="table">
+        <caption>{{ 'Table captions'|t }}</caption>
+        <thead>
+            <tr>
+                <th>{{ 'Header Cell'|t }}</th>
+                <th>{{ 'Header Cell'|t }}</th>
+                <th>{{ 'Header Cell'|t }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ 'Table Striped'|t }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <table data-typography-level="table" class="table table-striped">
+        <caption>{{ 'Table captions'|t }}</caption>
+        <thead>
+            <tr>
+                <th>{{ 'Header Cell'|t }}</th>
+                <th>{{ 'Header Cell'|t }}</th>
+                <th>{{ 'Header Cell'|t }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mb-4 gap-5 row-gap-3">
+    <div class="col-12">
+      <strong class="d-block">{{ 'Table group divider'|t }}</strong>
+    </div>
+    <div class="col-lg-4 mb-5 mb-lg-0">
+    </div>
+    <div class="col">
+      <table data-typography-level="table" class="table">
+        <caption>{{ 'Table captions'|t }}</caption>
+        <thead>
+            <tr>
+                <th>{{ 'Header Cell'|t }}</th>
+                <th>{{ 'Header Cell'|t }}</th>
+                <th>{{ 'Header Cell'|t }}</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+                <td>{{ 'row cell'|t }}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}

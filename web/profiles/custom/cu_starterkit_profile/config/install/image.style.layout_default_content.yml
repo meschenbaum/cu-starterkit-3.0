@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_default_content
+label: 'Layout: Default - Content'
+effects:
+  d6951e85-4efc-44c3-9cf2-7de779fa130a:
+    uuid: d6951e85-4efc-44c3-9cf2-7de779fa130a
+    id: image_scale
+    weight: 1
+    data:
+      width: 296
+      height: null
+      upscale: true

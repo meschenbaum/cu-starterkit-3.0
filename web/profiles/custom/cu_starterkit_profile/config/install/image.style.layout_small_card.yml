@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_small_card
+label: 'Layout: Small - Card'
+effects:
+  118866e2-4672-48d1-8643-b3430c704cd8:
+    uuid: 118866e2-4672-48d1-8643-b3430c704cd8
+    id: image_scale
+    weight: 1
+    data:
+      width: 385
+      height: null
+      upscale: true

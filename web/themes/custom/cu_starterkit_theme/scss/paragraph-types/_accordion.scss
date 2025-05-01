@@ -1,0 +1,53 @@
+/**
+ * @file
+ * Styles for CU Starterkit Theme's Content: Accordion paragraph.
+ */
+.accordion-item {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid $secondary;
+
+  &:first-of-type {
+    .accordion-button {
+      border-radius: 0;
+    }
+  }
+}
+
+.accordion-button {
+  font-size: 1.25rem;
+  font-weight: 400;
+
+  &:not(.collapsed) {
+    color: var(--cu-black);
+    background-color: $primary;
+    -webkit-box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+            box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+
+    &:after {
+      content: none;
+    }
+
+    &:before {
+      background-image: url("data:image/svg+xml;UTF-8, <svg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/></svg>");
+    }
+  }
+
+  &:before {
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    width: 1.50rem;
+    height: 1.50rem;
+    margin-right: 1rem;
+    content: "";
+    background-image: url("data:image/svg+xml;UTF-8, <svg xmlns='http://www.w3.org/2000/svg' fill='%23cfb87c' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 1.50rem;
+    -webkit-transition: -webkit-transform .2s ease-in-out;
+    transition: -webkit-transform .2s ease-in-out;
+    -o-transition: transform .2s ease-in-out;
+    transition: transform .2s ease-in-out;
+    transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  }
+}

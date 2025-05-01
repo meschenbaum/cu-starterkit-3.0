@@ -1,0 +1,36 @@
+langcode: en
+activate: true
+auth_source: default-sp
+login_link_display_name: 'SSO for CU Staff'
+login_link_show: true
+user_name: mail
+unique_id: mail
+mail_attr: mail
+header_no_cache: true
+role:
+  population: ''
+  eval_every_time: false
+register_users: true
+allow:
+  set_drupal_pwd: false
+  default_login: true
+  default_login_roles:
+    authenticated: authenticated
+    edit_own_content: edit_own_content
+    content_editor: content_editor
+    site_owner: site_owner
+    site_builder: site_builder
+    developer: developer
+    seo: seo
+    webform_editor: webform_editor
+    webform_submissions_viewer: webform_submissions_viewer
+  default_login_users: '1'
+logout_goto_url: /
+user_register_original: visitors
+sync:
+  mail: true
+  user_name: true
+autoenablesaml: true
+debug: false
+secure: true
+httponly: true

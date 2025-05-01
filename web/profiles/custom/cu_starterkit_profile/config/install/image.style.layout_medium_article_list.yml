@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_medium_article_list
+label: 'Layout: Medium - Article List'
+effects:
+  ee61575f-f89d-48f0-bf9b-68fbb8608a4d:
+    uuid: ee61575f-f89d-48f0-bf9b-68fbb8608a4d
+    id: image_scale
+    weight: 1
+    data:
+      width: 180
+      height: null
+      upscale: true

@@ -1,0 +1,116 @@
+{
+    "name": "cu-system/drupal-starterkit-upstream",
+    "description": "Install CU Drupal 10+ with Composer on Pantheon.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://gitlab.com/universityofcolorado/uis/webapps/shared-code/cu-starterkit-project-3.0",
+    "authors": [
+        {
+        "name": "University of Colorado: University Information Services",
+        "homepage": "https://www.cu.edu/uis/",
+        "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://gitlab.com/universityofcolorado/uis/webapps/shared-code/cu-starterkit-project-3.0/-/issues",
+        "source": "https://gitlab.com/universityofcolorado/uis/webapps/shared-code/cu-starterkit-project-3.0/-/tree/master"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "path",
+            "url": "upstream-configuration"
+        }
+    ],
+    "require": {
+        "composer/installers": "^2.1",
+        "cweagans/composer-patches": "~2.0",
+        "drupal/core-composer-scaffold": "~10.2.2",
+        "drupal/core-project-message": "~10.2.2",
+        "drupal/core-recommended": "~10.2.2",
+        "drush/drush": "^12",
+        "pantheon-systems/drupal-integrations": "^10",
+        "pantheon-systems/upstream-management": "^1.0",
+        "pantheon-upstreams/upstream-configuration": "^1.0"
+    },
+    "require-dev": {
+        "drupal/core-dev": "^10.1"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "./web"
+            },
+            "allowed-packages": ["pantheon-systems/drupal-integrations"],
+            "file-mapping": {
+                "[project-root]/.editorconfig": false,
+                "[project-root]/pantheon.upstream.yml": false,
+                "[project-root]/.gitattributes": false
+            }
+        },
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+            "web/profiles/custom/{$name}": ["type:drupal-custom-profile"],
+            "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
+            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
+        },
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
+        "enable-patching": true,
+        "composer-patches": {
+            "patches-file": "upstream-configuration/patches.json"
+        },
+        "patches": { }
+    },
+    "autoload": {
+        "classmap": ["upstream-configuration/scripts/ComposerScripts.php"]
+    },
+    "scripts": {
+        "pre-update-cmd": ["DrupalComposerManaged\\ComposerScripts::preUpdate"],
+        "post-update-cmd": [
+            "DrupalComposerManaged\\ComposerScripts::postUpdate",
+            "rm -rf vendor/simplesamlphp/simplesamlphp/config && ln -sf ../../../private/simplesamlphp/config vendor/simplesamlphp/simplesamlphp/config",
+            "rm -rf vendor/simplesamlphp/simplesamlphp/metadata && ln -sf ../../../private/simplesamlphp/metadata vendor/simplesamlphp/simplesamlphp/metadata",
+            "rm -rf vendor/simplesamlphp/simplesamlphp/cert && ln -sf ../../../private/simplesamlphp/cert vendor/simplesamlphp/simplesamlphp/cert"
+        ],
+        "post-install-cmd": [
+            "rm -rf vendor/simplesamlphp/simplesamlphp/config && ln -sf ../../../private/simplesamlphp/config vendor/simplesamlphp/simplesamlphp/config",
+            "rm -rf vendor/simplesamlphp/simplesamlphp/metadata && ln -sf ../../../private/simplesamlphp/metadata vendor/simplesamlphp/simplesamlphp/metadata",
+            "rm -rf vendor/simplesamlphp/simplesamlphp/cert && ln -sf ../../../private/simplesamlphp/cert vendor/simplesamlphp/simplesamlphp/cert"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "platform": {
+            "php": "8.2"
+        },
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true,
+            "simplesamlphp/composer-module-installer": true,
+            "pantheon-systems/upstream-management": true,
+            "php-http/discovery": true,
+            "drupal/core-project-message": true
+        }
+    }
+}

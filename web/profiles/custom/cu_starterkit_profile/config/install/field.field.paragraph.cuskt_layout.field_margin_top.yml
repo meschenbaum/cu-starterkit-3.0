@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_margin_top
+    - paragraphs.paragraphs_type.cuskt_layout
+  module:
+    - options
+id: paragraph.cuskt_layout.field_margin_top
+field_name: field_margin_top
+entity_type: paragraph
+bundle: cuskt_layout
+label: 'Margin Top'
+description: 'Sets margin for top of the layout row.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

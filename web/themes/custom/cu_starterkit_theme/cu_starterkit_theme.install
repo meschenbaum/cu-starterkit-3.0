@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for cu_starterkit_theme theme.
+ */
+
+use Drupal\Core\Config\InstallStorage;
+use Drupal\Core\Config\StorageInterface;
+use Drupal\Core\Config\FileStorage;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function cu_starterkit_theme_install() {
+
+  /* Install optional configs.
+  $config_installer = \Drupal::service('config.installer');
+  $optional_install_path = \Drupal::service('extension.list.theme')->getPath('cu_starterkit_theme') . '/' . InstallStorage::CONFIG_OPTIONAL_DIRECTORY;
+  if (is_dir($optional_install_path)) {
+    // Install any optional config the theme provides.
+    $storage = new FileStorage($optional_install_path, StorageInterface::DEFAULT_COLLECTION);
+    $config_installer->installOptionalConfig($storage, '');
+  }*/
+
+}

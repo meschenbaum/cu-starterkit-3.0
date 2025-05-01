@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_small_list
+label: 'Layout: Small - List'
+effects:
+  62d9a1a9-b254-442f-a00a-af71f31a6231:
+    uuid: 62d9a1a9-b254-442f-a00a-af71f31a6231
+    id: image_scale
+    weight: 1
+    data:
+      width: 385
+      height: null
+      upscale: true

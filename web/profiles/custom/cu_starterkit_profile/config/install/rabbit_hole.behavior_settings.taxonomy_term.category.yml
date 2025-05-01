@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.category
+id: taxonomy_term.category
+targetEntityType: taxonomy_term
+bundle: category
+action: display_page
+no_bypass: false
+bypass_message: false
+configuration: {  }

@@ -1,0 +1,71 @@
+{% extends "block.html.twig" %}
+{#
+/**
+ * @file
+ * Theme override for a branding block.
+ *
+ * Each branding element variable (logo, name, slogan) is only available if
+ * enabled in the block configuration.
+ *
+ * Available variables:
+ * - site_logo: Logo for site as defined in Appearance or theme settings.
+ * - site_name: Name for site as defined in Site information settings.
+ * - site_slogan: Slogan for site as defined in Site information settings.
+ * - logo_theme: Theme being used for global navigation
+ * - cuskt_branding_logo_use_svg_sprite: Boolean - Use SVG Sprite Logo
+ * - cuskt_branding_logo_mobile_sprite_path: Mobile SVG Sprite Path
+ * - cuskt_branding_logo_desktop_sprite_path: Desktop SVG Sprite Path
+ * - subPath: Domain masking subpath
+ * - is_landing_page: Boolean - is a landing page.
+ */
+#}
+{% block content %}
+<div class="navbar-brand">
+
+  {% if site_logo %}
+    {% if cuskt_branding_logo_use_svg_sprite and (cuskt_branding_logo_mobile_sprite_path != '' and cuskt_branding_logo_desktop_sprite_path != '') %}
+      {# SVG sprite display of site logo #}
+      {% if not is_landing_page %}
+      <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="site-logo d-none d-md-block"  aria-label="{{ 'Home'|t }}">
+      {% endif %}
+        <svg class="d-none d-md-block" role="img"><title>{{ 'Home'|t }}</title><use href="{{ subPath }}{{ cuskt_branding_logo_desktop_sprite_path }}#{{ logo_theme }}" /></svg>
+      {% if not is_landing_page %}
+      </a>
+      {% endif %}
+      {# Mobile display #}
+      {% if not is_landing_page %}
+      <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="site-logo d-block d-md-none"  aria-label="{{ 'Home'|t }}">
+      {% endif %}
+        <svg class="d-block d-md-none" role="img"><title>{{ 'Home'|t }}</title><use href="{{ subPath }}{{ cuskt_branding_logo_mobile_sprite_path }}#{{ logo_theme }}" /></svg>
+      {% if not is_landing_page %}
+      </a>
+      {% endif %}
+    {% else %}
+      {# Default image display of site logo #}
+      {% if not is_landing_page %}
+      <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="site-logo d-block"  aria-label="{{ 'Home'|t }}">
+      {% endif %}
+        <img class="d-block" src="{{ site_logo }}" alt="{{ 'Home'|t }}" fetchpriority="high" />
+      {% if not is_landing_page %}
+      </a>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  <div>
+    {% if site_name %}
+    {% if not is_landing_page %}
+    <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="site-title">
+    {% endif %}
+      {{ site_name }}
+    {% if not is_landing_page %}
+    </a>
+    {% endif %}
+    {% endif %}
+
+    {% if site_slogan %}
+    <div class="site-slogan">{{ site_slogan }}</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text_color
+    - paragraphs.paragraphs_type.cuskt_layout
+  module:
+    - options
+id: paragraph.cuskt_layout.field_text_color
+field_name: field_text_color
+entity_type: paragraph
+bundle: cuskt_layout
+label: 'Text Color'
+description: 'Select a different text color <strong>specifically</strong> for use with background images.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

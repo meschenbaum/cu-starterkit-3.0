@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_x_large_content
+label: 'Layout: X-Large - Content'
+effects:
+  a9ccf853-39cf-4254-a7b1-ec38c76698d0:
+    uuid: a9ccf853-39cf-4254-a7b1-ec38c76698d0
+    id: image_scale
+    weight: 1
+    data:
+      width: 1100
+      height: null
+      upscale: true

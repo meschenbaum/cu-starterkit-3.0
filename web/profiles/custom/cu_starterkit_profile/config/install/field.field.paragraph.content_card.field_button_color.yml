@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_button_color
+    - paragraphs.paragraphs_type.content_card
+  module:
+    - options
+id: paragraph.content_card.field_button_color
+field_name: field_button_color
+entity_type: paragraph
+bundle: content_card
+label: 'Button Color'
+description: 'Select button color (defaults to Primary)'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

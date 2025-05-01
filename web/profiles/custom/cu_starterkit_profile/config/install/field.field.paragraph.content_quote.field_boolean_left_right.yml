@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_boolean_left_right
+    - paragraphs.paragraphs_type.content_quote
+id: paragraph.content_quote.field_boolean_left_right
+field_name: field_boolean_left_right
+entity_type: paragraph
+bundle: content_quote
+label: 'Image Position'
+description: 'Select if image is on the left or right (defaults to left).'
+required: true
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Left
+  off_label: Right
+field_type: boolean

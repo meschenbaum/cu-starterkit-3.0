@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_column_layout_setting
+    - paragraphs.paragraphs_type.cuskt_layout
+  module:
+    - options
+id: paragraph.cuskt_layout.field_column_layout_setting
+field_name: field_column_layout_setting
+entity_type: paragraph
+bundle: cuskt_layout
+label: 'Column Layout Setting'
+description: 'Select the number columns per group to make up the layout.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

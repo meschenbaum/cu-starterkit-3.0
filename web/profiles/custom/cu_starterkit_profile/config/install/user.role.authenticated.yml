@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - environment_indicator
+    - media
+    - paragraphs_type_permissions
+    - search
+    - system
+    - toolbar
+id: authenticated
+label: 'Authenticated user'
+weight: -9
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access content'
+  - 'access environment indicator'
+  - 'access toolbar'
+  - 'search content'
+  - 'view media'
+  - 'view paragraph content content_accordion'
+  - 'view paragraph content content_accordion_item'
+  - 'view paragraph content content_anchor_link'
+  - 'view paragraph content content_card'
+  - 'view paragraph content content_horizontal_rule'
+  - 'view paragraph content content_list'
+  - 'view paragraph content content_list_item'
+  - 'view paragraph content content_list_styled_order'
+  - 'view paragraph content content_list_styled_order_item'
+  - 'view paragraph content content_media'
+  - 'view paragraph content content_quote'
+  - 'view paragraph content content_wysiwyg'
+  - 'view paragraph content cuskt_content_library_reference'
+  - 'view paragraph content cuskt_layout'
+  - 'view paragraph content cuskt_layout_hero'
+  - 'view paragraph content hero_wysiwyg'
+  - 'view paragraph content view_reference'
+  - 'view the administration theme'

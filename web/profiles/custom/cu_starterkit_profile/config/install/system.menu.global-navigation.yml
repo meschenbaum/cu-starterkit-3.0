@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: global-navigation
+label: 'Global Navigation'
+description: 'Global header menu.'
+locked: false

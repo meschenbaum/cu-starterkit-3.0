@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_small
+label: 'Layout: Small'
+effects:
+  d5fce43b-8c17-4da8-a303-a5611fa9e6b3:
+    uuid: d5fce43b-8c17-4da8-a303-a5611fa9e6b3
+    id: image_scale
+    weight: 1
+    data:
+      width: 740
+      height: null
+      upscale: true

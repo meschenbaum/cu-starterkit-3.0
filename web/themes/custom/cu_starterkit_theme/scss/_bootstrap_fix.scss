@@ -1,0 +1,32 @@
+// Bootstrap fixes
+// @TODO: update .close style to be .btn-close
+// @see: https://getbootstrap.com/docs/5.2/components/alerts/#dismissing
+
+// Bootstrap UI Kit variables
+:root {
+  --bootstrap-ui-kit--sidebar-bg-color: var(--#{$prefix}primary, #0d6efd);
+  --bootstrap-ui-kit--sidebar-text-color: var(--#{$prefix}body-color, white);
+  --bootstrap-ui-kit--nav-link-color: var(--#{$prefix}dark, white);
+  --bootstrap-ui-kit--nav-link-hover-color: var(--#{$prefix}secondary, white);
+  --bootstrap-ui-kit--nav-link-active-color: var(--#{$prefix}white, white);
+  --bootstrap-ui-kit--nav-link-active-bg-color: var(--#{$prefix}white-rgb, (255, 255, 255));
+  --bootstrap-ui-kit--nav-link-active-indicator-color: var(--#{$prefix}secondary, #6c757d);
+  --bootstrap-ui-kit--icon-hover-color: var(--#{$prefix}primary, #0d6efd);
+  --bootstrap-ui-kit--fs-lg: var(--#{$prefix}btn-font-size, 20px);
+}
+
+.bootstrap-ui-kit {
+  .icon-lg {
+    font-size: 2rem;
+  }
+}
+
+.alert-dismissible {
+  .close {
+    color: $black;
+  }
+}
+
+code {
+  overflow-y: auto;
+}

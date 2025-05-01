@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_list_size
+    - paragraphs.paragraphs_type.content_list_styled_order
+  module:
+    - options
+id: paragraph.content_list_styled_order.field_list_size
+field_name: field_list_size
+entity_type: paragraph
+bundle: content_list_styled_order
+label: 'List Size'
+description: 'Select the size of the numbering used.'
+required: true
+translatable: false
+default_value:
+  -
+    value: small
+default_value_callback: ''
+settings: {  }
+field_type: list_string

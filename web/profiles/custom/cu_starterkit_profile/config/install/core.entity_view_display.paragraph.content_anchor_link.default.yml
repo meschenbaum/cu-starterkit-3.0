@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_anchor_link.field_text
+    - paragraphs.paragraphs_type.content_anchor_link
+id: paragraph.content_anchor_link.default
+targetEntityType: paragraph
+bundle: content_anchor_link
+mode: default
+content:
+  field_text:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

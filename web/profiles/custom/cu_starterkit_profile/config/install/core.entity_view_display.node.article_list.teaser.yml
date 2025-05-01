@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.article_list.body
+    - field.field.node.article_list.field_content
+    - field.field.node.article_list.field_exclude_category
+    - field.field.node.article_list.field_exclude_tag
+    - field.field.node.article_list.field_filter_by_category
+    - field.field.node.article_list.field_filter_by_tag
+    - field.field.node.article_list.field_hero
+    - field.field.node.article_list.field_meta_tags
+    - node.type.article_list
+  module:
+    - text
+    - user
+id: node.article_list.teaser
+targetEntityType: node
+bundle: article_list
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_content: true
+  field_exclude_category: true
+  field_exclude_tag: true
+  field_filter_by_category: true
+  field_filter_by_tag: true
+  field_hero: true
+  field_meta_tags: true

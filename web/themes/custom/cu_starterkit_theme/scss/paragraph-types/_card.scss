@@ -1,0 +1,42 @@
+/**
+ * @file
+ * Visual styles for CU Starterkit Theme's card component.
+ */
+.card {
+  border: none;
+  margin-bottom: 1.25rem;
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 0;
+  }
+
+  &.has-border {
+    border-width: 1px;
+    border-style: solid;
+  }
+}
+
+.card-img-overlay {
+  -webkit-transition: background-color 0.5s ease-out;
+  -o-transition: background-color 0.5s ease-out;
+  transition: background-color 0.5s ease-out;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.50);
+  }
+}
+
+
+.card-img-overlay--text {
+  width: 100%;
+  padding-bottom: 2rem;
+  @include media-breakpoint-up(md) {
+    padding-bottom: 1.125rem;
+  }
+  @include media-breakpoint-up(lg) {
+    padding-bottom: 1.5rem;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}

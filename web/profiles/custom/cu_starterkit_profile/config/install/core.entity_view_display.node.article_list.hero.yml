@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.hero
+    - field.field.node.article_list.body
+    - field.field.node.article_list.field_content
+    - field.field.node.article_list.field_exclude_category
+    - field.field.node.article_list.field_exclude_tag
+    - field.field.node.article_list.field_filter_by_category
+    - field.field.node.article_list.field_filter_by_tag
+    - field.field.node.article_list.field_hero
+    - field.field.node.article_list.field_meta_tags
+    - node.type.article_list
+  module:
+    - layout_paragraphs
+    - user
+id: node.article_list.hero
+targetEntityType: node
+bundle: article_list
+mode: hero
+content:
+  field_hero:
+    type: layout_paragraphs
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  body: true
+  field_content: true
+  field_exclude_category: true
+  field_exclude_tag: true
+  field_filter_by_category: true
+  field_filter_by_tag: true
+  field_meta_tags: true

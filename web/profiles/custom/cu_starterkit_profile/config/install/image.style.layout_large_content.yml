@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_large_content
+label: 'Layout: Large - Content'
+effects:
+  64927675-cb58-4f10-8dc8-17d486cec065:
+    uuid: 64927675-cb58-4f10-8dc8-17d486cec065
+    id: image_scale
+    weight: 1
+    data:
+      width: 920
+      height: null
+      upscale: true

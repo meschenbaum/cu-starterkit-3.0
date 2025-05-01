@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'file:file:930923fc-bc2a-4a6d-9602-b91a7721857e'
+  module:
+    - layout_paragraphs
+id: content_media
+label: 'Content: Media'
+icon_uuid: 930923fc-bc2a-4a6d-9602-b91a7721857e
+icon_default: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0aXRsZS8+PGcgaWQ9IkltYWdlIj48cGF0aCBkPSJNMjUsMkg3QTUsNSwwLDAsMCwyLDdWMjVhNSw1LDAsMCwwLDUsNUgyNWE1LDUsMCwwLDAsNS01VjdBNSw1LDAsMCwwLDI1LDJaTTcsNEgyNWEzLDMsMCwwLDEsMywzdjUuNTlsLTEuODgtMS44OGEzLDMsMCwwLDAtNC4yNCwwbC03Ljk1LDgtMy0yLjQyYTMsMywwLDAsMC0zLjgsMEw0LDE4Ljg2VjdBMywzLDAsMCwxLDcsNFpNMjUsMjhIN2EzLDMsMCwwLDEtMy0zVjIxLjQ3bDQuMzgtMy42NmExLDEsMCwwLDEsMS4yNywwbDMuNzMsM2ExLDEsMCwwLDAsMS4zMy0uMDdsOC41OC04LjU5YTEsMSwwLDAsMSwxLjQyLDBMMjgsMTUuNDFWMjVBMywzLDAsMCwxLDI1LDI4WiIvPjxwYXRoIGQ9Ik0xMCwxM2EzLDMsMCwxLDAtMy0zQTMsMywwLDAsMCwxMCwxM1ptMC00YTEsMSwwLDEsMS0xLDFBMSwxLDAsMCwxLDEwLDlaIi8+PC9nPjwvc3ZnPg=='
+description: 'Media paragraph'
+behavior_plugins:
+  layout_paragraphs:
+    enabled: false
+    available_layouts: {  }

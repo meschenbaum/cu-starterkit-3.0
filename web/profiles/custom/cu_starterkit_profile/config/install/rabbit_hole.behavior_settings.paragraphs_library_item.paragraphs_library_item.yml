@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs_library
+id: paragraphs_library_item.paragraphs_library_item
+targetEntityType: paragraphs_library_item
+bundle: paragraphs_library_item
+action: page_not_found
+no_bypass: false
+bypass_message: false
+configuration: {  }

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_medium
+label: 'Layout: Medium'
+effects:
+  e11e3028-4138-4055-a972-875b658957f8:
+    uuid: e11e3028-4138-4055-a972-875b658957f8
+    id: image_scale
+    weight: 1
+    data:
+      width: 1080
+      height: null
+      upscale: true

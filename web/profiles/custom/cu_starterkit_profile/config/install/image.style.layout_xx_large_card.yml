@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_xx_large_card
+label: 'Layout: XX-Large - Card'
+effects:
+  76276c05-df77-4b1c-8c1a-de91f2fff234:
+    uuid: 76276c05-df77-4b1c-8c1a-de91f2fff234
+    id: image_scale
+    weight: 1
+    data:
+      width: 410
+      height: null
+      upscale: true

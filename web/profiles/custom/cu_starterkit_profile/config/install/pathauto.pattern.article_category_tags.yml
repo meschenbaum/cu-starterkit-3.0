@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: article_category_tags
+label: 'Article Category/Tags'
+type: 'canonical_entities:taxonomy_term'
+pattern: '/[term:vocabulary:name]/[term:name]'
+selection_criteria:
+  262bf6b3-f652-4ad6-b08e-30939f41ef6e:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: 262bf6b3-f652-4ad6-b08e-30939f41ef6e
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      category: category
+      tags: tags
+selection_logic: and
+weight: -5
+relationships: {  }

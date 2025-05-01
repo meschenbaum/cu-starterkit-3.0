@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - environment_indicator
+    - google_tag
+    - metatag
+    - node
+    - rebuild_cache_access
+    - redirect
+    - toolbar
+    - xmlsitemap
+id: seo
+label: SEO
+weight: -3
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access environment indicator'
+  - 'access toolbar'
+  - 'administer google_tag_container'
+  - 'administer meta tags'
+  - 'administer redirects'
+  - 'administer xmlsitemap'
+  - 'override xmlsitemap link settings'
+  - 'rebuild cache access'

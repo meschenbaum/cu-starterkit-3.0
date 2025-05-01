@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.layout_default_article_list
+    - image.style.layout_medium_article_list
+  theme:
+    - cu_starterkit_theme
+id: article_list
+label: 'Article List'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: layout_medium_article_list
+    breakpoint_id: cu_starterkit_theme.md
+    multiplier: 1x
+breakpoint_group: cu_starterkit_theme
+fallback_image_style: layout_default_article_list

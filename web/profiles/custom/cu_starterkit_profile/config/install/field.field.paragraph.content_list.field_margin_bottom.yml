@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_margin_bottom
+    - paragraphs.paragraphs_type.content_list
+  module:
+    - options
+id: paragraph.content_list.field_margin_bottom
+field_name: field_margin_bottom
+entity_type: paragraph
+bundle: content_list
+label: 'List Item - Margin Bottom'
+description: 'Sets the spacing between list items.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

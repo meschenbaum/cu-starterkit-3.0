@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_medium_card
+label: 'Layout: Medium - Card'
+effects:
+  07380270-ec1c-4f34-a7fe-70fd096849fa:
+    uuid: 07380270-ec1c-4f34-a7fe-70fd096849fa
+    id: image_scale
+    weight: 1
+    data:
+      width: 210
+      height: null
+      upscale: true

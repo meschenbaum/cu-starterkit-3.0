@@ -1,0 +1,143 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * Content: Card Paragraph field values
+ * - field_text_2: Card header text
+ * - field_text: Card footer text
+ * - field_wysiwyg: Card Body
+ * - field_media: media for card image
+ * - is_overlay: boolean value if there is an overlay
+ * - overlay_link: overlay link (uri)
+ * - overlay_link_title: overlay link title
+ * - text_color: overlay text color
+ * - card_header_bg_color: key value class to set bg color of header
+ * - card_footer_bg_color: key value class to set bg color of footer
+ * - card_horizontal_rule: boolean value to determine if HR should be used between image and body
+ * - card_image_position: key value to set type of card image
+ * - text_alignment: key value class for text alignment
+ * - border_color: Sets the card border color
+ * - button_color: key value class to set button color
+ * - button_link: button link (uri)
+ * - button_link_text: Button display text
+ * - button_link_title: button link title
+ * - button_center: boolean to center button
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    'card h-100',
+    text_alignment ? 'text-center',
+    border_color ? 'has-border border-' ~ border_color|clean_class
+  ]
+%}
+{% set h_classes = [
+    'card-header',
+    card_header_bg_color ? 'text-bg-' ~ card_header_bg_color|clean_class
+  ]
+%}
+{% set f_classes = [
+    'card-footer',
+    card_footer_bg_color ? 'text-bg-' ~ card_footer_bg_color|clean_class
+  ]
+%}
+{% set body_classes = [
+    'card-body'
+  ]
+%}
+{% set button_classes = [
+    button_color ? 'btn btn-' ~ button_color|raw : 'btn btn-primary'
+  ]
+%}
+{% set overlay_classes = [
+    'card-img-overlay--text position-absolute top-50 start-50 translate-middle',
+    text_color ? 'text-' ~ text_color|clean_class
+  ]
+%}
+
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if content.field_media[0] and card_image_position != 'bottom' and not is_overlay %}
+        {{ drupal_image(content.field_media[0]['#media'].field_media_image.entity.uri.value, content.field_media[0]['#view_mode'], {alt: content.field_media[0]['#media'].field_media_image.value.0.alt|t, class: 'img-fluid card-img-top'}, responsive=true) }}
+      {% endif %}
+      {% if content.field_media[0] and is_overlay %}
+        {{ drupal_image(content.field_media[0]['#media'].field_media_image.entity.uri.value, content.field_media[0]['#view_mode'], {alt: content.field_media[0]['#media'].field_media_image.value.0.alt|t, class: 'card-img img-fluid'}, responsive=true) }}
+      {% endif %}
+      {% if content.field_text_2[0] %}
+        <div{{ attributes.addClass(h_classes).removeClass(classes).removeClass(body_classes) }}>{{ content.field_text_2 }}</div>
+      {% endif %}
+      {% if content.field_wysiwyg %}
+        {% if content.field_media and is_overlay %}
+          <div class="card-img-overlay">
+          {% if is_overlay %}
+            <a href="{{ overlay_link }}" class="stretched-link" title="{{ overlay_link_title }}"></a>
+            <div{{ attributes.addClass(overlay_classes).removeClass(body_classes).removeClass(classes).removeClass(h_classes).removeClass(f_classes) }}>
+              <div{{ attributes.addClass(body_classes).removeClass(classes).removeClass(h_classes).removeClass(f_classes).removeClass(overlay_classes) }}>
+          {% endif %}
+        {% else %}
+          <div{{ attributes.addClass(body_classes).removeClass(classes).removeClass(h_classes).removeClass(f_classes) }}>
+        {% endif %}
+        {% if card_horizontal_rule %}
+          <hr class="br-cu-gold my-3" role="separator">
+        {% endif %}
+        {{ content.field_wysiwyg }}
+        {% if button_link %}
+          {% if button_center %}<div class="text-center">{% endif %}
+          <a{{ attributes.addClass(button_classes).removeClass(body_classes).removeClass(overlay_classes) }} href="{{ button_link }}" title="{{ button_link_title }}">{{ button_link_text }}</a>
+          {% if button_center %}</div>{% endif %}
+        {% endif %}
+        {% if content.field_media and is_overlay %}
+            </div>
+          </div>
+        {% endif %}
+        </div>
+      {% endif %}
+      {% if content.field_text[0] %}
+        <div{{ attributes.addClass(f_classes).removeClass(classes).removeClass(body_classes).removeClass(button_classes) }}>{{ content.field_text }}</div>
+      {% endif %}
+      {% if content.field_media[0] and card_image_position == 'bottom' and not is_overlay %}
+      {{ drupal_image(content.field_media[0]['#media'].field_media_image.entity.uri.value, content.field_media[0]['#view_mode'], {alt: content.field_media[0]['#media'].field_media_image.value.0.alt|t, class: 'img-fluid card-img-bottom'}, responsive=true) }}
+      {% endif %}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

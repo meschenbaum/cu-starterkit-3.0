@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_boolean_3
+    - paragraphs.paragraphs_type.content_card
+id: paragraph.content_card.field_boolean_3
+field_name: field_boolean_3
+entity_type: paragraph
+bundle: content_card
+label: 'Overlay Link on Entire Card'
+description: 'Overlay link inactive until overlay box is checked.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

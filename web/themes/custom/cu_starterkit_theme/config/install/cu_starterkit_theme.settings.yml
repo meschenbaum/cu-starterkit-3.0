@@ -1,0 +1,34 @@
+cuskt_branding: cusys
+cuskt_branding_logo_use_svg_sprite: FALSE
+cuskt_branding_logo_mobile_sprite_path: ''
+cuskt_branding_logo_desktop_sprite_path: ''
+cuskt_body_schema: none
+cuskt_body_bg_schema: none
+cuskt_navbar_global_schema: none
+cuskt_navbar_bg_global_schema: none
+cuskt_navbar_local_schema: light
+cuskt_navbar_bg_local_schema: light
+cuskt_navbar_main_schema: none
+cuskt_navbar_bg_main_schema: none
+cuskt_footer_global_schema: dark
+cuskt_footer_bg_global_schema: dark
+cuskt_footer_local_schema: light
+cuskt_footer_bg_local_schema: light
+cuskt_top_container: container
+cuskt_top_container_config: ''
+cuskt_search_type: none
+cuskt_search_action: ''
+cuskt_search_input_name: keys
+features:
+  node_user_picture: false
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: 1
+logo:
+  use_default: 0
+  path: themes/custom/cu_starterkit_theme/images/logos/logo-cu-system-white.svg
+favicon:
+  use_default: 1
+subtheme_folder: themes/custom
+subtheme_name: 'CU Starterkit subtheme'
+subtheme_machine_name: cuskt_subtheme

@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Tags
+vid: tags
+description: 'Enter a list of words to describe your content.  Tags describe the specific details of your article.'
+weight: 0

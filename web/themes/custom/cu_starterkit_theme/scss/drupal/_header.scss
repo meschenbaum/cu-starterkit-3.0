@@ -1,0 +1,18 @@
+// Header display
+header {
+  .navbar {
+    .btn-group {
+      > .btn {
+        &:not(.dropdown-toggle) {
+          border-radius: $btn-border-radius;
+        }
+      }
+    }
+  }
+
+  #searchBox {
+    .btn-default, .form-control {
+      border-color: var(--bs-navbar-toggler-border-color);
+    }
+  }
+}

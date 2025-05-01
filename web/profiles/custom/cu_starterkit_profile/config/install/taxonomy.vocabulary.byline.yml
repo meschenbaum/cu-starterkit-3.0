@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Byline
+vid: byline
+description: 'Used to capture article bylines. Enter first and last name of the authors.'
+weight: 0

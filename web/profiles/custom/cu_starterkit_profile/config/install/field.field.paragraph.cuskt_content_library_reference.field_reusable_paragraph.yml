@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_reusable_paragraph
+    - paragraphs.paragraphs_type.cuskt_content_library_reference
+id: paragraph.cuskt_content_library_reference.field_reusable_paragraph
+field_name: field_reusable_paragraph
+entity_type: paragraph
+bundle: cuskt_content_library_reference
+label: 'Library Item'
+description: 'Referenced Paragraph'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraphs_library_item'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: label
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

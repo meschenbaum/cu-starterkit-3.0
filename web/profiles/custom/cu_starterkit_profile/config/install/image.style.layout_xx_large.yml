@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_xx_large
+label: 'Layout: XX-Large'
+effects:
+  4e6ee128-5f08-4d2f-be69-05a622c0563e:
+    uuid: 4e6ee128-5f08-4d2f-be69-05a622c0563e
+    id: image_scale
+    weight: 1
+    data:
+      width: 2000
+      height: null
+      upscale: true

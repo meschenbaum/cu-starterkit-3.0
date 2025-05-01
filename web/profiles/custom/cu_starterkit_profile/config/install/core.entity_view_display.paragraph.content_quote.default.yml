@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_quote.field_boolean_left_right
+    - field.field.paragraph.content_quote.field_media
+    - field.field.paragraph.content_quote.field_text_alignment
+    - field.field.paragraph.content_quote.field_wysiwyg
+    - field.field.paragraph.content_quote.field_wysiwyg_2
+    - paragraphs.paragraphs_type.content_quote
+  module:
+    - text
+id: paragraph.content_quote.default
+targetEntityType: paragraph
+bundle: content_quote
+mode: default
+content:
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: content_list
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_wysiwyg:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_wysiwyg_2:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  field_boolean_left_right: true
+  field_text_alignment: true

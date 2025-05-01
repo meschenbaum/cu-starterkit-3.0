@@ -1,0 +1,122 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_quote.field_boolean_left_right
+    - field.field.paragraph.content_quote.field_media
+    - field.field.paragraph.content_quote.field_text_alignment
+    - field.field.paragraph.content_quote.field_wysiwyg
+    - field.field.paragraph.content_quote.field_wysiwyg_2
+    - paragraphs.paragraphs_type.content_quote
+  module:
+    - field_group
+    - media_library
+    - text
+third_party_settings:
+  field_group:
+    group_tabs_container:
+      children:
+        - group_quote
+        - group_citation
+        - group_image
+      label: 'Tabs Container'
+      region: content
+      parent_name: ''
+      weight: 5
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: horizontal
+        width_breakpoint: 640
+    group_quote:
+      children:
+        - field_wysiwyg
+        - field_text_alignment
+      label: Quote
+      region: content
+      parent_name: group_tabs_container
+      weight: 8
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: true
+    group_citation:
+      children:
+        - field_wysiwyg_2
+      label: Citation
+      region: content
+      parent_name: group_tabs_container
+      weight: 9
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_image:
+      children:
+        - field_media
+        - field_boolean_left_right
+      label: Image
+      region: content
+      parent_name: group_tabs_container
+      weight: 10
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+id: paragraph.content_quote.default
+targetEntityType: paragraph
+bundle: content_quote
+mode: default
+content:
+  field_boolean_left_right:
+    type: options_buttons
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_media:
+    type: media_library_widget
+    weight: 0
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_text_alignment:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_wysiwyg:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 10
+      placeholder: 'Enter your content here...'
+    third_party_settings: {  }
+  field_wysiwyg_2:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,270 @@
+{#
+/**
+ * @file
+ * Implements the Cards tab content for the UI Kit.
+ *
+ * Displays usage of cards within the theme.
+ *
+ * Macro inputs
+ * card(
+ *  - text_center = [false(default), true],
+ *  - border_color = [false(default), 'primary', 'secondary', 'light', 'dark'],
+ *  - header = [false(default), 'primary', 'secondary', 'light', 'dark'],
+ *  - horizontal_rule = [false(default), true],
+ *  - title = [false(default), true], 
+ *  - subtitle = [false(default), true], 
+ *  - text = [false(default), true], 
+ *  - link = [false(default), true], 
+ *  - button = [false(default), 'primary', 'secondary', 'light', 'dark'], 
+ *  - button_center = [false(default), true], 
+ *  - footer = [false(default), 'primary', 'secondary', 'light', 'dark'], 
+ *  - image_top = [false(default), true], 
+ *  - image_btm = [false(default), true], 
+ *  - overlay = [false(default), true], 
+ *  - overlay_text = [false(default), 'primary', 'secondary', 'light', 'dark']
+ )
+ */
+#}
+{% import '@cu_starterkit_theme/ui-kit/card/card.macros.twig' as macros %}
+{% extends '@bootstrap_ui_kit/section.html.twig' %}
+
+{% block section_intro %}
+  <p>Cards provide a flexible and extensible content container with multiple variants and options. Elements with color are interchangeable.</p>
+{% endblock %}
+
+{% block section_content %}
+  <h4 class="mb-3">{{ 'Basic Cards w/ either a Header or Footer'|t }}</h4>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, 'primary', false, true, true, true, true, false, false, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, 'secondary', false, true, true, true, true, false, false, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, 'light', false, true, true, true, true, false, false, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, 'dark', false, true, true, true, true, false, false, false, false, false, false, false) }}
+    </div>
+  </div>
+  <div class="my-4"></div>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, false, false, true, true, true, true, false, false, 'primary', false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, false, false, true, true, true, true, false, false, 'secondary', false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, false, false, true, true, true, true, false, false, 'light', false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, false, false, true, true, true, true, false, false, 'dark', false, false, false, false) }}
+    </div>
+  </div>
+
+  <div class="my-5">
+    <hr class="opacity-100 border-top border-2 border-primary" role="separator">
+  </div>
+
+  <h4 class="mb-3">{{ 'Basic Cards w/ borders and either a Header or Footer'|t }}</h4>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'primary', 'primary', false, true, true, true, true, false, false, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'secondary', 'secondary', false, true, true, true, true, false, false, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'light', 'light', false, true, true, true, true, false, false, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'dark', 'dark', false, true, true, true, true, false, false, false, false, false, false, false) }}
+    </div>
+  </div>
+  <div class="my-4"></div>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'primary', false, false, true, true, true, true, false, false, 'primary', false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'secondary', false, false, true, true, true, true, false, false, 'secondary', false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'light', false, false, true, true, true, true, false, false, 'light', false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'dark', false, false, true, true, true, true, false, false, 'dark', false, false, false, false) }}
+    </div>
+  </div>
+
+  <div class="my-5">
+    <hr class="opacity-100 border-top border-2 border-primary" role="separator">
+  </div>
+
+  <h4 class="mb-3">{{ 'Cards w/ borders and Header/Footer'|t }}</h4>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'primary', 'primary', false, true, true, true, true, false, false, 'primary', false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'secondary', 'secondary', false, true, true, true, true, false, false, 'secondary', false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'light', 'light', false, true, true, true, true, false, false, 'light', false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'dark', 'dark', false, true, true, true, true, false, false, 'dark', false, false, false, false) }}
+    </div>
+  </div>
+  <div class="my-4"></div>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'primary', 'primary', false, true, true, true, true, false, false, 'primary', false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'secondary', 'secondary', false, true, true, true, true, false, false, 'secondary', false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'light', 'light', false, true, true, true, true, false, false, 'light', false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'dark', 'dark', false, true, true, true, true, false, false, 'dark', false, false, false, false) }}
+    </div>
+  </div>
+
+  <div class="my-5">
+    <hr class="opacity-100 border-top border-2 border-primary" role="separator">
+  </div>
+
+  <h4 class="mb-3">{{ 'Cards w/ borders and Button'|t }}</h4>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'primary', false, false, true, true, true, true, 'primary', false, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'secondary', false, false, true, true, true, true, 'secondary', false, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'light', false, false, true, true, true, true, 'light', false, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'dark', false, false, true, true, true, true, 'dark', false, false, false, false, false, false) }}
+    </div>
+  </div>
+  <div class="my-4"></div>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'primary', false, false, true, true, true, true, 'primary', true, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'secondary', false, false, true, true, true, true, 'secondary', true, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'light', false, false, true, true, true, true, 'light', true, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'dark', false, false, true, true, true, true, 'dark', true, false, false, false, false, false) }}
+    </div>
+  </div>
+
+  <div class="my-5">
+    <hr class="opacity-100 border-top border-2 border-primary" role="separator">
+  </div>
+
+  <h4 class="mb-3">{{ 'Cards w/ borders and centered text'|t }}</h4>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(true, 'primary', false, false, true, true, true, true, 'primary', false, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(true, 'secondary', false, false, true, true, true, true, 'secondary', false, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(true, 'light', false, false, true, true, true, true, 'light', false, false, false, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(true, 'dark', false, false, true, true, true, true, 'dark', false, false, false, false, false, false) }}
+    </div>
+  </div>
+
+  <div class="my-5">
+    <hr class="opacity-100 border-top border-2 border-primary" role="separator">
+  </div>
+
+  <h4 class="mb-3">{{ 'Cards w/ image caps'|t }}</h4>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'primary', false, false, true, true, true, true, 'primary', false, false, true, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, false, false, true, true, true, true, 'secondary', false, false, false, true, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'dark', false, false, true, true, true, true, false, false, false, true, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, false, false, true, true, true, true, false, false, false, false, true, false, false) }}
+    </div>
+  </div>
+
+
+  <div class="my-5">
+    <hr class="opacity-100 border-top border-2 border-primary" role="separator">
+  </div>
+
+  <h4 class="mb-3">{{ 'Cards w/ image caps and horizontal rule'|t }}</h4>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'primary', false, true, true, true, true, true, 'primary', false, false, true, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, false, true, true, true, true, true, 'secondary', false, false, false, true, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'dark', false, true, true, true, true, true, false, false, false, true, false, false, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, false, true, true, true, true, true, false, false, false, false, true, false, false) }}
+    </div>
+  </div>
+
+  <div class="my-5">
+    <hr class="opacity-100 border-top border-2 border-primary" role="separator">
+  </div>
+
+  <h4 class="mb-3">{{ 'Cards w/ overlay link'|t }}</h4>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'primary', false, false, true, true, true, false, false, false, false, false, false, true, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, false, false, true, true, true, false, false, false, false, false, false, true, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, 'dark', false, false, true, true, true, false, false, false, false, true, false, true, false) }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(false, false, false, false, true, true, true, false, false, false, false, true, false, true, false) }}
+    </div>
+  </div>
+  <div class="my-4"></div>
+  <div class="row gy-2">
+    <div class="col-12 col-md-3">
+      {{ macros.card(true, 'primary', false, false, true, true, true, false, false, false, false, true, false, true, 'primary') }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(true, 'secondary', false, false, true, true, true, false, false, false, false, true, false, true, 'secondary') }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(true, 'light', false, false, true, true, true, false, false, false, false, true, false, true, 'light') }}
+    </div>
+    <div class="col-12 col-md-3">
+      {{ macros.card(true, 'dark', false, false, true, true, true, false, false, false, false, true, false, true, 'dark') }}
+    </div>
+  </div>
+
+{% endblock %}
+
+

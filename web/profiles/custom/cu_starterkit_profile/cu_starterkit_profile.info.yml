@@ -1,0 +1,95 @@
+name: CU Starter Kit Profile
+type: profile
+description: "CU D10 Starter Kit Profile"
+core_version_requirement: "^10"
+version: '1.0.7'
+install:
+  - admin_toolbar
+  - admin_toolbar_links_access_filter
+  - admin_toolbar_tools
+  - automated_cron
+  - block
+  - block_content
+  - breakpoint
+  - ckeditor5
+  - ckeditor5_icons
+  - config
+  - contact
+  - datetime
+  - datetime_range
+  - dblog
+  - default_content
+  - dynamic_page_cache
+  - editor
+  - entity_reference_revisions
+  - entity_usage
+  - environment_indicator
+  - environment_indicator_ui
+  - field
+  - field_group
+  - field_ui
+  - file
+  - filter
+  - force_users_logout
+  - google_tag
+  - history
+  - image
+  - jsonapi
+  - jsonapi_defaults
+  - jsonapi_extras
+  - jsonapi_image_styles
+  - layout_discovery
+  - layout_paragraphs
+  - layout_paragraphs_library
+  - layout_paragraphs_permissions
+  - link
+  - link_attributes
+  - link_attributes_menu_link_content
+  - media
+  - media_library
+  - menu_link_content
+  - menu_ui
+  - metatag
+  - mysql
+  - node
+  - options
+  - page_cache
+  - pantheon_advanced_page_cache
+  - pantheon_domain_masking
+  - paragraphs_library
+  - paragraphs_type_permissions
+  - path
+  - path_alias
+  - r4032login
+  - rabbit_hole
+  - rebuild_cache_access
+  - redirect
+  - redirect_404
+  - responsive_image
+  - search
+  - serialization
+  - shortcut
+  - simplesamlphp_auth
+  - system
+  - tac_lite
+  - taxonomy
+  - telephone
+  - text
+  - token
+  - toolbar
+  - twig_tweak
+  - update
+  - user
+  - views_ui
+  - viewsreference
+  - xmlsitemap_custom
+  - xmlsitemap_engines
+  - pathauto
+  - xmlsitemap
+  - externalauth
+  - views
+  - paragraphs
+themes:
+  - claro
+  - cu_starterkit_theme
+keep_english: true

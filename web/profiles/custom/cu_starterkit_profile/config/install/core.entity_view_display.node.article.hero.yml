@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.hero
+    - field.field.node.article.body
+    - field.field.node.article.field_byline
+    - field.field.node.article.field_categories
+    - field.field.node.article.field_content
+    - field.field.node.article.field_featured_media
+    - field.field.node.article.field_hero
+    - field.field.node.article.field_meta_tags
+    - field.field.node.article.field_permissions
+    - field.field.node.article.field_post_date
+    - field.field.node.article.field_tags
+    - node.type.article
+  module:
+    - layout_paragraphs
+    - user
+id: node.article.hero
+targetEntityType: node
+bundle: article
+mode: hero
+content:
+  field_hero:
+    type: layout_paragraphs
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  field_byline: true
+  field_categories: true
+  field_content: true
+  field_featured_media: true
+  field_meta_tags: true
+  field_permissions: true
+  field_post_date: true
+  field_tags: true
+  links: true

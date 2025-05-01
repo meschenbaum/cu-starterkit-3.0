@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.cuskt_layout_hero.field_background_color
+    - field.field.paragraph.cuskt_layout_hero.field_column_layout_setting_hero
+    - field.field.paragraph.cuskt_layout_hero.field_margin_bottom
+    - field.field.paragraph.cuskt_layout_hero.field_margin_top
+    - field.field.paragraph.cuskt_layout_hero.field_media
+    - field.field.paragraph.cuskt_layout_hero.field_padding_bottom
+    - field.field.paragraph.cuskt_layout_hero.field_padding_top
+    - field.field.paragraph.cuskt_layout_hero.field_text_color
+    - paragraphs.paragraphs_type.cuskt_layout_hero
+id: paragraph.cuskt_layout_hero.default
+targetEntityType: paragraph
+bundle: cuskt_layout_hero
+mode: default
+content:
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: hero_banner
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_background_color: true
+  field_column_layout_setting_hero: true
+  field_margin_bottom: true
+  field_margin_top: true
+  field_padding_bottom: true
+  field_padding_top: true
+  field_text_color: true

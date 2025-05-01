@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_horizontal_rule.field_border_color
+    - field.field.paragraph.content_horizontal_rule.field_padding_top_bottom
+    - paragraphs.paragraphs_type.content_horizontal_rule
+id: paragraph.content_horizontal_rule.default
+targetEntityType: paragraph
+bundle: content_horizontal_rule
+mode: default
+content:
+  field_border_color:
+    type: options_select
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_padding_top_bottom:
+    type: options_select
+    weight: 18
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

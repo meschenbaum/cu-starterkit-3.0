@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_media.field_media
+    - field.field.paragraph.content_media.field_text
+    - field.field.paragraph.content_media.field_text_alignment
+    - paragraphs.paragraphs_type.content_media
+id: paragraph.content_media.default
+targetEntityType: paragraph
+bundle: content_media
+mode: default
+content:
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: content_default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_text:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_text_alignment: true

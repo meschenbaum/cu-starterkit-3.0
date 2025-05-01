@@ -1,0 +1,72 @@
+// Hero display
+
+.hero {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.hero-background {
+  position: static;
+
+  @include media-breakpoint-up(md) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .media--view-mode-hero-banner {
+
+    @include media-breakpoint-up(md) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      
+    }
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    max-width: none;
+    max-height: 420px;
+    margin: 0;
+    -o-object-fit: cover;
+    object-fit: cover;
+    font-family: 'object-fit: cover;';
+  }
+
+  >.container {
+    position: static;
+  }
+
+  .row {
+    position: relative;
+
+    .field--name-field-wysiwyg p:last-child {
+      margin-bottom: 0;
+    }
+    
+    @include media-breakpoint-up(md) {
+      min-height: 230px;
+      height: 100%;
+    }
+
+    @include media-breakpoint-up(lg) {
+      min-height: 297px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      min-height: 360px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      min-height: 420px;
+    }
+  }
+}

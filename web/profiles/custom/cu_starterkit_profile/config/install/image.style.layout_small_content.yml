@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_small_content
+label: 'Layout: Small - Content'
+effects:
+  cf6d747f-c6c9-4ab3-8a86-eb3c55019fe4:
+    uuid: cf6d747f-c6c9-4ab3-8a86-eb3c55019fe4
+    id: image_scale
+    weight: 1
+    data:
+      width: 500
+      height: null
+      upscale: true

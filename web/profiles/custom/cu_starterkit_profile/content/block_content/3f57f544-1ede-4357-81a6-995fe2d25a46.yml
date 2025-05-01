@@ -1,0 +1,35 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 3f57f544-1ede-4357-81a6-995fe2d25a46
+  bundle: basic
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Global Footer Address'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| CU System Starter Kit'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://cu-starterkit-project-3.0.ddev.site/home'
+  body:
+    -
+      value: '<address itemscope="" itemtype="https://schema.org/CollegeOrUniversity"><div itemprop="address" itemscope="" itemtype="https://schema.org/PostalAddress"><span itemprop="streetAddress">1800 Grant Street, Suite 800</span> | <span itemprop="addressLocality">Denver</span>, <span itemprop="addressRegion">CO</span> <span itemprop="postalCode">80203</span></div><div>General: <a href="tel:+13038605600" itemprop="telephone">(303) 860-5600</a> | Fax: <a href="tel:+13038605610" itemprop="faxNumber">(303) 860-5610</a> | Media: <a href="tel:+13038605626" itemprop="telephone">(303) 860-5626</a></div><div>© <a href="https://regents.cu.edu/" itemprop="name">Regents of the University of Colorado</a> | <a href="https://www.cu.edu/privacy-policy" itemprop="license" rel="license">Privacy Policy</a> | <a href="https://www.cu.edu/terms-service" itemprop="license" rel="license">Terms of Service</a> |&nbsp;<a href="/user"><i class="fa-solid fa-door-open">&nbsp;</i></a></div></address>'
+      format: full_html
+      summary: ''

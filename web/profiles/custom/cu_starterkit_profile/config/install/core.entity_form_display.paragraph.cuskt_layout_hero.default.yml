@@ -1,0 +1,174 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.cuskt_layout_hero.field_background_color
+    - field.field.paragraph.cuskt_layout_hero.field_column_layout_setting_hero
+    - field.field.paragraph.cuskt_layout_hero.field_margin_bottom
+    - field.field.paragraph.cuskt_layout_hero.field_margin_top
+    - field.field.paragraph.cuskt_layout_hero.field_media
+    - field.field.paragraph.cuskt_layout_hero.field_padding_bottom
+    - field.field.paragraph.cuskt_layout_hero.field_padding_top
+    - field.field.paragraph.cuskt_layout_hero.field_text_color
+    - paragraphs.paragraphs_type.cuskt_layout_hero
+  module:
+    - field_group
+    - media_library
+third_party_settings:
+  field_group:
+    group_tab_container:
+      children:
+        - group_layouts
+        - group_styles
+        - group_spacing
+      label: 'Tab Container'
+      region: content
+      parent_name: ''
+      weight: 8
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: horizontal
+        width_breakpoint: 640
+    group_layouts:
+      children:
+        - field_column_layout_setting_hero
+      label: Layouts
+      region: content
+      parent_name: group_tab_container
+      weight: 11
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: true
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: true
+    group_styles:
+      children:
+        - field_background_color
+        - field_media
+        - field_text_color
+      label: Styles
+      region: content
+      parent_name: group_tab_container
+      weight: 12
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_spacing:
+      children:
+        - group_margins
+        - group_padding
+      label: Spacing
+      region: content
+      parent_name: group_tab_container
+      weight: 13
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_margins:
+      children:
+        - field_margin_top
+        - field_margin_bottom
+      label: Margins
+      region: content
+      parent_name: group_spacing
+      weight: 14
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_padding:
+      children:
+        - field_padding_top
+        - field_padding_bottom
+      label: Padding
+      region: content
+      parent_name: group_spacing
+      weight: 15
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+id: paragraph.cuskt_layout_hero.default
+targetEntityType: paragraph
+bundle: cuskt_layout_hero
+mode: default
+content:
+  field_background_color:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_column_layout_setting_hero:
+    type: options_select
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_margin_bottom:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_margin_top:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_media:
+    type: media_library_widget
+    weight: 6
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_padding_bottom:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_padding_top:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_text_color:
+    type: options_select
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  layout_paragraphs_fields:
+    weight: -200
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  status: true

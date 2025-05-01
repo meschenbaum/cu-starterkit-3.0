@@ -1,0 +1,81 @@
+cu_starterkit_theme_col1:
+  label: '1 Column'
+  category: 'CUSKT Columns'
+  path: layouts
+  template: cu_starterkit_theme_col1
+  default_region: first
+  icon_map:
+    - [first]
+  regions:
+    first:
+      label: First
+cu_starterkit_theme_col2:
+  label: '2 Columns'
+  category: 'CUSKT Columns'
+  path: layouts
+  template: cu_starterkit_theme_col2
+  default_region: first
+  icon_map:
+    - [first, second]
+  regions:
+    first:
+      label: First
+    second:
+      label: Second
+cu_starterkit_theme_col3:
+  label: '3 Columns'
+  category: 'CUSKT Columns'
+  path: layouts
+  template: cu_starterkit_theme_col3
+  default_region: first
+  icon_map:
+    - [first, second, third]
+  regions:
+    first:
+      label: First
+    second:
+      label: Second
+    third:
+      label: Third
+cu_starterkit_theme_col4:
+  label: '4 Columns'
+  category: 'CUSKT Columns'
+  path: layouts
+  template: cu_starterkit_theme_col4
+  default_region: first
+  icon_map:
+    - [first, second, third, fourth]
+  regions:
+    first:
+      label: First
+    second:
+      label: Second
+    third:
+      label: Third
+    fourth:
+      label: Fourth
+
+cu_starterkit_theme_hero_col1:
+  label: '1 Column'
+  category: 'CUSKT Columns - Hero'
+  path: layouts
+  template: cu_starterkit_theme_hero_col1
+  default_region: first
+  icon_map:
+    - [first]
+  regions:
+    first:
+      label: First
+cu_starterkit_theme_hero_col2:
+  label: '2 Columns'
+  category: 'CUSKT Columns - Hero'
+  path: layouts
+  template: cu_starterkit_theme_hero_col2
+  default_region: first
+  icon_map:
+    - [first, second]
+  regions:
+    first:
+      label: First
+    second:
+      label: Second

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_default_article_header
+label: 'Layout: Default - Article Feature'
+effects:
+  4f238169-b030-49d6-9b13-072531caf8fa:
+    uuid: 4f238169-b030-49d6-9b13-072531caf8fa
+    id: image_scale
+    weight: 1
+    data:
+      width: 296
+      height: null
+      upscale: true

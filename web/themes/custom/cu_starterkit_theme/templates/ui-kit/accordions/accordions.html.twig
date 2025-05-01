@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Implements the Accordions tab content for the UI Kit.
+ *
+ * Displays usage of accordions within the theme.
+ */
+#}
+{% import '@bootstrap_ui_kit/ui-kit/' ~ section.id ~ '/' ~ section.id ~ '.macros.twig' as macros %}
+{% extends '@bootstrap_ui_kit/section.html.twig' %}
+
+{% block section_intro %}
+  {% trans %}
+    <p>An accordion menu is a vertically stacked list of headers that can be clicked to reveal or hide content associated
+      with them. It is one of many ways you can expose content to users in a progressive manner.</p>
+  {% endtrans %}
+{% endblock %}
+
+{% block section_content %}
+  {% set headerAs = 'h3' %}
+
+  {# Normal (expanded) #}
+  <div class="mb-5">
+    <p><strong>{{ 'Collpased'|t }}</strong></p>
+    {{ macros.accordion(true, 1, true, headerAs) }}
+  </div>
+
+  {# Always Open #}
+  <div class="mb-5">
+    <p><strong>{{ 'Expanded'|t }}</strong></p>
+    {{ macros.accordion(true, 1, false, headerAs) }}
+  </div>
+
+  {# Always Open #}
+  <div class="mb-5">
+    <p><strong>{{ 'Grouped'|t }}</strong> <em>{{ '(single expand)'|t }}</em></p>
+    {{ macros.accordion(true, 2, false, headerAs) }}
+  </div>
+
+  {# Always Open 
+  <div class="mb-5">
+    <p><strong>{{ 'Grouped'|t }}</strong> <em>{{ '(mutiple expand)'|t }}</em></p>
+    {{ macros.accordion(false, 2, false, headerAs) }}
+  </div>#}
+{% endblock %}

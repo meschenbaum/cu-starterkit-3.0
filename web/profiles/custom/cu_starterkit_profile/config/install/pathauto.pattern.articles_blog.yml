@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: articles_blog
+label: Articles
+type: 'canonical_entities:node'
+pattern: '/[node:field_post_date:date:html_year]/[node:field_post_date:date:custom:m]/[node:field_post_date:date:custom:d]/[node:title]'
+selection_criteria:
+  72e2feb3-69c8-47fc-9e2d-c99c43845e67:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 72e2feb3-69c8-47fc-9e2d-c99c43845e67
+    context_mapping:
+      node: node
+    bundles:
+      article: article
+selection_logic: and
+weight: -5
+relationships: {  }

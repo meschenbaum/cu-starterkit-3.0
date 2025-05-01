@@ -1,0 +1,173 @@
+/**
+ * @file
+ * Styles for CUSys Bootstrap Barrio's Content: List paragraph pattern.
+ */
+.list-pattern--divider { 
+  .list-pattern__item {
+    padding-bottom: 3rem;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+
+/** Stylized Ordered List **/
+.cu-styled-list, .cu-styled-list-secondary, .cu-styled-list-light, .cu-styled-list-dark {
+  padding: 0;
+
+  li {
+    margin-bottom: 2rem;
+    padding: 0 0 1rem 3rem;
+    border-color: $primary;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    min-height: 4rem;
+    @include media-breakpoint-up(md) {
+      padding: 0 0 1.5rem 5rem;
+      min-height: 5rem;
+    }
+    @include media-breakpoint-up(lg) {
+      padding: 0 0 1.5rem 6rem;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:before {
+      margin-right: 0;
+      background: $primary;
+      border-radius: 100%;
+      color: $black;
+      text-align: center;
+      display: block;
+      width: 2rem;
+      height: 2rem;
+      position: absolute;
+      top: 0rem;
+      left: 0rem;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 2rem;
+      @include media-breakpoint-up(md) {
+        left: 1rem;
+      }
+      @include media-breakpoint-up(lg) {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.5rem;
+        line-height: 3rem;
+      }
+    }
+
+    &.cu-styled-list-item-medium {
+      padding: 0 0 1.5rem 4rem;
+      min-height: 5rem;
+      @include media-breakpoint-up(md) {
+        padding: 0 0 1.5rem 7rem;
+      }
+      @include media-breakpoint-up(lg) {
+        padding: 0 0 1.5rem 12rem;
+        min-height: 9rem;
+      }
+  
+      &:before {
+        width: 3rem;
+        height: 3rem;
+        font-size: 2rem;
+        line-height: 3rem;
+        @include media-breakpoint-up(md) {
+          left: 2rem;
+        }
+        @include media-breakpoint-up(lg) {
+          width: 6rem;
+          height: 6rem;
+          top: 0.5rem;
+          left: 3rem;
+          font-size: 3.5rem;
+          line-height: 6rem;
+        }
+      }
+    }
+
+    &.cu-styled-list-item-large {
+      padding: 7rem 0 1.5rem 1rem;
+      min-height: 10rem;
+      @include media-breakpoint-up(md) {
+        padding: 0 0 1.5rem 12rem;
+        min-height: 12rem;
+      }
+      @include media-breakpoint-up(lg) {
+        padding: 0 0 1.5rem 21rem;
+        min-height: 14rem;
+      }
+  
+      &:before {
+        width: 6rem;
+        height: 6rem;
+        left: 6rem;
+        font-size: 4rem;
+        line-height: 6rem;
+        @include media-breakpoint-up(sm) {
+          left: 9rem;
+        }
+        @include media-breakpoint-up(md) {
+          top: 0.5rem;
+          left: 3rem;
+        }
+        @include media-breakpoint-up(lg) {
+          width: 8rem;
+          height: 8rem;
+          left: 5rem;
+          font-size: 5.5rem;
+          line-height: 8rem;
+        }
+        @include media-breakpoint-up(xl) {
+          width: 9rem;
+          height: 9rem;
+          font-size: 6rem;
+          line-height: 9rem;
+        }
+      }
+    }
+  }
+
+  > .list-group-item::before {
+    // Increments only this instance of the section counter
+    content: counters(section, ".") "";
+  }
+}
+
+.cu-styled-list-secondary {
+  li {
+    &:before {
+      background: $secondary;
+      color: $white;
+    }
+  }
+}
+
+.cu-styled-list-light {
+  li {
+    &:before {
+      background: $light;
+      color: $black;
+    }
+  }
+}
+
+.cu-styled-list-dark {
+  li {
+    &:before {
+      background: $dark;
+      color: $white;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:3f57f544-1ede-4357-81a6-995fe2d25a46'
+  module:
+    - block_content
+  theme:
+    - cu_starterkit_theme
+id: cu_starterkit_theme_globalfooteraddress
+theme: cu_starterkit_theme
+region: global_footer_first
+weight: 0
+provider: null
+plugin: 'block_content:3f57f544-1ede-4357-81a6-995fe2d25a46'
+settings:
+  id: 'block_content:3f57f544-1ede-4357-81a6-995fe2d25a46'
+  label: 'Global Footer Address'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

@@ -1,0 +1,112 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 0cdbd0f4-a2cf-4aae-99e3-0315d36c0a9d
+  bundle: page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Home
+  created:
+    -
+      value: 1701952651
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Home | CU System Starter Kit'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'https://cu-starterkit-project-3.0.ddev.site/home'
+  path:
+    -
+      alias: /home
+      langcode: en
+      pathauto: 1
+  field_content:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 7bf41e41-cd95-4a3d-b15a-080b95743925
+          bundle: cuskt_layout
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1701952658
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  layout: cu_starterkit_theme_col1
+                  config:
+                    label: ''
+                  parent_uuid: null
+                  region: null
+          revision_translation_affected:
+            -
+              value: true
+          field_padding_bottom:
+            -
+              value: '5'
+          field_padding_top:
+            -
+              value: '5'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 7a468ae2-4884-41c6-a8e4-8b752c586154
+          bundle: content_wysiwyg
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1701952691
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: 7bf41e41-cd95-4a3d-b15a-080b95743925
+                  region: first
+          revision_translation_affected:
+            -
+              value: true
+          field_wysiwyg:
+            -
+              value: '<p>Welcome to your new CU Starter Kit site!</p>'
+              format: basic_html
+  field_landing_page:
+    -
+      value: false

@@ -1,0 +1,92 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.styled_list
+    - media.type.audio
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.video
+    - node.type.article
+    - node.type.article_list
+    - node.type.page
+  module:
+    - filter
+    - media
+    - node
+    - paragraphs_type_permissions
+id: edit_own_content
+label: 'Edit My Own Content'
+weight: -8
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'create article content'
+  - 'create article_list content'
+  - 'create page content'
+  - 'create paragraph content content_accordion'
+  - 'create paragraph content content_accordion_item'
+  - 'create paragraph content content_anchor_link'
+  - 'create paragraph content content_card'
+  - 'create paragraph content content_horizontal_rule'
+  - 'create paragraph content content_list'
+  - 'create paragraph content content_list_item'
+  - 'create paragraph content content_list_styled_order'
+  - 'create paragraph content content_list_styled_order_item'
+  - 'create paragraph content content_media'
+  - 'create paragraph content content_quote'
+  - 'create paragraph content content_wysiwyg'
+  - 'create paragraph content cuskt_content_library_reference'
+  - 'create paragraph content cuskt_layout'
+  - 'create paragraph content cuskt_layout_hero'
+  - 'create paragraph content hero_wysiwyg'
+  - 'create paragraph content view_reference'
+  - 'delete own article content'
+  - 'delete own article_list content'
+  - 'delete own page content'
+  - 'delete paragraph content content_accordion'
+  - 'delete paragraph content content_accordion_item'
+  - 'delete paragraph content content_anchor_link'
+  - 'delete paragraph content content_card'
+  - 'delete paragraph content content_horizontal_rule'
+  - 'delete paragraph content content_list'
+  - 'delete paragraph content content_list_item'
+  - 'delete paragraph content content_list_styled_order'
+  - 'delete paragraph content content_list_styled_order_item'
+  - 'delete paragraph content content_media'
+  - 'delete paragraph content content_quote'
+  - 'delete paragraph content content_wysiwyg'
+  - 'delete paragraph content cuskt_content_library_reference'
+  - 'delete paragraph content cuskt_layout'
+  - 'delete paragraph content cuskt_layout_hero'
+  - 'delete paragraph content hero_wysiwyg'
+  - 'delete paragraph content view_reference'
+  - 'edit own article content'
+  - 'edit own article_list content'
+  - 'edit own audio media'
+  - 'edit own document media'
+  - 'edit own image media'
+  - 'edit own page content'
+  - 'edit own remote_video media'
+  - 'edit own video media'
+  - 'update paragraph content content_accordion'
+  - 'update paragraph content content_accordion_item'
+  - 'update paragraph content content_anchor_link'
+  - 'update paragraph content content_card'
+  - 'update paragraph content content_horizontal_rule'
+  - 'update paragraph content content_list'
+  - 'update paragraph content content_list_item'
+  - 'update paragraph content content_list_styled_order'
+  - 'update paragraph content content_list_styled_order_item'
+  - 'update paragraph content content_media'
+  - 'update paragraph content content_quote'
+  - 'update paragraph content content_wysiwyg'
+  - 'update paragraph content cuskt_content_library_reference'
+  - 'update paragraph content cuskt_layout'
+  - 'update paragraph content cuskt_layout_hero'
+  - 'update paragraph content hero_wysiwyg'
+  - 'update paragraph content view_reference'
+  - 'use text format styled_list'
+  - 'view own unpublished content'
+  - 'view own unpublished media'

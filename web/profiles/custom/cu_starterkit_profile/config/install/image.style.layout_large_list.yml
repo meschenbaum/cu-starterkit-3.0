@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_large_list
+label: 'Layout: Large - List'
+effects:
+  b51f155b-cbbf-40a9-9db6-e20206bb0220:
+    uuid: b51f155b-cbbf-40a9-9db6-e20206bb0220
+    id: image_scale
+    weight: 1
+    data:
+      width: 290
+      height: null
+      upscale: true

@@ -1,0 +1,77 @@
+.region-content .block-google-cse {
+  margin-bottom: 2rem;
+}
+
+.region-content .gsc-search-button-v2 {
+  margin-top: 0;
+}
+
+.region-content .gsc-search-button-v2 svg {
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
+.region-content .gsc-control-cse {
+  padding-bottom: 2rem;
+  font-size: 0.875rem;
+}
+
+.region-content .gsc-result-info {
+  font-size: 0.875rem;
+}
+
+.region-content .gsc-resultsbox-visible {
+  margin-top: 1rem;
+}
+
+.region-content .gsc-webResult.gsc-result {
+  padding: 1.5rem 0;
+  border-bottom: 2px solid #cfb87c;
+}
+
+.region-content .gsc-webResult.gsc-result:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.region-content .gsc-webResult.gsc-result:hover {
+  border-bottom-color: #cfb87c;
+}
+
+.region-content .gsc-webResult.gsc-result:first {
+  padding-top: 0;
+}
+
+.region-content .gsc-result .gs-result {
+  padding: 0 1rem;
+}
+
+.region-content .gsc-result .gsc-thumbnail-inside,
+.region-content .gsc-result .gsc-url-top,
+.region-content .gsc-result .gsc-table-result {
+  padding: 0;
+}
+
+.region-content .gsc-result .gs-title {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+}
+
+.region-content .gsc-result .gsc-url-top {
+  margin-top: 1.25rem;
+}
+
+.region-content .gsc-result .gsc-url-top .gs-visibleUrl {
+  margin: 0.4rem 0 0.3rem;
+  color: #6a6a6a;
+  font-size: 0.875rem;
+}
+
+.region-content .gsc-result .gsc-url-top .gs-visibleUrl-long {
+  display: block;
+}
+
+.region-content .gsc-result .gsc-table-result .gs-snippet {
+  margin: 0.875rem 0;
+  font-size: 1rem;
+  line-height: 1.625rem;
+}

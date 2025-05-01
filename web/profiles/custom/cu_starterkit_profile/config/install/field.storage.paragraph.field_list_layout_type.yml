@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_list_layout_type
+field_name: field_list_layout_type
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 2col__4_8
+      label: '2 Col:  4 x 8 (Image~Text)'
+    -
+      value: 2col__8_4
+      label: '2 Col:  8 x 4 (Text~Image)'
+    -
+      value: 2col__3_9
+      label: '2 Col:  3 x 9 (Image~Text)'
+    -
+      value: 2col__9_3
+      label: '2 Col:  9 x 3 (Text~Image)'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

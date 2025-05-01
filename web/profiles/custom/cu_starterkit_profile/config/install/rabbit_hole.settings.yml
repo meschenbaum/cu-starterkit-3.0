@@ -1,0 +1,3 @@
+enabled_entity_types:
+  1: paragraphs_library_item
+  2: taxonomy_term

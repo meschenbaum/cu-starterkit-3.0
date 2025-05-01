@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_list_item.field_media
+    - field.field.paragraph.content_list_item.field_wysiwyg
+    - paragraphs.paragraphs_type.content_list_item
+  module:
+    - text
+id: paragraph.content_list_item.default
+targetEntityType: paragraph
+bundle: content_list_item
+mode: default
+content:
+  field_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: content_list
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_wysiwyg:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }

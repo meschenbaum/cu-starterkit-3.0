@@ -1,0 +1,501 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the profilename install profile.
+ */
+
+use Drupal\user\Entity\User;
+use Drupal\taxonomy\Entity\Term;
+use Symfony\Component\Yaml\Yaml;
+use Drupal\user\RoleInterface;
+use Drupal\Core\Config\StorageInterface;
+use \Drupal\node\Entity\Node;
+use Drupal\field\Entity\FieldStorageConfig;
+use \Drupal\paragraphs\Entity\Paragraph;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function cu_starterkit_profile_install() {
+  // @TODO: Add hook to remove from_library paragraph type
+
+  // Add permissions to anonymous role during install because 
+  // importing config_profile export does not work for anonymous role 
+  $anon_perms = [
+    'access content',
+    'view media',
+    'view paragraph content content_accordion',
+    'view paragraph content content_accordion_item',
+    'view paragraph content content_anchor_link',
+    'view paragraph content content_card',
+    'view paragraph content content_horizontal_rule',
+    'view paragraph content content_list',
+    'view paragraph content content_list_item',
+    'view paragraph content content_list_styled_order',
+    'view paragraph content content_list_styled_order_item',
+    'view paragraph content content_media',
+    'view paragraph content content_quote',
+    'view paragraph content content_wysiwyg',
+    'view paragraph content cuskt_content_library_reference',
+    'view paragraph content cuskt_layout',
+    'view paragraph content cuskt_layout_hero',
+    'view paragraph content hero_wysiwyg',
+    'view paragraph content view_reference',
+  ];
+  user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, $anon_perms);
+
+  drupal_flush_all_caches();
+}
+
+/**
+ * Implements hook_install_tasks_alter().
+ */
+function cu_starterkit_profile_install_tasks_alter(array &$tasks, array $install_state) {
+  $tasks['install_finished']['function'] = 'cu_starterkit_profile_after_install_finished';
+}
+
+/**
+ * CU Starterkit tasks to do after install finished.
+ *
+ * Add term for protected page permission.
+ *
+ * @param array $install_state
+ *   The current install state.
+ *
+ * @return array
+ *   A renderable array with a redirect header.
+ */
+function cu_starterkit_profile_after_install_finished(array &$install_state) {
+  $new_term = Term::create([
+    'vid' => 'permissions',
+    'name' => 'CU Faculty, Staff and Students using SSO',
+  ]);
+  
+  $new_term->enforceIsNew();
+  $new_term->save();
+
+  node_access_rebuild(TRUE);
+
+  \Drupal::messenger()->deleteAll();
+
+  // Set front page and 404 defaults to default_content.
+  \Drupal::configFactory()
+    ->getEditable('system.site')
+    ->set('page.front', '/home')
+    ->set('page.404', '/404')
+    ->set('page.403', '/403')
+    ->save(TRUE);
+}
+
+/**
+ * Enable JSON API Image Styles module.
+ */
+function cu_starterkit_profile_update_8001() {
+  if (\Drupal::moduleHandler()->moduleExists('jsonapi_image_styles') === FALSE) {
+    \Drupal::service('module_installer')->install(['jsonapi_image_styles']);
+  }
+}
+
+/**
+ * Update list(text) fields
+ * - paragraph.field_background_color
+ */
+function cu_starterkit_profile_update_102001(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['current_pk'] = 0;
+    $sandbox['max'] = (int) \Drupal::database()
+      ->select('paragraph__field_background_color')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+  }
+
+  // Queries for relevant paragraphs already using that field.
+  $ids = \Drupal::entityQuery('paragraph')
+    ->accessCheck(FALSE)
+    ->condition('type', ['cuskt_layout','cuskt_layout_hero','content_card'], 'IN')
+    ->condition('field_background_color', '%text-bg-%', 'LIKE')
+    ->execute();
+
+  $updated_value_map = [
+    'text-bg-primary' => 'primary',
+    'text-bg-secondary' => 'secondary',
+    'text-bg-light' => 'light',
+    'text-bg-dark' => 'dark',
+  ];
+  // Loads queried paragraphs.
+  foreach ($ids as $id) {
+
+    if (!is_null($id)) {
+      /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+      $paragraph = \Drupal::entityTypeManager()
+        ->getStorage('paragraph')
+        ->load($id);
+
+      if ($paragraph->field_background_color) {
+        $paragraph->set('field_background_color', $updated_value_map[$paragraph->field_background_color->value]);
+        $paragraph->save();
+      }
+
+      $sandbox['progress']++;
+      $sandbox['current_pk'] = $id;
+    }
+  }
+  $sandbox['#finished'] = empty($sandbox['max']) || count($ids) == 0 ? 1 : $sandbox['progress'] / $sandbox['max'];
+}
+
+/**
+ * Update list(text) fields
+ * - paragraph.field_border_color
+ */
+function cu_starterkit_profile_update_102002(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['current_pk'] = 0;
+    $sandbox['max'] = (int) \Drupal::database()
+      ->select('paragraph__field_border_color')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+  }
+
+  // Queries for relevant paragraphs already using that field.
+  $ids = \Drupal::entityQuery('paragraph')
+    ->accessCheck(FALSE)
+    ->condition('type', ['content_horizontal_rule','content_card'], 'IN')
+    ->condition('field_border_color', '%border-%', 'LIKE')
+    ->execute();
+
+  $updated_value_map = [
+    'border-primary' => 'primary',
+    'border-secondary' => 'secondary',
+    'border-light' => 'light',
+    'border-dark' => 'dark',
+  ];
+
+  // Loads queried paragraphs.
+  foreach ($ids as $id) {
+
+    if (!is_null($id)) {
+      /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+      $paragraph = \Drupal::entityTypeManager()
+        ->getStorage('paragraph')
+        ->load($id);
+
+      if ($paragraph->field_border_color) {
+        $paragraph->set('field_border_color', $updated_value_map[$paragraph->field_border_color->value]);
+        $paragraph->save();
+      }
+
+      $sandbox['progress']++;
+      $sandbox['current_pk'] = $id;
+    }
+  }
+  $sandbox['#finished'] = empty($sandbox['max']) || count($ids) == 0 ? 1 : $sandbox['progress'] / $sandbox['max'];
+}
+
+/**
+ * Update list(text) fields
+ * - paragraph.field_card_image_position
+ */
+function cu_starterkit_profile_update_102003(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['current_pk'] = 0;
+    $sandbox['max'] = (int) \Drupal::database()
+      ->select('paragraph__field_card_image_position')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+  }
+
+  // Queries for relevant paragraphs already using that field.
+  $ids = \Drupal::entityQuery('paragraph')
+    ->accessCheck(FALSE)
+    ->condition('type', ['content_card'], 'IN')
+    ->condition('field_card_image_position', '%card-img-%', 'LIKE')
+    ->execute();
+
+  $updated_value_map = [
+    'card-img-top' => 'top',
+    'card-img-bottom' => 'bottom',
+  ];
+  // Loads queried paragraphs.
+  foreach ($ids as $id) {
+
+    if (!is_null($id)) {
+      /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+      $paragraph = \Drupal::entityTypeManager()
+        ->getStorage('paragraph')
+        ->load($id);
+
+      if ($paragraph->field_card_image_position) {
+        $paragraph->set('field_card_image_position', $updated_value_map[$paragraph->field_card_image_position->value]);
+        $paragraph->save();
+      }
+
+      $sandbox['progress']++;
+      $sandbox['current_pk'] = $id;
+    }
+  }
+  $sandbox['#finished'] = empty($sandbox['max']) || count($ids) == 0 ? 1 : $sandbox['progress'] / $sandbox['max'];
+}
+
+/**
+ * Update list(text) fields
+ * - paragraph.field_list_style
+ */
+function cu_starterkit_profile_update_102004(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['current_pk'] = 0;
+    $sandbox['max'] = (int) \Drupal::database()
+      ->select('paragraph__field_list_style')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+  }
+
+  // Queries for relevant paragraphs already using that field.
+  $ids = \Drupal::entityQuery('paragraph')
+    ->accessCheck(FALSE)
+    ->condition('type', ['content_list_styled_order'], 'IN')
+    ->condition('field_list_style', '%cu-styled-%', 'LIKE')
+    ->execute();
+
+  $updated_value_map = [
+    'cu-styled-list' => 'gold',
+    'cu-styled-list-black' => 'black',
+  ];
+  // Loads queried paragraphs.
+  foreach ($ids as $id) {
+
+    if (!is_null($id)) {
+      /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+      $paragraph = \Drupal::entityTypeManager()
+        ->getStorage('paragraph')
+        ->load($id);
+
+      if ($paragraph->field_list_style) {
+        $paragraph->set('field_list_style', $updated_value_map[$paragraph->field_list_style->value]);
+        $paragraph->save();
+      }
+
+      $sandbox['progress']++;
+      $sandbox['current_pk'] = $id;
+    }
+  }
+  $sandbox['#finished'] = empty($sandbox['max']) || count($ids) == 0 ? 1 : $sandbox['progress'] / $sandbox['max'];
+}
+
+/**
+ * Update list(text) fields
+ * - paragraph.field_padding_bottom
+ */
+function cu_starterkit_profile_update_102005(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['current_pk'] = 0;
+    $sandbox['max'] = (int) \Drupal::database()
+      ->select('paragraph__field_padding_bottom')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+  }
+
+  // Queries for relevant paragraphs already using that field.
+  $ids = \Drupal::entityQuery('paragraph')
+    ->accessCheck(FALSE)
+    ->condition('type', ['cuskt_layout_hero','cuskt_layout'], 'IN')
+    ->condition('field_padding_bottom', '%pb-%', 'LIKE')
+    ->execute();
+
+  $updated_value_map = [
+    'pb-0' => '0',
+    'pb-1' => '1',
+    'pb-2' => '2',
+    'pb-3' => '3',
+    'pb-4' => '4',
+    'pb-5' => '5',
+  ];
+  // Loads queried paragraphs.
+  foreach ($ids as $id) {
+
+    if (!is_null($id)) {
+      /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+      $paragraph = \Drupal::entityTypeManager()
+        ->getStorage('paragraph')
+        ->load($id);
+
+      if ($paragraph->field_padding_bottom) {
+        $paragraph->set('field_padding_bottom', $updated_value_map[$paragraph->field_padding_bottom->value]);
+        $paragraph->save();
+      }
+
+      $sandbox['progress']++;
+      $sandbox['current_pk'] = $id;
+    }
+  }
+  $sandbox['#finished'] = empty($sandbox['max']) || count($ids) == 0 ? 1 : $sandbox['progress'] / $sandbox['max'];
+}
+
+/**
+ * Update list(text) fields
+ * - paragraph.field_padding_top
+ */
+function cu_starterkit_profile_update_102006(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['current_pk'] = 0;
+    $sandbox['max'] = (int) \Drupal::database()
+      ->select('paragraph__field_padding_top')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+  }
+
+  // Queries for relevant paragraphs already using that field.
+  $ids = \Drupal::entityQuery('paragraph')
+    ->accessCheck(FALSE)
+    ->condition('type', ['cuskt_layout_hero','cuskt_layout'], 'IN')
+    ->condition('field_padding_top', '%pt-%', 'LIKE')
+    ->execute();
+
+  $updated_value_map = [
+    'pt-0' => '0',
+    'pt-1' => '1',
+    'pt-2' => '2',
+    'pt-3' => '3',
+    'pt-4' => '4',
+    'pt-5' => '5',
+  ];
+  // Loads queried paragraphs.
+  foreach ($ids as $id) {
+
+    if (!is_null($id)) {
+      /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+      $paragraph = \Drupal::entityTypeManager()
+        ->getStorage('paragraph')
+        ->load($id);
+
+      if ($paragraph->field_padding_top) {
+        $paragraph->set('field_padding_top', $updated_value_map[$paragraph->field_padding_top->value]);
+        $paragraph->save();
+      }
+
+      $sandbox['progress']++;
+      $sandbox['current_pk'] = $id;
+    }
+  }
+  $sandbox['#finished'] = empty($sandbox['max']) || count($ids) == 0 ? 1 : $sandbox['progress'] / $sandbox['max'];
+}
+
+/**
+ * Update list(text) fields
+ * - paragraph.field_text_color
+ */
+function cu_starterkit_profile_update_102007(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['current_pk'] = 0;
+    $sandbox['max'] = (int) \Drupal::database()
+      ->select('paragraph__field_text_color')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+  }
+
+  // Queries for relevant paragraphs already using that field.
+  $ids = \Drupal::entityQuery('paragraph')
+    ->accessCheck(FALSE)
+    ->condition('type', ['content_card','cuskt_layout_hero','cuskt_layout'], 'IN')
+    ->condition('field_text_color', '%text-%', 'LIKE')
+    ->execute();
+
+  $updated_value_map = [
+    'text-primary' => 'primary',
+    'text-secondary' => 'secondary',
+    'text-light' => 'light',
+    'text-dark' => 'dark',
+  ];
+  // Loads queried paragraphs.
+  foreach ($ids as $id) {
+
+    if (!is_null($id)) {
+      /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+      $paragraph = \Drupal::entityTypeManager()
+        ->getStorage('paragraph')
+        ->load($id);
+
+      if ($paragraph->field_text_color) {
+        $paragraph->set('field_text_color', $updated_value_map[$paragraph->field_text_color->value]);
+        $paragraph->save();
+      }
+
+      $sandbox['progress']++;
+      $sandbox['current_pk'] = $id;
+    }
+  }
+  $sandbox['#finished'] = empty($sandbox['max']) || count($ids) == 0 ? 1 : $sandbox['progress'] / $sandbox['max'];
+}
+
+/**
+ * Enable CKEditor5 Icons plugin.
+ */
+function cu_starterkit_profile_update_102008() {
+  if (\Drupal::moduleHandler()->moduleExists('ckeditor5_icons') === FALSE) {
+    \Drupal::service('module_installer')->install(['ckeditor5_icons']);
+  }
+}
+
+/**
+ * Update list(text) fields
+ * - paragraph.field_list_style
+ */
+function cu_starterkit_profile_update_102009(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['current_pk'] = 0;
+    $sandbox['max'] = (int) \Drupal::database()
+      ->select('paragraph__field_list_style')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+  }
+
+  // Queries for relevant paragraphs already using that field.
+  $ids = \Drupal::entityQuery('paragraph')
+    ->accessCheck(FALSE)
+    ->condition('type', ['content_list_styled_order'], 'IN')
+    ->condition('field_list_style', ['gold','black'], 'IN')
+    ->execute();
+
+  $updated_value_map = [
+    'gold' => 'primary',
+    'black' => 'dark',
+  ];
+  // Loads queried paragraphs.
+  foreach ($ids as $id) {
+
+    if (!is_null($id)) {
+      /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+      $paragraph = \Drupal::entityTypeManager()
+        ->getStorage('paragraph')
+        ->load($id);
+
+      if ($paragraph->field_list_style) {
+        $paragraph->set('field_list_style', $updated_value_map[$paragraph->field_list_style->value]);
+        $paragraph->save();
+      }
+
+      $sandbox['progress']++;
+      $sandbox['current_pk'] = $id;
+    }
+  }
+  $sandbox['#finished'] = empty($sandbox['max']) || count($ids) == 0 ? 1 : $sandbox['progress'] / $sandbox['max'];
+}

@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.layout_default_card
+    - image.style.layout_large_card
+    - image.style.layout_medium_card
+    - image.style.layout_small_card
+    - image.style.layout_x_large_card
+    - image.style.layout_xx_large_card
+  theme:
+    - cu_starterkit_theme
+id: card_default
+label: 'Card: Default'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: layout_xx_large_card
+    breakpoint_id: cu_starterkit_theme.xxl
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: layout_x_large_card
+    breakpoint_id: cu_starterkit_theme.xl
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: layout_large_card
+    breakpoint_id: cu_starterkit_theme.lg
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: layout_medium_card
+    breakpoint_id: cu_starterkit_theme.md
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: layout_small_card
+    breakpoint_id: cu_starterkit_theme.sm
+    multiplier: 1x
+breakpoint_group: cu_starterkit_theme
+fallback_image_style: layout_default_card

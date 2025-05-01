@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_medium_content
+label: 'Layout: Medium - Content'
+effects:
+  1ed42ad3-5b6b-44b4-ac4d-fc5d2ec0f0e2:
+    uuid: 1ed42ad3-5b6b-44b4-ac4d-fc5d2ec0f0e2
+    id: image_scale
+    weight: 1
+    data:
+      width: 680
+      height: null
+      upscale: true

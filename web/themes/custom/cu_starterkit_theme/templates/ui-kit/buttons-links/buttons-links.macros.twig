@@ -1,0 +1,80 @@
+{# Button sets (columns) #}
+{% macro button_set(style, outlined, bg_color) %}
+  {% set btn_text = 'Button text'|t %}
+  {% set btn_class = (outlined ? 'btn-outline-' : 'btn-') ~ style|lower %}
+  {% set wrapper_attr = create_attribute() %}
+  {% set wrapper_classes = [
+    style ? 'p-5',
+    style ? 'mt-lg-0',
+    style ? 'rounded-3',
+    bg_color ? 'text-bg-' ~ bg_color,
+  ] %}
+  <div {{ wrapper_attr.addClass(wrapper_classes) }}>
+    <div class="row row-cols-1 gy-5">
+      <strong>{{ style|t }} <small>{{ outlined ? '(Outlined)'|t }}</small></strong>
+      <div>
+        <small class="d-block mb-2">{{ 'Small'|t }}</small>
+        <button type="button" class="btn btn-sm {{ btn_class }}">{{ btn_text }}</button>
+      </div>
+      <div>
+        <small class="d-block mb-2">{{ 'Normal'|t }}</small>
+        <button type="button" class="btn {{ btn_class }}">{{ btn_text }}</button>
+      </div>
+      <div>
+        <small class="d-block mb-2">{{ 'Large'|t }}</small>
+        <button type="button" class="btn btn-lg {{ btn_class }}">{{ btn_text }}</button>
+      </div>
+      <div>
+        <small class="d-block mb-2">{{ 'With Icon'|t }}</small>
+        <button type="button" class="btn {{ btn_class }}">
+          {{ btn_text }}
+          {% include '@cu_starterkit_theme/ui-kit/iconography/icon.html.twig' with { name: 'arrow-right', classes: 'ms-1' } %}
+        </button>
+      </div>
+      <strong class="mt-5 pt-5">{{ 'Button States'|t }}</strong>
+      <div>
+        <small class="d-block mb-2">{{ 'Normal'|t }}</small>
+        <button type="button" class="btn {{ btn_class }}">{{ btn_text }}</button>
+      </div>
+      <div>
+        <small class="d-block mb-2">{{ 'Hover / Active'|t }}</small>
+        <button type="button" class="btn {{ btn_class }} active" data-bs-toggle="button">{{ btn_text }}</button>
+      </div>
+      <div>
+        <small class="d-block mb-2">{{ 'Disabled'|t }}</small>
+        <button type="button" class="btn {{ btn_class }}" disabled>{{ btn_text }}</button>
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{# Link sets (columns) #}
+{% macro link_set(style, bg_color) %}
+  {% set link_text = 'Link text'|t %}
+  {% set wrapper_attr = create_attribute() %}
+  {% set wrapper_classes = [
+    style ? 'p-5',
+    style ? 'mt-lg-0',
+    style ? 'rounded-3',
+    bg_color ? 'text-bg-' ~ bg_color,
+  ] %}
+  <div {{ wrapper_attr.addClass(wrapper_classes) }}>
+    <div class="row row-cols-1 gy-5">
+      <strong>{{ style ~ ' Links'|t }}</strong>
+      <div>
+        <small class="d-block mb-2">{{ 'Normal'|t }}</small>
+        <div class="mb-5">
+          <a href="#" class="link-{{ style|lower }}">{{ link_text }}</a>
+        </div>
+      </div>
+      <div>
+        <small class="d-block mb-2">{{ 'With Icon'|t }}</small>
+        <div class="mb-5">
+          <a href="#" class="link-{{ style|lower }}">{{ link_text }}
+            {% include '@cu_starterkit_theme/ui-kit/iconography/icon.html.twig' with { name: 'arrow-right', classes: 'ms-1' } %}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

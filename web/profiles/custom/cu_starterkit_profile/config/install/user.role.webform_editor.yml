@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: webform_editor
+label: 'Webform Editor'
+weight: -2
+is_admin: null
+permissions: {  }

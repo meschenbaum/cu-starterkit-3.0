@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.byline
+id: taxonomy_term.byline
+targetEntityType: taxonomy_term
+bundle: byline
+action: page_not_found
+no_bypass: false
+bypass_message: false
+configuration: {  }

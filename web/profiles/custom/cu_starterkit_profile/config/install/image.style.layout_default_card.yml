@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_default_card
+label: 'Layout: Default - Card'
+effects:
+  5be9ae5d-a254-4738-b588-c8505aff7930:
+    uuid: 5be9ae5d-a254-4738-b588-c8505aff7930
+    id: image_scale
+    weight: 1
+    data:
+      width: 440
+      height: null
+      upscale: true

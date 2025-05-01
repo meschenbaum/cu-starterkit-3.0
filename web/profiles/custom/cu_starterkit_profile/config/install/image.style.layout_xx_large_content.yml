@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_xx_large_content
+label: 'Layout: XX-Large - Content'
+effects:
+  3db8e0ad-b3ff-4568-9503-0119b1263d02:
+    uuid: 3db8e0ad-b3ff-4568-9503-0119b1263d02
+    id: image_scale
+    weight: 1
+    data:
+      width: 500
+      height: null
+      upscale: true

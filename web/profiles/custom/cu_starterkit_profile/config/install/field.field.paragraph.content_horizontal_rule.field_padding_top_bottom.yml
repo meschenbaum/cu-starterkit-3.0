@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_padding_top_bottom
+    - paragraphs.paragraphs_type.content_horizontal_rule
+  module:
+    - options
+id: paragraph.content_horizontal_rule.field_padding_top_bottom
+field_name: field_padding_top_bottom
+entity_type: paragraph
+bundle: content_horizontal_rule
+label: 'Padding: Top/Bottom'
+description: 'Set padding for both top and bottom equally.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

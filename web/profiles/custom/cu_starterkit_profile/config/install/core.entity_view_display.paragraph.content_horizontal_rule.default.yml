@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_horizontal_rule.field_border_color
+    - field.field.paragraph.content_horizontal_rule.field_padding_top_bottom
+    - paragraphs.paragraphs_type.content_horizontal_rule
+id: paragraph.content_horizontal_rule.default
+targetEntityType: paragraph
+bundle: content_horizontal_rule
+mode: default
+content: {  }
+hidden:
+  field_border_color: true
+  field_padding_top_bottom: true

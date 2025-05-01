@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_list_item.field_media
+    - field.field.paragraph.content_list_item.field_wysiwyg
+    - paragraphs.paragraphs_type.content_list_item
+  module:
+    - media_library
+    - text
+id: paragraph.content_list_item.default
+targetEntityType: paragraph
+bundle: content_list_item
+mode: default
+content:
+  field_media:
+    type: media_library_widget
+    weight: 1
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_wysiwyg:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 10
+      placeholder: 'Enter your content here...'
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

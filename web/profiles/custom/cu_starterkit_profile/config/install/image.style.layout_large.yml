@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_large
+label: 'Layout: Large'
+effects:
+  f7cbad65-944b-42c1-ba76-409e7cf3301c:
+    uuid: f7cbad65-944b-42c1-ba76-409e7cf3301c
+    id: image_scale
+    weight: 1
+    data:
+      width: 1260
+      height: null
+      upscale: true

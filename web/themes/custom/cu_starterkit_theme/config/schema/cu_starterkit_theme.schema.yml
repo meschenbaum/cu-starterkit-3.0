@@ -1,0 +1,67 @@
+cu_starterkit_theme.settings:
+  type: config_object
+  label: 'CU Starterkit theme settings'
+  mapping:
+    cuskt_branding:
+      type: string
+      label: 'Branding theme'
+    cuskt_branding_logo_use_svg_sprite:
+      type: boolean
+      label: 'Use SVG Sprite Logo'
+    cuskt_branding_logo_mobile_sprite_path:
+      type: string
+      label: 'Mobile SVG Sprite Path'
+    cuskt_branding_logo_desktop_sprite_path:
+      type: string
+      label: 'Desktop SVG Sprite Path'
+    cuskt_body_schema:
+      type: string
+      label: 'Body theme'
+    cuskt_body_bg_schema:
+      type: string
+      label: 'Body background'
+    cuskt_navbar_global_schema:
+      type: string
+      label: 'Navbar theme: Global'
+    cuskt_navbar_bg_global_schema:
+      type: string
+      label: 'Navbar background: Global'
+    cuskt_navbar_local_schema:
+      type: string
+      label: 'Navbar theme: Local'
+    cuskt_navbar_bg_local_schema:
+      type: string
+      label: 'Navbar background: Local'
+    cuskt_navbar_main_schema:
+      type: string
+      label: 'Navbar theme: Main'
+    cuskt_navbar_bg_main_schema:
+      type: string
+      label: 'Navbar background: Main'
+    cuskt_footer_global_schema:
+      type: string
+      label: 'Footer theme: Global'
+    cuskt_footer_bg_global_schema:
+      type: string
+      label: 'Footer background: Global'
+    cuskt_footer_local_schema:
+      type: string
+      label: 'Footer theme: Local'
+    cuskt_footer_bg_local_schema:
+      type: string
+      label: 'Footer background: Local'
+    cuskt_top_container:
+      type: string
+      label: 'Website container type'
+    cuskt_top_container_config:
+      type: string
+      label: 'Website container type configuration'
+    cuskt_search_type:
+      type: string
+      label: 'Search type'
+    cuskt_search_action:
+      type: string
+      label: 'Search target action'
+    cuskt_search_input_name:
+      type: string
+      label: 'Search input name'

@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_paragraph
+    - paragraphs.paragraphs_type.content_accordion
+    - paragraphs.paragraphs_type.content_accordion_item
+  module:
+    - entity_reference_revisions
+id: paragraph.content_accordion.field_paragraph
+field_name: field_paragraph
+entity_type: paragraph
+bundle: content_accordion
+label: 'Accordion Items'
+description: 'Create your accordion of items.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      content_accordion_item: content_accordion_item
+    negate: 0
+    target_bundles_drag_drop:
+      content_accordion:
+        weight: 8
+        enabled: false
+      content_accordion_item:
+        weight: 9
+        enabled: true
+      content_anchor_link:
+        weight: 10
+        enabled: false
+      content_media:
+        weight: 11
+        enabled: false
+      content_wysiwyg:
+        weight: 12
+        enabled: false
+      cuskt_content_library_reference:
+        weight: 13
+        enabled: false
+      cuskt_layout:
+        weight: 14
+        enabled: false
+field_type: entity_reference_revisions

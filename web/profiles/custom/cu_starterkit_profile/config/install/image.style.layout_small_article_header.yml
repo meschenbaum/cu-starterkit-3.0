@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: layout_small_article_header
+label: 'Layout: Small - Article Feature'
+effects:
+  39c414d6-2764-4888-8d11-9dde3186bded:
+    uuid: 39c414d6-2764-4888-8d11-9dde3186bded
+    id: image_scale
+    weight: 1
+    data:
+      width: 676
+      height: null
+      upscale: true
